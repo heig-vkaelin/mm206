@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week36 - Task 6</title>
+
+  <style>
+    .wrapper {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: 80px 80px 1fr 80px 80px;
+      width: 600px;
+      height: 600px;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border: 2px solid black;
+    }
+
+    .orange {
+      background: orange;
+      grid-column: 1 / 7;
+    }
+
+    .red {
+      background: red;
+      grid-column: 1;
+      grid-row: 2 / 4;
+    }
+
+    .yellow {
+      background: yellow;
+      grid-column: 2 / 7;
+    }
+
+    .light-yellow {
+      background: lightyellow;
+      grid-column: 2 / 7;
+    }
+
+    .light-pink {
+      background: lightpink;
+      grid-column: 1 / 4;
+    }
+
+    .pink {
+      background: magenta;
+      grid-column: 4 / 7;
+    }
+
+    .blue {
+      background: blue;
+      grid-column: 1 / 7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="box orange">div 1</div>
+    <div class="box red">div 2</div>
+    <div class="box yellow">div 3</div>
+    <div class="box light-yellow">div 4</div>
+    <div class="box light-pink">div 5</div>
+    <div class="box pink">div 6</div>
+    <div class="box blue">div 7</div>
+  </div>
+</body>
+
+</html>

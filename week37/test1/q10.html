@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q10</title>
+  </head>
+
+  <body>
+    <canvas id="cnv" height="400" width="400"></canvas>
+    <div>
+      <input type="number" name="newValue" id="newValue" />
+      <button id="addValue">Add value</button>
+    </div>
+
+    <script>
+      const cnv = document.getElementById('cnv');
+      const ctx = cnv.getContext('2d');
+      ctx.strokeStyle = 'black';
+      const CANVAS_SIZE = 400;
+
+      const newValue = document.getElementById('newValue');
+      const btnElem = document.getElementById('addValue');
+
+      const values = [];
+
+      function clearCanvas() {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+      }
+
+      function draw() {
+        const total = values.reduce((acc, val) => acc + val, 0);
+        let startAngle = 0;
+
+        clearCanvas();
+
+        for (const value of values) {
+          const fractionValue = value / total;
+          const angle = fractionValue * Math.PI * 2;
+
+          ctx.beginPath();
+          ctx.moveTo(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+          ctx.arc(CANVAS_SIZE / 2, CANVAS_SIZE / 2, 180, startAngle, startAngle + angle);
+
+          ctx.fillStyle = `hsl(${360 * Math.random()}, 100%, 50%)`;
+          ctx.fill();
+          ctx.stroke();
+          startAngle += angle;
+        }
+      }
+
+      btnElem.addEventListener('click', () => {
+        values.push(newValue.valueAsNumber);
+        draw();
+      });
+    </script>
+  </body>
+</html>

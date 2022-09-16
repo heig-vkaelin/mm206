@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Ex2" />
+    <title>Plant details - Helseflora</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <h2 class="website-title with-back">
+      <button id="back">⬅</button>
+      <span>Helseflora</span>
+    </h2>
+    <div id="plant-details">
+      <h1 id="plant-name"></h1>
+      <img id="plant-image" />
+      <ul id="plant-infos"></ul>
+    </div>
+
+    <script>
+      const back = document.querySelector('#back');
+      back.addEventListener('click', () => {
+        window.history.back();
+      });
+
+      async function fetchPlantDetails() {
+        const params = new URLSearchParams(window.location.search);
+        const plantId = params.get('id');
+
+        const response = await fetch(`https://sukkergris.no/plant/?id=${plantId}`);
+        const plant = await response.json();
+        console.log(plant);
+        displayPlant(plant);
+      }
+
+      function displayPlant(plant) {
+        const plantName = document.querySelector('#plant-name');
+        const plantImage = document.querySelector('#plant-image');
+        const plantInfo = document.querySelector('#plant-infos');
+
+        plantName.textContent = plant.navn;
+        plantImage.src = `https://sukkergris.no/plantimages/large/${plant.bildefil.replace('png', 'jpg')}`;
+
+        plantInfo.innerHTML = `
+          <li>Kategori: ${plant.kategori}</li>
+          <li>${plant.beskrivelse}</li>
+          <li>
+            Normal høyde: ${plant.hoyde} cm
+            <br />
+            Vekstsone: ${plant.vekstsone}
+            <br />
+            Anbefalt gjødselmix: ${plant.nitrogen} % nitrogen, 
+            ${plant.kalium} % kalium, ${plant.fosfor} % fosfor. 
+            Bør ikke plantes hvis temperaturen om dagen er 
+            under ${plant.min_temp_dag} grader, eller temperaturen 
+            om natten er under ${plant.min_temp_natt} grader.
+          </li>
+          <li>kr ${plant.pris},- per stk.</li>
+        `;
+      }
+
+      fetchPlantDetails();
+    </script>
+  </body>
+</html>

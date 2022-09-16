@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q5</title>
+
+  <style>
+    #container {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      grid-template-rows: 100px 50px 1fr 100px;
+      grid-template-areas:
+        "hd hd"
+        "mn ct"
+        "mn ct"
+        "ft ft";
+    }
+
+    @media screen and (max-width: 600px) {
+      #container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "hd hd"
+          "mn mn"
+          "ct ct"
+          "ft ft";
+      }
+    }
+
+    .header {
+      grid-area: hd;
+      background-color: antiquewhite;
+    }
+
+    .menu {
+      grid-area: mn;
+      background-color: cornsilk;
+    }
+
+    .content {
+      grid-area: ct;
+      background-color: bisque;
+    }
+
+    .footer {
+      grid-area: ft;
+      background-color: beige;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="header">My fancy header</div>
+    <div class="menu">My fancy menu</div>
+    <div class="content">My fancy content</div>
+    <div class="footer">My fancy footer</div>
+  </div>
+</body>
+
+</html>

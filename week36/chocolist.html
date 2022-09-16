@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My document</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .choco {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 30px 50px;
+    grid-template-areas:
+      "im nm"
+      "im desc";
+    background: burlywood;
+    border-bottom: 1px solid black;
+  }
+
+  .choco img {
+    width: 80px;
+    grid-area: im;
+  }
+
+  .choco h3 {
+    grid-area: nm;
+    padding: 5px 0 0 10px;
+  }
+
+  .choco .desc {
+    grid-area: desc;
+    padding-left: 10px;
+  }
+</style>
+
+<body>
+
+  <div id="container"></div>
+
+  <script>
+
+    let chocoArr = [
+      {
+        id: 35,
+        price: 12,
+        name: "Tiger",
+        descr: "Lys sjokolademousse med striper av mocca-mousse og overtrekk av mørk sjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/Truffel_boks03.jpg"
+      },
+      {
+        id: 24,
+        price: 15,
+        name: "Green ferret",
+        descr: "Eple-fondant i mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinHardGreenFondant.jpg"
+      },
+      {
+        id: 27,
+        price: 21,
+        name: "Afterglow",
+        descr: "Appelsinfondant blandet med appelsinlikørgelé og overtrekk av mørk sjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinSoftOrangeFondantGel.jpg"
+      },
+      {
+        id: 26,
+        price: 15,
+        name: "Black mist",
+        descr: "Mocca ganache i mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinSoftDarkChoc.jpg"
+      },
+      {
+        id: 30,
+        price: 10,
+        name: "Black & white",
+        descr: "Hvit sjokolade med overtrekk av mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PureChocDarkWhite.jpg"
+      },
+      {
+        id: 20,
+        price: 16,
+        name: "Rum & cherry",
+        descr: "Kirsebær i rom-likør",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/Pralin_cherry_soft_gel.jpg"
+      }
+    ];
+
+    const container = document.querySelector('#container')
+
+    for (const choco of chocoArr) {
+      const chocoDiv = document.createElement("div");
+      chocoDiv.classList.add("choco");
+      chocoDiv.innerHTML = `
+        <h3>${choco.name}</h3>
+        <img src="${choco.img_small}">
+        <div class="desc">
+          <p>${choco.descr}</p>
+          <p>Price kr ${choco.price}</p>
+        </div>
+      `
+      container.appendChild(chocoDiv)
+    }
+
+  </script>
+
+</body>
+
+</html>

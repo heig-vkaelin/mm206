@@ -1,0 +1,3 @@
+let myHeading = document.getElementById("myHeading");
+myHeading.innerHTML = "Hello World!";
+//more code here...

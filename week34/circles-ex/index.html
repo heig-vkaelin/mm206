@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Circles Exercice</title>
+</head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFE4C4;
+  }
+
+  .circles-generator {
+    padding: 20px 0 0 10px;
+  }
+
+  .canvas {
+    padding: 50px;
+  }
+</style>
+
+<body>
+  <form class="circles-generator">
+    <div>
+      <label for="nbCircles">Number of circles</label>
+      <input type="number" name="nbCircles" class="nbCircles">
+      <label for="radius">Outer radius</label>
+      <input type="number" name="radius" class="radius">
+    </div>
+    <button>Draw circles</button>
+  </form>
+  <canvas class="canvas" width="500px" height="500px"></canvas>
+</body>
+
+</html>
+
+<script>
+  const form = document.querySelector('.circles-generator')
+  const nbCircles = document.querySelector('.nbCircles')
+  const radius = document.querySelector('.radius')
+  const canvas = document.querySelector('.canvas')
+  const ctx = canvas.getContext('2d')
+
+  function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  }
+
+  function drawCircle(radius) {
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    const totalCircles = nbCircles.value
+    const biggestCircle = radius.value
+    const diff = biggestCircle / totalCircles
+    clearCanvas();
+
+    for (let i = 0; i < totalCircles; ++i) {
+      drawCircle(biggestCircle - diff * i)
+    }
+  }
+  )
+
+</script>

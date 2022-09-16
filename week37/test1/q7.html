@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q7</title>
+  </head>
+
+  <body>
+    <canvas id="cnv" height="200" width="200"></canvas>
+    <div>
+      <input type="range" id="range" min="0" max="25" />
+    </div>
+
+    <script>
+      const cnv = document.getElementById('cnv');
+      const ctx = cnv.getContext('2d');
+      const rangeElem = document.getElementById('range');
+      const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const CANVAS_SIZE = 200;
+
+      ctx.fillStyle = 'orange';
+      ctx.strokeStyle = 'darkred';
+      ctx.lineWidth = 3;
+      ctx.font = 'bold 100px sans-serif';
+
+      function drawLetter(index) {
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        ctx.fillStyle = 'orange';
+
+        const letter = alphabet.charAt(index);
+        ctx.fillText(letter, 100, 100);
+        ctx.strokeText(letter, 100, 100);
+      }
+
+      rangeElem.addEventListener('change', (e) => {
+        drawLetter(rangeElem.value);
+      });
+
+      drawLetter(rangeElem.value);
+    </script>
+  </body>
+</html>

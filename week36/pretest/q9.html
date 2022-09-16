@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q9</title>
+</head>
+
+<body>
+  <h2 id="question-number"></h2>
+  <p id="question"></p>
+  <div>
+    <form id="user-answer">
+      <input type="text" name="answer" id="answer">
+      <button>Submit answer and show next question</button>
+    </form>
+  </div>
+</body>
+
+<script>
+  const questionNumberElem = document.getElementById('question-number');
+  const questionElem = document.getElementById('question');
+  const userAnswerForm = document.getElementById('user-answer');
+  const questions = [
+    {
+      q: "What is the capitol of Egypt?",
+      a: "cairo"
+    },
+    {
+      q: "What is the main ingredient in beer?",
+      a: "water"
+    },
+    {
+      q: "What is the name of the president in USA?",
+      a: "joe biden"
+    },
+    {
+      q: "What is the abbreviation of the European Union?",
+      a: "eu"
+    },
+    {
+      q: "What is the abbreviation of Game of Thrones",
+      a: "got"
+    }
+  ]
+  const total = questions.length;
+  let current = 0;
+  let score = 0;
+
+  showQuestion();
+
+  function validateQuestion() {
+    if (current >= total) {
+      return;
+    }
+
+    const answer = userAnswerForm.answer.value;
+    userAnswerForm.answer.value = '';
+    if (answer.toLowerCase() === questions[current].a) {
+      score++;
+    }
+    current++;
+    if (current < total) {
+      showQuestion();
+    } else {
+      showScore();
+    }
+  }
+
+  function showQuestion() {
+    questionNumberElem.innerText = `Question ${current + 1}`;
+    questionElem.innerText = questions[current].q;
+  }
+
+  function showScore() {
+    questionNumberElem.innerText = `You got ${score} correct answers out of ${total}`;
+    questionElem.innerText = '';
+    userAnswerForm.style.display = 'none';
+  }
+
+  userAnswerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    validateQuestion();
+  });
+</script>
+
+</html>

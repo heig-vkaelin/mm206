@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q10</title>
+</head>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  #container {
+    margin: 20px 0;
+    box-shadow: 0 0 10px black;
+    max-width: 600px;
+  }
+
+  .choco {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: 30px 40px 30px;
+    grid-template-areas:
+      "image name"
+      "image description"
+      "image price";
+    background: saddlebrown;
+    color: wheat;
+    border-bottom: 1px solid wheat;
+  }
+
+  .choco:last-child {
+    border-bottom: none;
+  }
+
+  .choco img {
+    width: 100px;
+    grid-area: image;
+  }
+
+  .choco h3 {
+    grid-area: name;
+    padding: 5px 0 0 10px;
+  }
+
+  .choco .desc {
+    grid-area: description;
+    padding-left: 10px;
+  }
+
+  .choco .price {
+    grid-area: price;
+    padding-left: 10px;
+  }
+
+  #big-image {
+    display: flex;
+  }
+</style>
+
+<body>
+
+  <div id="container">
+    <div id="list"></div>
+    <div id="big-image"></div>
+  </div>
+
+  <script>
+    const chocoArr = [
+      {
+        id: 35,
+        price: 12,
+        name: "Tiger",
+        descr: "Lys sjokolademousse med striper av mocca-mousse og overtrekk av mørk sjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/Truffel_boks03.jpg"
+      },
+      {
+        id: 24,
+        price: 15,
+        name: "Green ferret",
+        descr: "Eple-fondant i mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinHardGreenFondant.jpg"
+      },
+      {
+        id: 27,
+        price: 21,
+        name: "Afterglow",
+        descr: "Appelsinfondant blandet med appelsinlikørgelé og overtrekk av mørk sjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinSoftOrangeFondantGel.jpg"
+      },
+      {
+        id: 26,
+        price: 15,
+        name: "Black mist",
+        descr: "Mocca ganache i mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PralinSoftDarkChoc.jpg"
+      },
+      {
+        id: 30,
+        price: 10,
+        name: "Black & white",
+        descr: "Hvit sjokolade med overtrekk av mørk melkesjokolade",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/PureChocDarkWhite.jpg"
+      },
+      {
+        id: 20,
+        price: 16,
+        name: "Rum & cherry",
+        descr: "Kirsebær i rom-likør",
+        img_small: "http://sukkergris.no/konfekt/bilder_s/Pralin_cherry_soft_gel.jpg"
+      }
+    ];
+
+    const container = document.querySelector('#container #list')
+    const bigImage = document.querySelector('#container #big-image')
+
+    for (const choco of chocoArr) {
+      const chocoDiv = document.createElement('div');
+      chocoDiv.classList.add('choco');
+      chocoDiv.innerHTML = `
+        <h3>${choco.name}</h3>
+        <img src="${choco.img_small}">
+        <p class="desc">${choco.descr}</p>
+        <p class="price">kr ${choco.price},-</p>
+      `
+
+      chocoDiv.addEventListener('click', () => {
+        bigImage.innerHTML = `<img src="${choco.img_small.replace('bilder_s', 'bilder_m')}">`
+      })
+
+      container.appendChild(chocoDiv)
+    }
+
+  </script>
+
+</body>
+
+</html>

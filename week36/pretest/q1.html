@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q1</title>
+</head>
+
+<body>
+  <form id="form">
+    <label for="kmh">Speed in km/h:</label>
+    <input type="number" name="kmh" id="kmh">
+    <button type="submit">Convert to knots</button>
+  </form>
+  <h2 id="result"></h2>
+</body>
+
+<script>
+  const formElem = document.getElementById('form');
+  const kmhElem = document.getElementById('kmh')
+  const resultElem = document.getElementById('result')
+
+  formElem.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const kmh = kmhElem.value;
+    const knots = (kmh / 1.852).toFixed(2);
+    resultElem.textContent = `Speed in knots: ${knots}`;
+  });
+</script>
+
+</html>

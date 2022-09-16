@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q7</title>
+</head>
+
+<body>
+</body>
+
+<script>
+  function millisecToCommonTime(milli) {
+    const date = new Date(0, 0, 0, 0, 0, 0, milli);
+    return date.toLocaleTimeString('en-GB');
+  }
+
+  const myTime = millisecToCommonTime(2000);
+  console.log(myTime)
+</script>
+
+</html>

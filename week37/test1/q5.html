@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q5</title>
+  </head>
+
+  <body>
+    <form id="form">
+      <label for="wallLength">Wall length:</label>
+      <input type="number" name="wallLength" id="wallLength" />
+      <label for="closetWidth">Closet width:</label>
+      <input type="number" name="closetWidth" id="closetWidth" />
+      <button>Calculate number of closets</button>
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+      const formElem = document.getElementById('form');
+      const resultElem = document.getElementById('result');
+
+      formElem.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const wallLength = e.target.wallLength.value;
+        const closetWidth = e.target.closetWidth.value;
+
+        if (wallLength <= 0 || closetWidth <= 0) {
+          return;
+        }
+
+        const nbClosets = Math.floor(wallLength / closetWidth);
+        const remaining = wallLength % closetWidth;
+
+        resultElem.innerText = `You can fit ${nbClosets} closets along the wall, with ${remaining} cm remaining.`;
+      });
+    </script>
+  </body>
+</html>

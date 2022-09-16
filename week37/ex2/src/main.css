@@ -1,0 +1,150 @@
+/* Global */
+:root {
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-300: #86efac;
+  --green-400: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --green-700: #15803d;
+  --green-800: #166534;
+  --green-900: #14532d;
+  background: var(--green-900);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.website-title {
+  padding: 10px 5px;
+  font-size: 18px;
+  color: var(--green-400);
+  border-bottom: 1px solid var(--green-800);
+}
+
+.website-title.with-back {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+#back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: var(--green-400);
+  border-radius: 999px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+}
+
+#back:hover {
+  background: var(--green-600);
+}
+
+.page-title {
+  padding: 0 5px;
+  font-size: 32px;
+  color: var(--green-700);
+  border-bottom: 1px solid var(--green-800);
+}
+
+/* Category view */
+.category {
+  display: block;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+.category:hover {
+  background: var(--green-700);
+}
+
+/* Plants view */
+.plant {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 30px 40px 30px;
+  grid-template-areas:
+    'image name'
+    'image description'
+    'image price';
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+.plant:hover {
+  background: var(--green-700);
+}
+
+.plant:last-child {
+  border-bottom: none;
+}
+
+.plant img {
+  width: 100px;
+  grid-area: image;
+}
+
+.plant h3 {
+  grid-area: name;
+  padding: 5px 0 0 10px;
+}
+
+.plant .desc {
+  grid-area: description;
+  padding-left: 10px;
+}
+
+.plant .price {
+  grid-area: price;
+  padding-left: 10px;
+}
+
+/* Plant details view */
+#plant-details {
+  position: relative;
+  padding: 30px 50px;
+}
+
+#plant-name {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  padding: 5px 50px 5px 5px;
+
+  color: var(--green-200);
+  background: rgb(21, 128, 61, 0.7);
+}
+
+#plant-image {
+  width: 100%;
+  border: 1px solid var(--green-600);
+}
+
+#plant-infos li {
+  padding: 10px 0;
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+#plant-infos li:last-child {
+  border-bottom: none;
+}

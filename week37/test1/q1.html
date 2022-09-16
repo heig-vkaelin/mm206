@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Valentin Kaelin">
+  <meta name="description" content="MM206 - Test1">
+  <title>Test1 - Q1</title>
+</head>
+
+<body>
+  <button id="show-fortune">Show the fortune!</button>
+  <h2 id="result"></h2>
+
+  <script>
+    const fortunes = [
+      "You will inherit a large sum of money",
+      "You will fall in love",
+      "You will break your leg",
+      "You will get caught for your crimes"
+    ];
+
+    const btn = document.getElementById('show-fortune');
+    const result = document.getElementById('result');
+
+    btn.addEventListener('click', (e) => {
+      result.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
+    });
+  </script>
+</body>
+
+</html>

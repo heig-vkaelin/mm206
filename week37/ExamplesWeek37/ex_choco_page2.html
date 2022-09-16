@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My document</title>
+</head>
+
+<body>
+    
+    <h1 id="txtName"></h1>
+    <img id="image">   
+
+    <script>
+
+        let txtName = document.getElementById('txtName');
+        let image = document.getElementById('image');
+
+        let chocoTxt = localStorage.getItem("theChoco");
+        
+        //check if the data exists in localstorage
+        if (chocoTxt) {
+            let choco = JSON.parse(chocoTxt);
+            txtName.innerHTML = choco.name;
+            image.src = choco.img_large;
+        }
+        else {
+            txtName.innerHTML = "No data";
+        }        
+        
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q3</title>
+  </head>
+
+  <body>
+    <h1>Chicken stue</h1>
+    <form id="form">
+      <label for="nbPeople">For how many persons?</label>
+      <input type="number" name="nbPeople" id="nbPeople" />
+      <button>Show recipe</button>
+    </form>
+    <ul id="results"></ul>
+
+    <script>
+      const formElem = document.getElementById('form');
+      const nbPeopleElem = document.getElementById('nbPeople');
+      const resultsElem = document.getElementById('results');
+
+      const chickenPerPerson = 200;
+      const potatoesPerPerson = 150;
+      const tomatoesPerPerson = 250;
+
+      formElem.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (nbPeopleElem.value <= 0) {
+          return;
+        }
+
+        resultsElem.innerHTML = `
+        <li>${nbPeopleElem.value * chickenPerPerson} g chopped chicken breasts</li>
+        <li>${nbPeopleElem.value * potatoesPerPerson} g chopped potatoes</li>
+        <li>${nbPeopleElem.value * tomatoesPerPerson} g chopped tomatoes</li>
+      `;
+      });
+    </script>
+  </body>
+</html>

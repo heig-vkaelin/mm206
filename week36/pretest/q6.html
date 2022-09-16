@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pretest - Q6</title>
+
+  <style>
+    #unlock-message {
+      display: none;
+    }
+  </style>
+
+</head>
+
+<body>
+  <button id="btnA">A</button>
+  <button id="btnB">B</button>
+  <h3 id="unlock-message">You have unlocked the door !</h3>
+</body>
+
+<script>
+  const btnA = document.getElementById('btnA');
+  const btnB = document.getElementById('btnB');
+  const unlockMessage = document.getElementById('unlock-message');
+
+  const secret = 'ABBA'
+  let txt = '';
+
+  function checkIfSecret() {
+    if (txt.endsWith(secret)) {
+      unlockMessage.style.display = 'block';
+    }
+  }
+
+  btnA.addEventListener('click', function (evt) {
+    txt += 'A';
+    checkIfSecret();
+  });
+
+  btnB.addEventListener('click', function (evt) {
+    txt += 'B';
+    checkIfSecret();
+  });
+</script>
+
+</html>

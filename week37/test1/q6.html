@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q6</title>
+  </head>
+
+  <body>
+    <canvas id="cnv" width="600" height="200"></canvas>
+    <div>
+      <form id="draw-circles">
+        <label for="nbCircles">Number of circles:</label>
+        <input type="text" name="nbCircles" id="nbCircles" />
+        <button>Draw circles</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    const cnv = document.getElementById('cnv');
+    const drawCirclesForm = document.getElementById('draw-circles');
+    const nbCirclesInput = document.getElementById('nbCircles');
+    const ctx = cnv.getContext('2d');
+
+    const CANVAS_WIDTH = 600;
+    const CANVAS_HEIGHT = 200;
+
+    ctx.fillStyle = 'lightgrey';
+    ctx.strokeStyle = 'black';
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    function drawCircles() {
+      const nbCircles = nbCirclesInput.value;
+      let diameter = CANVAS_WIDTH / nbCircles;
+
+      if (diameter > CANVAS_HEIGHT) {
+        diameter = CANVAS_HEIGHT;
+      }
+
+      // Clear content
+      ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      const radius = diameter / 2;
+      const y = CANVAS_HEIGHT / 2;
+
+      let x = radius;
+
+      for (let i = 0; i < nbCircles; i++, x += diameter) {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    drawCirclesForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      drawCircles();
+    });
+  </script>
+</html>

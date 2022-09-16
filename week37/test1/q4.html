@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q4</title>
+
+    <style>
+      h1 {
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 id="clickable">Click me!</h1>
+
+    <script>
+      const clickable = document.getElementById('clickable');
+      let currentColor = 'black';
+
+      clickable.addEventListener('click', () => {
+        currentColor = currentColor === 'black' ? 'red' : 'black';
+        clickable.style.color = currentColor;
+      });
+    </script>
+  </body>
+</html>

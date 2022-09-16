@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Ex2" />
+    <title>Categories - Helseflora</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <h2 class="website-title">Helseflora</h2>
+    <h1 class="page-title">Kategorier</h1>
+    <div id="categories"></div>
+
+    <script>
+      const container = document.querySelector('#categories');
+
+      async function fetchCategories() {
+        const response = await fetch('https://sukkergris.no/plantcategories/');
+        const categories = await response.json();
+        displayCategories(categories);
+      }
+
+      function displayCategories(categories) {
+        for (const category of categories) {
+          const categoryLink = document.createElement('a');
+          categoryLink.classList.add('category');
+          categoryLink.innerText = category.kategori;
+          categoryLink.href = `plants.html?category=${category.kategori}`;
+          container.appendChild(categoryLink);
+        }
+      }
+
+      fetchCategories();
+    </script>
+  </body>
+</html>

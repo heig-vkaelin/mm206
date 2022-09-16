@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Test1" />
+    <title>Test1 - Q8</title>
+  </head>
+
+  <body>
+    <h1>Calculate the distance</h1>
+    <form id="form">
+      <label for="from">From:</label>
+      <select name="from" id="from">
+        <option value="0">Arendal</option>
+        <option value="1">Grimstad</option>
+        <option value="2">Lillesand</option>
+        <option value="3">Kristiansand</option>
+        <option value="4">Mandal</option>
+      </select>
+      <label for="to">To:</label>
+      <select name="to" id="to">
+        <option value="0">Arendal</option>
+        <option value="1">Grimstad</option>
+        <option value="2">Lillesand</option>
+        <option value="3">Kristiansand</option>
+        <option value="4">Mandal</option>
+      </select>
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+      const fromElem = document.getElementById('from');
+      const toElem = document.getElementById('to');
+      const distances = [
+        [0, 22, 41, 71, 113],
+        [22, 0, 21, 51, 93],
+        [41, 21, 0, 30, 72],
+        [71, 51, 30, 0, 43],
+        [113, 93, 72, 43, 0],
+      ];
+
+      function calculateDistance() {
+        result.innerText = `${distances[fromElem.value][toElem.value]} km`;
+      }
+
+      fromElem.addEventListener('change', calculateDistance);
+      toElem.addEventListener('change', calculateDistance);
+
+      calculateDistance();
+    </script>
+  </body>
+</html>

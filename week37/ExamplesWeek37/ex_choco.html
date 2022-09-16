@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My document</title>
+</head>
+
+<body>
+    
+    <div id="container"></div>   
+
+    <script>
+
+        let url = "https://sukkergris.no/choco/jsonlist/";
+        let container = document.getElementById('container');        
+        
+        loadData();
+
+        async function loadData() {
+
+            try {
+                let resp = await fetch(url);
+                let data = await resp.json();
+                
+                for (let choco of data) {
+                    
+                    let chocoDiv = document.createElement("div");
+                    chocoDiv.innerHTML += "<img src=" + choco.img_small + ">";
+                    chocoDiv.innerHTML += "<h3>" + choco.name + "</h3>";
+                    chocoDiv.innerHTML += "<p>" + choco.description + "</p>";
+                    chocoDiv.innerHTML += "<p>kr " + choco.price + ",-</p>";
+
+                    container.appendChild(chocoDiv);
+
+                    chocoDiv.addEventListener('click', function(evt) {
+                        localStorage.setItem("theChoco", JSON.stringify(choco));
+                        window.location.href = "ex_choco_page2.html";
+                    });
+                } 
+            }
+            catch(err) {
+                console.log(err);
+            }
+        }
+        
+    </script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        #container>div {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            grid-template-rows: 30px 40px 30px;
+            grid-template-areas: "im hd"
+                                 "im ds"
+                                 "im pr";
+            background-color: antiquewhite;
+            border-bottom: 1px solid black;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #container>div>img {
+            grid-area: im;
+            width: 100px;
+        }
+        #container>div>h3 {
+            grid-area: hd;
+            padding: 5px;
+        }
+        #container>div>p:nth-child(3) {
+            grid-area: ds;
+            padding: 5px;            
+        }
+        #container>div>p:nth-child(4) {
+            grid-area: pr;
+            padding: 5px;            
+        }
+
+    </style>
+
+</body>
+
+</html>
