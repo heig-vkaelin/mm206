@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="description" content="MM206 - Ex2" />
+    <title>Cart - Helseflora</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <header class="website-header">
+      <h2 class="website-title with-back">
+        <button id="back" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"
+            />
+          </svg>
+        </button>
+        <span>Helseflora</span>
+      </h2>
+    </header>
+    <h1 class="page-title">Shopping cart</h1>
+    <div id="cart-items"></div>
+    <div class="wrapper">
+      <button id="empty-cart">Empty shopping cart</button>
+      <div class="total-price">Total price: kr <span id="total-price-value"></span>,-</div>
+    </div>
+
+    <script>
+      const container = document.querySelector('#cart-items');
+      const emptyCart = document.querySelector('#empty-cart');
+      const totalPrice = document.querySelector('#total-price-value');
+      const back = document.querySelector('#back');
+
+      back.addEventListener('click', () => {
+        window.history.back();
+      });
+
+      emptyCart.addEventListener('click', () => {
+        localStorage.removeItem('cart');
+        container.innerHTML = '';
+        totalPrice.innerText = '0';
+        emptyCart.style.display = 'none';
+      });
+
+      function displayCartItems() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || {};
+        let total = 0;
+        container.innerHTML = '';
+
+        for (const [id, item] of Object.entries(cart)) {
+          const cartDiv = document.createElement('div');
+          cartDiv.classList.add('cart-item');
+          cartDiv.innerHTML = `
+            <div class="name">
+              <input type="number" name=${id} value=${item.quantity} class="update-quantity">
+              <span class="title">${item.name}</span>
+            </div>
+            <div class="prices">
+              <div>kr ${item.price},-</div>
+              <div>kr ${item.price * item.quantity},-</div>
+              <div>
+                <button name=${id} class="delete-from-cart">Delete</button>
+              </div>
+            </div>
+          `;
+          container.appendChild(cartDiv);
+          total += item.price * item.quantity;
+        }
+
+        const deleteButtons = document.querySelectorAll('.delete-from-cart');
+        deleteButtons.forEach((button) => {
+          button.addEventListener('click', (e) => {
+            delete cart[e.target.name];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+          });
+        });
+        const updateQuantites = document.querySelectorAll('.update-quantity');
+        updateQuantites.forEach((input) => {
+          input.addEventListener('change', (e) => {
+            const newValue = e.target.value;
+
+            if (newValue <= 0) {
+              e.target.value = cart[e.target.name].quantity;
+              return;
+            }
+            cart[e.target.name].quantity = newValue;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+          });
+        });
+
+        totalPrice.innerText = total;
+      }
+
+      displayCartItems();
+    </script>
+  </body>
+</html>
