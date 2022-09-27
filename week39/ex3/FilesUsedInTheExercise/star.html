@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>My document</title>
+</head>
+<body>
+
+    <canvas id="cnv" width="400" height="400"></canvas>        
+    
+    <script>
+
+        let innerRadius = 30;
+        let outerRadius = 150;
+        let spikes = 20; //number of spikes
+
+        let points = spikes * 2; //number of points
+        
+        let cnv = document.getElementById('cnv');
+        let ctx = cnv.getContext("2d");
+
+        let v = 0; //angle
+        let vstep = Math.PI * 2 / points; //angle step
+
+        ctx.fillStyle = "orange";
+        ctx.beginPath();
+        
+        for (let i = 0; i < points; i++) {
+            let radius = i % 2 ? innerRadius : outerRadius;
+            let x = Math.cos(v) * radius + 200;
+            let y = Math.sin(v) * radius + 200;
+            ctx.lineTo(x, y);
+
+            v = v + vstep;
+        }
+
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();        
+
+    </script>
+
+    
+
+</body>
+
+</html>
