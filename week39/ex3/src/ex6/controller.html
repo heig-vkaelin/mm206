@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ex6 - MVC</title>
+    <link rel="stylesheet" href="chocolistview.css" />
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <script src="chocoview.js"></script>
+    <script src="chocomodel.js"></script>
+
+    <script>
+      const container = document.getElementById('container');
+
+      const view = createChocoListView();
+      document.body.appendChild(view);
+
+      const model = new ChocoModel();
+
+      loadData();
+
+      async function loadData() {
+        try {
+          const data = await model.getChocoData('fudge');
+          view.showData(data);
+        } catch (error) {
+          // TODO: display "Sorry, no valid data”
+          console.log('Somehting bad has happened: ', error);
+        }
+      }
+    </script>
+  </body>
+</html>

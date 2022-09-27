@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ex3 - Events, drag & drop</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    #container {
+      margin: 10px;
+      border: 1px solid black;
+    }
+
+    .carItem {
+      height: 35px;
+      padding: 0 5px;
+      border-bottom: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 5px;
+      background-color: azure;
+      cursor: pointer;
+    }
+
+    .carItem:last-child {
+      border-bottom: none;
+    }
+
+    .carItem .edit-button {
+      padding: 5px 15px;
+    }
+
+    .carItem:hover {
+      background-color: rgb(211, 236, 236);
+    }
+
+    #trash {
+      width: 32px;
+      height: 32px;
+      margin: 32px 0 0 16px;
+    }
+  </style>
+  <body>
+    <div id="container"></div>
+    <svg
+      id="trash"
+      ondrop="drop_handler(event)"
+      ondragover="dragover_handler(event)"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 448 512"
+    >
+      <path
+        d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
+      />
+    </svg>
+
+    <script>
+      const container = document.getElementById('container');
+      let cars = ['Volvo', 'Peugeot', 'Citroen', 'Porche', 'Skoda'];
+
+      function deleteCar(carToDelete) {
+        cars = cars.filter((c) => c != carToDelete);
+        displayCars();
+      }
+
+      function displayCars() {
+        container.innerHTML = '';
+
+        for (car of cars) {
+          const carDiv = document.createElement('div');
+          carDiv.setAttribute('data-car', car);
+          carDiv.setAttribute('draggable', true);
+          carDiv.setAttribute('ondragstart', 'dragstart_handler(event)');
+          carDiv.classList.add('carItem');
+          carDiv.innerHTML = `
+            <span>${car}</span>
+            <div>
+              <button class="edit-button">Edit</button>
+            </div>
+          `;
+          container.appendChild(carDiv);
+        }
+      }
+
+      function dragstart_handler(e) {
+        e.dataTransfer.setData('text/plain', e.target.getAttribute('data-car'));
+      }
+
+      function dragover_handler(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+      }
+
+      function drop_handler(e) {
+        e.preventDefault();
+        const carName = e.dataTransfer.getData('text/plain');
+        deleteCar(carName);
+      }
+
+      displayCars();
+    </script>
+  </body>
+</html>

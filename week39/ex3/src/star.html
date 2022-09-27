@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ex4- OOP</title>
+  </head>
+  <body>
+    <canvas id="cnv" width="400" height="400"></canvas>
+
+    <script>
+      class Star {
+        constructor(cnv, n, r1, r2) {
+          this.cnv = cnv;
+          this.numSpikes = n;
+          this.innerRadius = r1;
+          this.outerRadius = r2;
+          this.ctx = cnv.getContext('2d');
+        }
+
+        setNumSpikes(n) {
+          this.numSpikes = n;
+        }
+
+        getNumSpikes() {
+          return this.numSpikes;
+        }
+
+        setOuterRadius(r) {
+          this.outerRadius = r;
+        }
+
+        getOuterRadius() {
+          return this.outerRadius;
+        }
+
+        setInnerRadius(r) {
+          this.innerRadius = r;
+        }
+
+        getInnerRadius() {
+          return this.innerRadius;
+        }
+
+        setLineColor(color) {
+          this.ctx.strokeStyle = color;
+        }
+
+        setFillColor(color) {
+          this.ctx.fillStyle = color;
+        }
+
+        draw() {
+          let v = 0; // angle
+          let points = this.numSpikes * 2; // number of points
+          let vstep = (Math.PI * 2) / points; // angle step
+
+          this.ctx.beginPath();
+
+          for (let i = 0; i < points; i++) {
+            let radius = i % 2 ? this.innerRadius : this.outerRadius;
+            let x = Math.cos(v) * radius + 200;
+            let y = Math.sin(v) * radius + 200;
+            this.ctx.lineTo(x, y);
+
+            v = v + vstep;
+          }
+
+          this.ctx.closePath();
+          this.ctx.fill();
+          this.ctx.stroke();
+        }
+      }
+
+      const cnv = document.getElementById('cnv');
+      const myStar = new Star(cnv, 20, 30, 150);
+      myStar.setFillColor('orange');
+      myStar.setLineColor('black');
+      myStar.draw();
+    </script>
+  </body>
+</html>

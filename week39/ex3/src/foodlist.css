@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.foodItem {
+  height: 35px;
+  border-bottom: 1px solid black;
+  display: grid;
+  align-items: center;
+  padding-left: 5px;
+  background-color: azure;
+  cursor: pointer;
+}
+
+.foodItem:hover {
+  background-color: rgb(211, 236, 236);
+}

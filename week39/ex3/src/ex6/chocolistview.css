@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.choco {
+  border-bottom: 1px black solid;
+  background-color: rgb(246, 201, 175);
+  cursor: pointer;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: 40px 40px;
+  grid-template-areas:
+    'im nm'
+    'im dc';
+}
+
+.choco:hover {
+  background-color: blanchedalmond;
+}
+
+.choco > img {
+  grid-area: im;
+  width: 80px;
+}
+.choco > h2 {
+  grid-area: nm;
+  margin-left: 5px;
+}
+.choco > p {
+  grid-area: dc;
+  margin-left: 5px;
+}
