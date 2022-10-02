@@ -8,6 +8,13 @@ function createChocoListView() {
       myDiv.innerHTML = '<img src=' + value.img_small + '>';
       myDiv.innerHTML += '<h2>' + value.name + '</h2>';
       myDiv.innerHTML += '<p>' + value.description + '</p>';
+
+      myDiv.addEventListener('click', () => {
+        const event = new CustomEvent('chocoselect');
+        event.chocodata = value;
+        div.dispatchEvent(event);
+      });
+
       div.appendChild(myDiv);
     }
   };

@@ -9,14 +9,19 @@
 
   <body>
     <div id="container"></div>
+    <div id="error"></div>
 
     <script src="chocoview.js"></script>
     <script src="chocomodel.js"></script>
 
     <script>
       const container = document.getElementById('container');
+      const error = document.getElementById('error');
 
       const view = createChocoListView();
+      view.addEventListener('chocoselect', function (e) {
+        console.log(e.chocodata);
+      });
       document.body.appendChild(view);
 
       const model = new ChocoModel();
@@ -27,8 +32,8 @@
         try {
           const data = await model.getChocoData('fudge');
           view.showData(data);
-        } catch (error) {
-          // TODO: display "Sorry, no valid data”
+        } catch (e) {
+          error.innerText = 'Sorry, no valid data';
           console.log('Somehting bad has happened: ', error);
         }
       }
