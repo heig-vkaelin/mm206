@@ -51,16 +51,16 @@
         }
 
         draw() {
+          const points = this.numSpikes * 2; // number of points
+          const vstep = (Math.PI * 2) / points; // angle step
           let v = 0; // angle
-          let points = this.numSpikes * 2; // number of points
-          let vstep = (Math.PI * 2) / points; // angle step
 
           this.ctx.beginPath();
 
           for (let i = 0; i < points; i++) {
-            let radius = i % 2 ? this.innerRadius : this.outerRadius;
-            let x = Math.cos(v) * radius + 200;
-            let y = Math.sin(v) * radius + 200;
+            const radius = i % 2 ? this.innerRadius : this.outerRadius;
+            const x = Math.cos(v) * radius + 200;
+            const y = Math.sin(v) * radius + 200;
             this.ctx.lineTo(x, y);
 
             v = v + vstep;
