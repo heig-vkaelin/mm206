@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Helseflora</title>
+</head>
+
+<body>
+  <header>
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon" id="backarrow"
+        onclick="window.history.back()">
+        <path fill-rule="evenodd"
+          d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
+          clip-rule="evenodd" />
+      </svg>
+      <h1>Helseflora</h1>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon" id="cart-icon"
+      onclick="window.location.href='cart.html'">
+      <path
+        d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+    </svg>
+  </header>
+  <main>
+    <h1 id="category-name"></h1>
+    <div id="plants-list"></div>
+  </main>
+
+  <script>
+    function goToPlant(id) {
+      localStorage.setItem('plantId', id);
+      window.location.href = `plant.html?plant=${id}`;
+    }
+
+    function getPlants() {
+      const category = localStorage.getItem('category');
+      fetch(`https://sukkergris.no/plants/?category=${category}`)
+        .then(response => response.json())
+        .then(plants => {
+          const container = document.getElementById('container');
+          const categoryName = document.getElementById('category-name');
+          categoryName.innerHTML = decodeURI(category);
+
+          plants.forEach(plant => {
+            const image = document.createElement('img');
+            const name = document.createElement('p');
+            const desc = document.createElement('p');
+            const price = document.createElement('p');
+
+            image.setAttribute('src', `https://sukkergris.no/plantimages/small/${plant.bildefil}`);
+            name.setAttribute('class', 'name');
+            name.innerText = plant.navn;
+            desc.setAttribute('class', 'desc');
+            desc.innerText = plant.beskrivelse;
+
+            price.setAttribute('class', 'price');
+            price.innerText = `kr ${plant.pris}.-`;
+
+            const plantDiv = document.createElement('div');
+            plantDiv.setAttribute('class', 'plant-item list')
+            plantDiv.append(image, name, desc, price);
+            plantDiv.addEventListener('click', () => goToPlant(encodeURI(plant.id)));
+            document.getElementById('plants-list').append(plantDiv);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    getPlants();
+  </script>
+
+</body>
+
+</html>
