@@ -1,0 +1,42 @@
+/*-------------------------
+  Plant view
+-------------------------*/
+.plant {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 30px 40px 30px;
+  grid-template-areas:
+    'image name'
+    'image description'
+    'image price';
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+.plant:hover {
+  background: var(--green-700);
+}
+
+.plant:last-child {
+  border-bottom: none;
+}
+
+.plant img {
+  width: 100px;
+  grid-area: image;
+}
+
+.plant h3 {
+  grid-area: name;
+  padding: 5px 0 0 10px;
+}
+
+.plant .desc {
+  grid-area: description;
+  padding-left: 10px;
+}
+
+.plant .price {
+  grid-area: price;
+  padding-left: 10px;
+}

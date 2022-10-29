@@ -1,0 +1,47 @@
+/*-------------------------
+  Plant details view
+-------------------------*/
+#plant-details {
+  position: relative;
+  padding: 30px 50px;
+}
+
+#plant-name {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: calc((100% - 100px) / 2 + 50px);
+  padding: 5px;
+  background: rgb(21, 128, 61, 0.7);
+  color: var(--green-200);
+}
+
+#plant-image {
+  width: 100%;
+  border: 1px solid var(--green-600);
+}
+
+#plant-infos li {
+  padding: 10px 0;
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+#plant-infos li:last-child {
+  border-bottom: none;
+}
+
+#plant-infos .add-to-cart {
+  margin: 0 0 0 10px;
+  background: var(--green-400);
+  padding: 10px 5px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#plant-infos .add-to-cart:hover {
+  background: var(--green-600);
+}

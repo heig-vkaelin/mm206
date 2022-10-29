@@ -1,0 +1,44 @@
+/*-------------------------
+  Category view
+-------------------------*/
+.category {
+  display: block;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--green-200);
+  border-bottom: 1px solid var(--green-800);
+}
+
+.category:hover {
+  background: var(--green-700);
+}
+
+.search-plant {
+  padding: 25px 5px;
+  font-size: 18px;
+  color: var(--green-200);
+}
+
+.search-plant input {
+  padding: 10px;
+  font-size: 18px;
+  color: var(--green-200);
+  background: var(--green-700);
+  border: 1px solid var(--green-800);
+  border-radius: 5px;
+}
+
+.search-plant button {
+  padding: 10px;
+  font-size: 18px;
+  color: var(--green-200);
+  background: var(--green-800);
+  border: 1px solid var(--green-900);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-plant button:hover {
+  background: var(--green-700);
+}
