@@ -31,7 +31,7 @@
         </svg>
       </a>
     </header>
-    <h1 class="page-title"></h1>
+    <h1 class="page-title">Plants</h1>
     <div id="plants"></div>
 
     <script type="module">
@@ -47,12 +47,25 @@
 
       async function main() {
         const params = Object.fromEntries(new URLSearchParams(window.location.search));
-        pageTitle.innerText = params.search ?? params.category;
         const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS, params);
         displayPlants(plants);
+        displayTitle(plants, params);
+      }
+
+      function displayTitle(plants, params) {
+        if (params.search) {
+          pageTitle.textContent = `Search results for "${params.search}"`;
+        } else if (plants.length) {
+          pageTitle.textContent = `Category: ${plants[0].category_name}`;
+        }
       }
 
       function displayPlants(plants) {
+        if (!plants.length) {
+          container.innerHTML = `<p class="no-results">Your search did not match any plants</p>`;
+          return;
+        }
+
         for (const plant of plants) {
           const plantLink = document.createElement('a');
           plantLink.href = `plant-details.html?id=${plant.id}`;

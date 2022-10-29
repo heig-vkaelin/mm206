@@ -47,7 +47,7 @@
           const categoryLink = document.createElement('a');
           categoryLink.classList.add('category');
           categoryLink.innerText = category.name;
-          categoryLink.href = `plants.html?category=${category.name}`;
+          categoryLink.href = `plants.html?category=${category.id}`;
           container.appendChild(categoryLink);
         }
       }
