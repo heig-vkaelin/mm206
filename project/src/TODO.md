@@ -22,13 +22,13 @@
 
 ### Details page (plant-details.html)
 
-- [ ] Show big picture, name, category, description, height, price
-- [ ] Show discount if applicable in percentage
-- [ ] Number of plants in stock, if not in stock show estimate delivery time
-- [ ] Customer rating if available, 1-5 stars
-- [ ] Buy button -> add to cart (part 3)
-- [ ] Go to cart button (part 3)
-- [ ] Back button/text/image to go back to home page
+- [x] Show big picture, name, category, description, height, price
+- [x] Show discount if applicable in percentage
+- [x] Number of plants in stock, if not in stock show estimate delivery time
+- [x] Customer rating if available, 1-5 stars
+- [x] Buy button -> add to cart (part 3)
+- [x] Go to cart button (part 3)
+- [x] Back button/text/image to go back to home page
 
 # Part 2
 

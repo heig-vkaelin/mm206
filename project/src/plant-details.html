@@ -21,7 +21,7 @@
             />
           </svg>
         </button>
-        <span>Helseflora</span>
+        <a href="index.html">Helseflora</a>
       </h2>
       <a href="cart.html" id="cart" class="btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -33,49 +33,62 @@
     </header>
     <div id="plant-details">
       <h1 id="plant-name"></h1>
+      <p id="discount"></p>
       <img id="plant-image" />
       <ul id="plant-infos"></ul>
     </div>
 
-    <script>
+    <script type="module">
+      import { fetchAPI, ENDPOINTS } from './services/api.js';
+
       const back = document.querySelector('#back');
       back.addEventListener('click', () => {
         window.history.back();
       });
 
       async function fetchPlantDetails() {
-        const params = new URLSearchParams(window.location.search);
-        const plantId = params.get('id');
-
-        const response = await fetch(`https://sukkergris.no/plant/?id=${plantId}`);
-        const plant = await response.json();
-        displayPlant(plant);
+        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
+        displayPlant(plants[0]);
       }
 
       function displayPlant(plant) {
         const plantName = document.querySelector('#plant-name');
+        const discount = document.querySelector('#discount');
         const plantImage = document.querySelector('#plant-image');
         const plantInfo = document.querySelector('#plant-infos');
 
-        plantName.textContent = plant.navn;
-        plantImage.src = `https://sukkergris.no/plantimages/large/${plant.bildefil.replace('png', 'jpg')}`;
+        plantName.textContent = plant.name;
+        plantImage.src = plant.image;
+
+        if (plant.discount > 0) {
+          discount.textContent = `- ${plant.discount}%`;
+        }
+
+        const stock = plant.stock
+          ? `Remaining stock: ${plant.stock}`
+          : `<p class="out-of-stock">Out of stock</p>
+             <p>Estimate delivery time: ${new Date(plant.expected_shipped).toLocaleDateString()}</p>`;
+
+        const stars = plant.rating
+          ? `<li>Customer rating: ${'★'.repeat(plant.rating)}${'☆'.repeat(5 - plant.rating)}</li>`
+          : '';
 
         plantInfo.innerHTML = `
-          <li>Kategori: ${plant.kategori}</li>
-          <li>${plant.beskrivelse}</li>
+          <li>${stock}</li>
+          ${stars}
+          <li>Category: ${plant.category_name}</li>
+          <li>${plant.description}</li>
           <li>
-            Normal høyde: ${plant.hoyde} cm
+            Normal height: ${plant.height} cm
             <br />
-            Vekstsone: ${plant.vekstsone}
-            <br />
-            Anbefalt gjødselmix: ${plant.nitrogen} % nitrogen, 
-            ${plant.kalium} % kalium, ${plant.fosfor} % fosfor. 
-            Bør ikke plantes hvis temperaturen om dagen er 
-            under ${plant.min_temp_dag} grader, eller temperaturen 
-            om natten er under ${plant.min_temp_natt} grader.
+            Recommended fertilizer mix: ${plant.nitrogen} % nitrogen,
+            ${plant.potassium} % potassium, ${plant.phosphor} % phosphorus.
+            Should not be planted if the temperature during the day is below
+            ${plant.min_temp_day} degrees, or the temperature at night
+            is below ${plant.min_temp_night} degrees.
           </li>
           <li>
-            <span>kr ${plant.pris},- per stk.</span>
+            <span>kr ${plant.price},- per piece</span>
             <button class="add-to-cart">Add to shopping cart</button>
           </li>
         `;
@@ -86,19 +99,15 @@
 
       function addToCartHandler(plant) {
         console.log('Add to cart: ', plant);
-
-        let cart = {};
-        if (localStorage.getItem('cart')) {
-          cart = JSON.parse(localStorage.getItem('cart'));
-        }
+        const cart = JSON.parse(localStorage.getItem('cart')) ?? {};
 
         if (cart[plant.id]) {
           cart[plant.id].quantity++;
         } else {
           cart[plant.id] = {
             id: plant.id,
-            name: plant.navn,
-            price: plant.pris,
+            name: plant.name,
+            price: plant.price,
             quantity: 1,
           };
         }

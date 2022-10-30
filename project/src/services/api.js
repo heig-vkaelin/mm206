@@ -7,7 +7,7 @@ export const ENDPOINTS = {
   PLANTS: 'plants',
 };
 
-export async function fetchAPI(endpoint, params = {}) {
+export async function fetchAPI(endpoint) {
   if (Object.values(ENDPOINTS).indexOf(endpoint) === -1) {
     return {
       error: 'Invalid endpoint',
@@ -16,8 +16,10 @@ export async function fetchAPI(endpoint, params = {}) {
   }
 
   const url = new URL(endpoint, BASE_URL);
-  for (const key in params) {
-    url.searchParams.append(key, params[key]);
+  const params = new URLSearchParams(window.location.search);
+
+  for (const [key, value] of params) {
+    url.searchParams.append(key, value);
   }
   url.searchParams.append('key', KEY);
 

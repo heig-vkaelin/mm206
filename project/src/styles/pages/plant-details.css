@@ -16,6 +16,17 @@
   color: var(--green-200);
 }
 
+#discount {
+  position: absolute;
+  top: 50px;
+  right: 70px;
+  padding: 8px 16px;
+  background: var(--red-200);
+  border-radius: 999px;
+  color: var(--red-800);
+  font-size: 16px;
+}
+
 #plant-image {
   width: 100%;
   border: 1px solid var(--green-600);
@@ -44,4 +55,9 @@
 
 #plant-infos .add-to-cart:hover {
   background: var(--green-600);
+}
+
+.out-of-stock {
+  color: var(--red-600);
+  font-weight: 600;
 }

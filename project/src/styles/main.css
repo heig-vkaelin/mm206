@@ -32,13 +32,37 @@
   --green-700: #15803d;
   --green-800: #166534;
   --green-900: #14532d;
+
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #fecaca;
+  --red-300: #fca5a5;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --red-800: #991b1b;
+  --red-900: #7f1d1d;
+
   /* 
     --color-forest: #2e4600;
     --color-grass: #486b00;
     --color-lime: #a2c523;
     --color-earth: #7d4427;
   */
-  background: var(--purple-100);
+  background: var(--gray-900);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 * {
@@ -135,6 +159,6 @@ li {
 .page-title {
   padding: 0 5px;
   font-size: 32px;
-  color: var(--orange-700);
+  color: var(--green-700);
   border-bottom: 1px solid var(--green-800);
 }

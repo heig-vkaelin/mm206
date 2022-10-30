@@ -21,7 +21,7 @@
             />
           </svg>
         </button>
-        <span>Helseflora</span>
+        <a href="index.html">Helseflora</a>
       </h2>
       <a href="cart.html" id="cart" class="btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -46,16 +46,16 @@
       });
 
       async function main() {
-        const params = Object.fromEntries(new URLSearchParams(window.location.search));
-        console.log(params);
-        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS, params);
+        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
         displayPlants(plants);
-        displayTitle(plants, params);
+        displayTitle(plants);
       }
 
-      function displayTitle(plants, params) {
-        if (params.search) {
-          pageTitle.textContent = `Search results for "${params.search}"`;
+      function displayTitle(plants) {
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.has('search')) {
+          pageTitle.textContent = `Search results for "${params.get('search')}"`;
         } else if (plants.length) {
           pageTitle.textContent = `Category: ${plants[0].category_name}`;
         }
