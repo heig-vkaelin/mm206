@@ -49,7 +49,7 @@
 - [ ] Edit plant button -> edit plant page
 - [ ] Delete plant button -> delete plant
 
-# Part 3 – Shopping and ordering
+# Part 3 – Shopping and ordering
 
 ## Task 6
 
@@ -98,7 +98,7 @@ Divided in 3 parts/steps:
 - [ ] List all orders
 - [ ] Delete orders
 
-# Part 4 – Users and comments/plant reviews
+# Part 4 – Users and comments/plant reviews
 
 ## Task 10
 
@@ -129,7 +129,7 @@ Divided in 3 parts/steps:
 - [ ] On this page you can see all comments and ratings for the selected plant
 - [ ] This comments page should also be available for non-logged in users
 
-## Task 16
+## Task 16
 
 - [ ] When you click on the user pictures (in header) -> settings page
 - [ ] Form to change user information
