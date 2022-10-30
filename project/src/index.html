@@ -13,7 +13,10 @@
 
   <body>
     <header class="website-header">
-      <h2 class="website-title">Helseflora</h2>
+      <div class="website-nav">
+        <img class="website-logo" src="images/logo.png" alt="Helseflora logo" />
+        <h2 class="website-title">Helseflora</h2>
+      </div>
       <a href="cart.html" id="cart" class="btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
           <path
@@ -27,7 +30,7 @@
       <form action="" class="search-plant">
         <label for="search">Search a plant</label>
         <input type="text" name="search" id="search" placeholder="Search for a plant" />
-        <button>Search</button>
+        <button id="search-button">Search</button>
       </form>
     </div>
     <div id="categories"></div>
@@ -40,6 +43,9 @@
       async function main() {
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
         displayCategories(categories);
+
+        const searchButton = document.querySelector('#search-button');
+        searchButton.addEventListener('click', searchPlants);
       }
 
       function displayCategories(categories) {
@@ -50,6 +56,11 @@
           categoryLink.href = `plants.html?category=${category.id}`;
           container.appendChild(categoryLink);
         }
+      }
+
+      function searchPlants() {
+        const search = document.querySelector('#search').value;
+        window.location.href = `plants.html?search=${search}`;
       }
 
       main();

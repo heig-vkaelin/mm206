@@ -6,24 +6,25 @@
   padding: 5px;
   font-size: 18px;
   font-weight: 300;
-  color: var(--green-200);
+  color: var(--purple-500);
   border-bottom: 1px solid var(--green-800);
 }
 
 .category:hover {
   background: var(--green-700);
+  color: var(--purple-100)
 }
 
 .search-plant {
   padding: 25px 5px;
   font-size: 18px;
-  color: var(--green-200);
+  color: var(--green-700);
 }
 
 .search-plant input {
   padding: 10px;
   font-size: 18px;
-  color: var(--green-200);
+  color: var(--orange-50);
   background: var(--green-700);
   border: 1px solid var(--green-800);
   border-radius: 5px;
@@ -32,7 +33,7 @@
 .search-plant button {
   padding: 10px;
   font-size: 18px;
-  color: var(--green-200);
+  color: var(--orange-50);
   background: var(--green-800);
   border: 1px solid var(--green-900);
   border-radius: 5px;
