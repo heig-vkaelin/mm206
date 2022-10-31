@@ -1,53 +1,95 @@
-/*-------------------------
-  Plant view
--------------------------*/
-.plant {
+#category-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 48rem;
+  padding-left: 1rem;
+  padding-right: 1rem
+}
+#category-header {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center
+}
+#category-header h1 {
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  letter-spacing: -.025em;
+  color: var(--orange-400)
+}
+#category-header p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  max-width: 48rem;
+  color: var(--orange-400)
+}
+#category-plants {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-template-rows: 30px 40px 30px;
-  grid-template-areas:
-    'image name'
-    'image description'
-    'image price';
-  color: var(--green-200);
-  border-bottom: 1px solid var(--green-800);
+  margin-top: 2rem;
+  column-gap: 1.5rem;
+  row-gap: 2.5rem;
+  grid-template-columns: repeat(2,minmax(0,1fr))
 }
-
-.plant:hover {
-  background: var(--green-700);
+@media (min-width:640px) {
+  #category-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+  }
+  #category-plants {
+    grid-template-columns: repeat(4,minmax(0,1fr))
+  }
 }
-
-.plant:last-child {
-  border-bottom: none;
+@media (min-width:1024px) {
+  #category-container {
+    max-width: 80rem;
+    padding-left: 2rem;
+    padding-right: 2rem
+  }
+  #category-plants {
+    grid-template-columns: repeat(6,minmax(0,1fr))
+  }
 }
-
-.plant img {
-  width: 100px;
-  grid-area: image;
+@media (min-width:1280px) {
+  #category-plants {
+    column-gap: 2rem
+  }
 }
-
-.plant h3 {
-  grid-area: name;
-  padding: 5px 0 0 10px;
+.category-plant {
+  display: flex;
+  flex-direction: column;
+  align-items: center
 }
-
-.plant .desc {
-  grid-area: description;
-  padding-left: 10px;
+.category-plant-image:hover {
+  opacity: .5
 }
-
-.plant .price {
-  grid-area: price;
-  padding-left: 10px;
+.category-plant-image {
+  border-radius: .5rem;
+  overflow: hidden;
+  width: 10rem;
+  aspect-ratio: 1
 }
-
-.no-results {
-  margin: 20px;
-  padding: 20px;
-  background: var(--green-600);
-  border: 1px solid var(--green-500);
-  border-radius: 12px;
-  color: var(--green-800);
-  font-size: 18px;
-  font-weight: 600;
+.category-plant-image img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%
+}
+.group:hover .category-plant-image img {
+  opacity: .5
+}
+.category-plant-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  width: 10rem;
+  color: var(--green-200)
 }

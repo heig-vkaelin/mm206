@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Valentin Kaelin" />
-    <meta name="description" content="MM206 - Ex2" />
+    <meta name="author" content="Francesco Monti" />
+    <meta name="description" content="MM206 - Project" />
     <title>Plants - Helseflora</title>
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/pages/plants.css" />
@@ -13,16 +14,10 @@
 
   <body>
     <header class="website-header">
-      <h2 class="website-title with-back">
-        <button id="back" class="btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-              d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"
-            />
-          </svg>
-        </button>
-        <a href="index.html">Helseflora</a>
-      </h2>
+      <a class="website-nav" href="index.html">
+        <img class="website-logo" src="images/logo.png" alt="Helseflora logo" />
+        <h2 class="website-title">Helseflora</h2>
+      </a>
       <a href="cart.html" id="cart" class="btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
           <path
@@ -31,24 +26,34 @@
         </svg>
       </a>
     </header>
-    <h1 class="page-title">Plants</h1>
-    <div id="plants"></div>
+
+    <main>
+      <div class="spin"></div>
+      <div id="category-container" hidden>
+        <div id="category-header">
+          <h1 class="page-title"></h1>
+          <!-- <p>Thoughtfully designed objects for the workspace, home, and travel.</p> -->
+        </div>
+
+        <section id="category-plants"></section>
+      </div>
+    </main>
 
     <script type="module">
       import { fetchAPI, ENDPOINTS } from './services/api.js';
 
-      const container = document.querySelector('#plants');
+      const container = document.querySelector('#category-container');
+      const plantsContainer = document.querySelector('#category-plants');
+      const spinner = document.querySelector('.spin');
       const pageTitle = document.querySelector('.page-title');
-      const back = document.querySelector('#back');
-
-      back.addEventListener('click', () => {
-        window.history.back();
-      });
 
       async function main() {
         const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
+        console.log(plants);
         displayPlants(plants);
         displayTitle(plants);
+        spinner.hidden = true;
+        container.hidden = false;
       }
 
       function displayTitle(plants) {
@@ -56,14 +61,16 @@
 
         if (params.has('search')) {
           pageTitle.textContent = `Search results for "${params.get('search')}"`;
-        } else if (plants.length) {
+        } else if (params.length > 0) {
           pageTitle.textContent = `Category: ${plants[0].category_name}`;
+        } else {
+          pageTitle.textContent = 'All plants';
         }
       }
 
       function displayPlants(plants) {
         if (!plants.length) {
-          container.innerHTML = `<p class="no-results">Your search did not match any plants</p>`;
+          plantsContainer.innerHTML = `<p class="no-results">Your search did not match any plants</p>`;
           return;
         }
 
@@ -71,14 +78,18 @@
           const plantLink = document.createElement('a');
           plantLink.href = `plant-details.html?id=${plant.id}`;
 
-          plantLink.classList.add('plant');
+          plantLink.classList.add('category-plant');
           plantLink.innerHTML = `
-            <h3>${plant.name}</h3>
-            <img src="${plant.thumb}">
-            <p class="desc">${plant.description}</p>
-            <p class="price">kr ${plant.price},-</p>
+            <img
+              class="category-plant-image"
+              src="${plant.thumb}"
+              />
+            <div class="category-plant-description">
+              <h3>${plant.name}</h3>
+              <p>kr ${plant.price},-</p>
+            </div>
           `;
-          container.appendChild(plantLink);
+          plantsContainer.appendChild(plantLink);
         }
       }
 
