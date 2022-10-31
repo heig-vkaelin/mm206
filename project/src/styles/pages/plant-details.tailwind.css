@@ -1,0 +1,133 @@
+#plant-container {
+  @apply mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8;
+}
+
+#plant-details {
+  @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 p-10 rounded-lg;
+  background-color: var(--gray-50);
+}
+
+#plant-image {
+  @apply w-full relative;
+}
+
+#plant-image img {
+  @apply h-full w-full object-cover object-center sm:rounded-lg;
+}
+
+#plant-image #discount {
+  @apply absolute top-6 right-6 text-3xl px-4 py-2 rounded-full;
+  background-color: var(--red-200);
+  color: var(--red-600);
+}
+
+#plant-info {
+  @apply mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0;
+}
+
+#plant-info h1 {
+  @apply text-3xl font-bold tracking-tight;
+  color: var(--gray-900);
+}
+
+#plant-info h3 {
+  @apply text-xl font-bold tracking-tight italic;
+  color: var(--gray-700);
+}
+
+#plant-info > div {
+  @apply mt-3;
+}
+
+#plant-info .price {
+  @apply text-3xl tracking-tight;
+  color: var(--gray-900);
+}
+
+#plant-info #plant-reviews div {
+  @apply flex items-center;
+}
+
+#plant-info .star {
+  @apply h-5 w-5 flex-shrink-0;
+  color: var(--gray-300);
+}
+
+#plant-info .full-star {
+  color: var(--purple-500);
+}
+
+#plant-info #plant-description {
+  @apply text-base;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+  color: var(--gray-700);
+}
+
+#plant-info > form {
+  @apply mt-6;
+}
+
+#plant-info > form > div {
+  @apply sm:flex-row mt-10 flex flex-col items-center justify-between;
+}
+
+#plant-info > form button {
+  @apply flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 sm:w-full;
+  background-color: var(--purple-600);
+}
+
+#plant-info > form button:disabled {
+  @apply cursor-not-allowed;
+  background-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+#plant-info > form p {
+  @apply italic px-6;
+}
+
+#plant-info .details {
+  @apply mt-12;
+}
+
+#plant-info .details button {
+  @apply relative flex w-full items-center justify-between py-6 text-left;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+}
+
+#plant-info .details-title {
+  @apply text-sm font-medium;
+  color: var(--gray-900);
+}
+
+#plant-info .details-title.title-open {
+  color: var(--purple-600);
+}
+
+#plant-info .details-buttons {
+  @apply ml-6 flex items-center;
+}
+
+#plant-info .details button svg {
+  @apply h-6 w-6 hidden group-hover:text-gray-500;
+  color: var(--gray-400);
+}
+
+#plant-info .details button .visible {
+  @apply block group-hover:text-indigo-500;
+  color: var(--purple-400);
+}
+
+#plant-info .details > div {
+  @apply border-t;
+}
+
+.prose {
+  @apply pb-6;
+  font-size: 0.875rem;
+  line-height: 1.7142857;
+  color: #374151;
+}

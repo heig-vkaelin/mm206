@@ -105,6 +105,17 @@ li {
   padding: 0 5px;
 }
 
+.no-results {
+  margin: 20px;
+  padding: 20px;
+  background: var(--green-600);
+  border: 1px solid var(--green-500);
+  border-radius: 12px;
+  color: var(--green-900);
+  font-size: 18px;
+  font-weight: 600;
+}
+
 /*-------------------------
   Header
 -------------------------*/

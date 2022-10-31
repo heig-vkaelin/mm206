@@ -49,10 +49,14 @@
       const params = new URLSearchParams(window.location.search);
 
       async function main() {
-        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
-        console.log(plants);
-        displayPlants(plants);
-        displayTitle(plants);
+        try {
+          const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
+          displayPlants(plants);
+          displayTitle(plants);
+        } catch (error) {
+          container.innerHTML = `<p class="no-results">The category id is invalid</p>`;
+        }
+
         spinner.hidden = true;
         container.hidden = false;
       }

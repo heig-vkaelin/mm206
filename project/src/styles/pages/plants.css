@@ -3,19 +3,19 @@
   margin-right: auto;
   max-width: 48rem;
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 1rem
 }
 #category-header {
   padding-top: 2rem;
   padding-bottom: 2rem;
-  text-align: center;
+  text-align: center
 }
 #category-header h1 {
   font-weight: 700;
   font-size: 2.25rem;
   line-height: 2.5rem;
-  letter-spacing: -0.025em;
-  color: var(--orange-400);
+  letter-spacing: -.025em;
+  color: var(--orange-400)
 }
 #category-header p {
   font-size: 1rem;
@@ -24,61 +24,61 @@
   margin-right: auto;
   margin-top: 1rem;
   max-width: 48rem;
-  color: var(--orange-400);
+  color: var(--orange-400)
 }
 #category-plants {
   display: grid;
   margin-top: 2rem;
   column-gap: 1.5rem;
   row-gap: 2.5rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2,minmax(0,1fr))
 }
-@media (min-width: 640px) {
+@media (min-width:640px) {
   #category-container {
     padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-right: 1.5rem
   }
   #category-plants {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4,minmax(0,1fr))
   }
 }
-@media (min-width: 1024px) {
+@media (min-width:1024px) {
   #category-container {
     max-width: 80rem;
     padding-left: 2rem;
-    padding-right: 2rem;
+    padding-right: 2rem
   }
   #category-plants {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(6,minmax(0,1fr))
   }
 }
-@media (min-width: 1280px) {
+@media (min-width:1280px) {
   #category-plants {
-    column-gap: 2rem;
+    column-gap: 2rem
   }
 }
 .category-plant {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center
 }
 .category-plant-image:hover {
-  opacity: 0.5;
+  opacity: .5
 }
 .category-plant-image {
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   overflow: hidden;
   width: 10rem;
-  aspect-ratio: 1;
+  aspect-ratio: 1
 }
 .category-plant-image img {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  width: 100%;
+  width: 100%
 }
 .group:hover .category-plant-image img {
-  opacity: 0.5;
+  opacity: .5
 }
 .category-plant-description {
   display: flex;
@@ -91,16 +91,5 @@
   margin-right: 1rem;
   margin-top: 1rem;
   width: 10rem;
-  color: var(--green-200);
-}
-
-.no-results {
-  margin: 20px;
-  padding: 20px;
-  background: var(--green-600);
-  border: 1px solid var(--green-500);
-  border-radius: 12px;
-  color: var(--green-800);
-  font-size: 18px;
-  font-weight: 600;
+  color: var(--green-200)
 }

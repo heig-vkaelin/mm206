@@ -5,7 +5,7 @@
 ### Startup page (index.html)
 
 - [x] List categories -> redirect to plantlist page
-- [ ] Search field with button -> show plants in plantlist page
+- [x] Search field with button -> show plants in plantlist page
 - [x] Go to cart button (part 3)
 
 ## Task 2
