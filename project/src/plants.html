@@ -59,9 +59,14 @@
       function displayTitle(plants) {
         const params = new URLSearchParams(window.location.search);
 
+        if(!plants.length) {
+          pageTitle.textContent = 'No plants found';
+          return;
+        }
+
         if (params.has('search')) {
           pageTitle.textContent = `Search results for "${params.get('search')}"`;
-        } else if (params.length > 0) {
+        } else if (params.has('category')) {
           pageTitle.textContent = `Category: ${plants[0].category_name}`;
         } else {
           pageTitle.textContent = 'All plants';

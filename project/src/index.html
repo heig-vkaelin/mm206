@@ -45,8 +45,8 @@
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
         displayCategories(categories);
 
-        const searchButton = document.querySelector('#search-button');
-        searchButton.addEventListener('click', searchPlants);
+        document.querySelector('.search-plant').addEventListener('submit', (event) => event.preventDefault());
+        document.querySelector('#search-button').addEventListener('click', searchPlants);
       }
 
       function displayCategories(categories) {
