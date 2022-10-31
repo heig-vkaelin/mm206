@@ -32,7 +32,6 @@
       <div id="category-container" hidden>
         <div id="category-header">
           <h1 class="page-title"></h1>
-          <!-- <p>Thoughtfully designed objects for the workspace, home, and travel.</p> -->
         </div>
 
         <section id="category-plants"></section>
@@ -47,6 +46,8 @@
       const spinner = document.querySelector('.spin');
       const pageTitle = document.querySelector('.page-title');
 
+      const params = new URLSearchParams(window.location.search);
+
       async function main() {
         const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
         console.log(plants);
@@ -57,16 +58,14 @@
       }
 
       function displayTitle(plants) {
-        const params = new URLSearchParams(window.location.search);
-
-        if(!plants.length) {
+        if (!plants.length) {
           pageTitle.textContent = 'No plants found';
           return;
         }
 
-        if (params.has('search')) {
+        if (params.has('search') && params.get('search') !== '') {
           pageTitle.textContent = `Search results for "${params.get('search')}"`;
-        } else if (params.has('category')) {
+        } else if (params.has('category') && plants.length > 0) {
           pageTitle.textContent = `Category: ${plants[0].category_name}`;
         } else {
           pageTitle.textContent = 'All plants';
@@ -74,8 +73,8 @@
       }
 
       function displayPlants(plants) {
-        if (!plants.length) {
-          plantsContainer.innerHTML = `<p class="no-results">Your search did not match any plants</p>`;
+        if (params.has('search') && !plants.length) {
+          container.innerHTML = `<p class="no-results">Your search did not match any plants</p>`;
           return;
         }
 

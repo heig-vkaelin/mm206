@@ -31,7 +31,7 @@
       <form action="" class="search-plant">
         <label for="search">Search a plant</label>
         <input type="text" name="search" id="search" placeholder="Search for a plant" />
-        <button id="search-button">Search</button>
+        <button>Search</button>
       </form>
     </div>
     <div id="categories"></div>
@@ -40,13 +40,16 @@
       import { fetchAPI, ENDPOINTS } from './services/api.js';
 
       const container = document.querySelector('#categories');
+      const searchForm = document.querySelector('.search-plant');
 
       async function main() {
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
         displayCategories(categories);
 
-        document.querySelector('.search-plant').addEventListener('submit', (event) => event.preventDefault());
-        document.querySelector('#search-button').addEventListener('click', searchPlants);
+        searchForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          searchPlants();
+        });
       }
 
       function displayCategories(categories) {

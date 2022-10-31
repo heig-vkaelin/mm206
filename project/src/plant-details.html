@@ -63,6 +63,8 @@
 
         if (plant.discount > 0) {
           discount.textContent = `- ${plant.discount}%`;
+        } else {
+          discount.style.display = 'none';
         }
 
         const stock = plant.stock
