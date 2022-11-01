@@ -44,7 +44,7 @@
 
 ### Plants page (admin/plants.html)
 
-- [ ] List all plants
+- [x] List all plants
 - [ ] Add plant button -> add plant page
 - [ ] Edit plant button -> edit plant page
 - [ ] Delete plant button -> delete plant

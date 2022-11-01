@@ -1,0 +1,41 @@
+main {
+  display: block;
+}
+
+.table-component {
+  margin: 24px 0 0 0;
+}
+
+tbody .name .container {
+  @apply flex items-center;
+}
+
+tbody .name .image-container {
+  @apply h-10 w-10 flex-shrink-0;
+}
+
+tbody .name img {
+  @apply h-10 w-10 rounded-full;
+}
+
+tbody .name .text-container {
+  @apply ml-4;
+}
+
+tbody .name .text-container .name {
+  @apply font-medium;
+  color: var(--gray-900);
+}
+
+tbody .name .text-container .category {
+  color: var(--gray-500);
+}
+
+tbody .actions a {
+  margin: 0 12px 0 0;
+  color: var(--indigo-600);
+}
+
+tbody .actions a:hover {
+  color: var(--indigo-900);
+}

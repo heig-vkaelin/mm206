@@ -10,7 +10,7 @@
     <title>Admin plants - Helseflora</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/admin/main.css" />
-    <link rel="stylesheet" href="../styles/admin/pages/login.css" />
+    <link rel="stylesheet" href="../styles/admin/pages/plants.css" />
   </head>
 
   <body>
@@ -20,17 +20,95 @@
       </a>
     </header>
     <main>
-      <div class="card-container">
-        <div class="card">
-          <h1>Plants</h1>
+      <div class="table-component">
+        <div class="table-heading">
+          <div class="heading-container">
+            <h1 class="table-header">Plants</h1>
+            <p class="table-subtitle">A list of all the plants your created and can modify.</p>
+          </div>
+          <div class="add-item-container">
+            <button type="button" class="btn btn-primary btn-sm">Add plant</button>
+          </div>
+        </div>
+        <div class="table-main-container">
+          <div class="table-sub-container">
+            <div class="table-max-width">
+              <div class="table-hide-overflow">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Reserved</th>
+                      <th scope="col" class="relative py-3.5 pl-3 pr-6"></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
 
     <script type="module">
+      import { fetchAPI, ENDPOINTS } from '../services/api.js';
       import { adminMiddleware } from '../services/auth.js';
 
-      adminMiddleware();
+      const tableBody = document.querySelector('tbody');
+
+      async function main() {
+        adminMiddleware();
+
+        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS, {
+          headers: {
+            Authorization: JSON.parse(localStorage.getItem('user')).token,
+          },
+        });
+
+        console.log(plants);
+
+        tableBody.innerHTML = plants
+          .sort((a, b) => a.category_name.localeCompare(b.category_name))
+          .map((plant) => {
+            const inStock = plant.stock > 0;
+            return `
+          <tr>
+            <td class="name">
+              <div class="container">
+                <div class="img-container">
+                  <img
+                    class="img"
+                    src="${plant.thumb}"
+                    alt=""
+                  />
+                </div>
+                <div class="text-container">
+                  <div class="name">${plant.name}</div>
+                  <div class="category">${plant.category_name}</div>
+                </div>
+              </div>
+            </td>
+            <td class="price">
+              <div>${plant.price} NOK</div>
+            </td>
+            <td>
+              <span class="tag ${inStock ? 'success' : 'error'}">${inStock ? 'Available' : 'Unavailable'}</span>
+            </td>
+            <td>${plant.reserved_members}</td>
+            <td class="actions">
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
+            </td>
+          </tr>
+        `;
+          })
+          .join('');
+      }
+
+      main();
     </script>
   </body>
 </html>

@@ -1,0 +1,37 @@
+main {
+  display: block
+}
+.table-component {
+  margin: 24px 0 0
+}
+tbody .name .container {
+  display: flex;
+  align-items: center
+}
+tbody .name .image-container {
+  flex-shrink: 0;
+  height: 2.5rem;
+  width: 2.5rem
+}
+tbody .name img {
+  border-radius: 9999px;
+  height: 2.5rem;
+  width: 2.5rem
+}
+tbody .name .text-container {
+  margin-left: 1rem
+}
+tbody .name .text-container .name {
+  font-weight: 500;
+  color: var(--gray-900)
+}
+tbody .name .text-container .category {
+  color: var(--gray-500)
+}
+tbody .actions a {
+  margin: 0 12px 0 0;
+  color: var(--indigo-600)
+}
+tbody .actions a:hover {
+  color: var(--indigo-900)
+}
