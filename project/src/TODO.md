@@ -34,15 +34,15 @@
 
 ## Task 4
 
-### Admin login page (admin.html)
+### Admin login page (admin/login.html)
 
-- [ ] Username and password field
-- [ ] After login show "Plants", "Orders", "Users" and "Reviews" buttons
-- [ ] Logout button
+- [x] Username and password field
+- [x] After login show "Plants", "Orders", "Users" and "Reviews" buttons
+- [x] Logout button
 
 ## Task 5
 
-### Plants page (admin-plants.html)
+### Plants page (admin/plants.html)
 
 - [ ] List all plants
 - [ ] Add plant button -> add plant page

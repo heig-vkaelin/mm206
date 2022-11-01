@@ -5,9 +5,10 @@ export const BASE_URL = 'https://helseflora.herokuapp.com';
 export const ENDPOINTS = {
   CATEGORIES: 'categories',
   PLANTS: 'plants',
+  ADMIN_LOGIN: 'users/adminLogin',
 };
 
-export async function fetchAPI(endpoint) {
+export async function fetchAPI(endpoint, options = {}) {
   if (Object.values(ENDPOINTS).indexOf(endpoint) === -1) {
     return {
       error: 'Invalid endpoint',
@@ -24,7 +25,7 @@ export async function fetchAPI(endpoint) {
   url.searchParams.append('key', KEY);
 
   try {
-    const response = await fetch(url.href);
+    const response = await fetch(url.href, options);
     const data = await response.json();
     return {
       data,
