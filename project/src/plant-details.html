@@ -170,11 +170,9 @@
 
       if (plant.stock > 0) {
         plantStock.textContent = `${plant.stock} remaining`;
-        cartButton.disabled = false;
       } else {
-        cartButton.textContent = 'Out of stock';
-        cartButton.disabled = true;
-        plantStock.textContent = `Estimate delivery time: ${new Date(plant.expected_shipped).toLocaleDateString()}`;
+        plantStock.classList.add('out-of-stock');
+        plantStock.innerHTML = `Out of stock<br/>Estimate delivery time: ${new Date(plant.expected_shipped).toLocaleDateString()}`;
       }
 
       plantDescription.textContent = plant.description;

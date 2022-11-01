@@ -159,6 +159,12 @@
   padding-right: 1.5rem;
   font-style: italic
 }
+#plant-info > form p.out-of-stock {
+  font-weight: 700;
+  font-size: .875rem;
+  line-height: 1.25rem;
+  color: var(--red-500)
+}
 #plant-info .details {
   margin-top: 3rem
 }

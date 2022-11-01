@@ -87,6 +87,10 @@
   @apply italic px-6;
 }
 
+#plant-info > form p.out-of-stock {
+  @apply font-bold text-sm;
+  color: var(--red-500);
+}
 #plant-info .details {
   @apply mt-12;
 }
