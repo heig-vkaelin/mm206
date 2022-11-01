@@ -3,7 +3,7 @@
 }
 
 #plant-details {
-  @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 p-10 rounded-lg;
+  @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 sm:p-10 p-2 rounded-lg;
   background-color: var(--gray-50);
 }
 
@@ -73,8 +73,13 @@
 }
 
 #plant-info > form button {
-  @apply flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 sm:w-full;
+  @apply flex min-w-full sm:min-w-0 sm:max-w-xs flex-1 items-center justify-center rounded-md border border-transparent py-3 px-8 text-base font-medium sm:w-full;
+  color: white;
   background-color: var(--purple-600);
+}
+
+#plant-info > form button:hover {
+  background-color: var(--purple-700);
 }
 
 #plant-info > form button:disabled {
@@ -84,7 +89,7 @@
 }
 
 #plant-info > form p {
-  @apply italic px-6;
+  @apply italic px-2 mt-4 sm:mt-0 sm:px-6;
 }
 
 #plant-info > form p.out-of-stock {

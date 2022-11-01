@@ -7,71 +7,152 @@
     <meta name="author" content="Valentin Kaelin" />
     <meta name="author" content="Francesco Monti" />
     <meta name="description" content="MM206 - Project" />
-    <title>Cart - Helseflora</title>
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/pages/cart.css" />
+    <title>Cart - Helseflora</title>
   </head>
-
   <body>
     <header class="website-header">
-      <h2 class="website-title with-back">
-        <button id="back" class="btn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-              d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"
-            />
-          </svg>
-        </button>
-        <span>Helseflora</span>
-      </h2>
+      <a class="website-nav" href="index.html">
+        <img class="website-logo" src="images/logo.png" alt="Helseflora logo" />
+        <h2 class="website-title">Helseflora</h2>
+      </a>
     </header>
-    <h1 class="page-title">Shopping cart</h1>
-    <div id="cart-items"></div>
-    <div class="wrapper">
-      <button id="empty-cart">Empty shopping cart</button>
-      <div class="total-price">Total price: kr <span id="total-price-value"></span>,-</div>
-    </div>
+
+    <div class="spin"></div>
+
+    <main hidden>
+      <div id="cart-container">
+        <h1>Shopping Cart</h1>
+
+        <form id="cart">
+          <div>
+            <ul id="cart-items" role="list"></ul>
+            <div class="additional-info">
+              <p>
+                <button id="empty-cart">Empty cart</button>
+              </p>
+            </div>
+          </div>
+
+          <!-- Order summary -->
+          <div id="cart-summary">
+            <div>
+              <dl>
+                <div id="subtotal" class="cart-subtotal">
+                  <dt>Subtotal</dt>
+                  <dd></dd>
+                </div>
+                <div id="shipping-fees" class="cart-subtotal">
+                  <dt>Shipping</dt>
+                  <dd></dd>
+                </div>
+                <div id="total" class="cart-subtotal">
+                  <dt>Order total</dt>
+                  <dd></dd>
+                </div>
+              </dl>
+            </div>
+
+            <div>
+              <button type="submit" id="checkout-button">Checkout</button>
+            </div>
+
+            <div class="additional-info">
+              <p>
+                or
+                <a href="index.html">
+                  Continue Shopping
+                  <span aria-hidden="true"> &rarr;</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
 
     <script>
+      const main = document.querySelector("main");
       const container = document.querySelector('#cart-items');
       const emptyCart = document.querySelector('#empty-cart');
-      const totalPrice = document.querySelector('#total-price-value');
-      const back = document.querySelector('#back');
+      const checkoutButton = document.querySelector('#checkout-button');
+      const spinner = document.querySelector('.spin');
 
-      back.addEventListener('click', () => {
-        window.history.back();
-      });
+      const subtotalPrice = document.querySelector('#subtotal dd');
+      const shippingFees = document.querySelector('#shipping-fees dd');
+      const totalPrice = document.querySelector('#total dd');
+
+      const shipping_fees = 0;
+
+      document.querySelector('#cart').addEventListener('submit', (e) => e.preventDefault());
 
       emptyCart.addEventListener('click', () => {
         localStorage.removeItem('cart');
-        container.innerHTML = '';
-        totalPrice.innerText = '0';
+        displayCartItems();
         emptyCart.style.display = 'none';
+        checkoutButton.disabled = true;
       });
 
       function displayCartItems() {
         const cart = JSON.parse(localStorage.getItem('cart')) || {};
-        let total = 0;
+        let subtotal = 0;
         container.innerHTML = '';
 
+        if (Object.keys(cart).length === 0) {
+          container.innerHTML = '<p class="no-results">Your cart is empty</p>';
+          emptyCart.style.display = 'none';
+          checkoutButton.disabled = true;
+        } else {
+          emptyCart.style.display = 'block';
+          checkoutButton.disabled = false;
+        }
+
         for (const [id, item] of Object.entries(cart)) {
-          const cartDiv = document.createElement('div');
-          cartDiv.classList.add('cart-item');
-          cartDiv.innerHTML = `
-            <div class="name">
-              <input type="number" name=${id} value=${item.quantity} class="update-quantity">
-              <span class="title">${item.name}</span>
-            </div>
-            <div class="prices">
-              <div>kr ${item.price},-</div>
-              <div>kr ${item.price * item.quantity},-</div>
+          const cartItem = document.createElement('li');
+          cartItem.classList.add('cart-item');
+          cartItem.innerHTML = `
+            <div><img src="${item.thumb}" /></div>
+            <div class="description">
               <div>
-                <button name=${id} class="delete-from-cart">Delete</button>
+                <div class="name">
+                  <div>
+                    <h3><a href="plants.html?id=${id}">${item.name}</a></h3>
+                    <p>ID: ${id}</p>
+                  </div>
+                  <p class="price">NOK ${item.price.toLocaleString()},-/piece</p>
+                </div>
+
+                <div class="quantity-container">
+                  <input type="number" name="${id}" min="1" value="${item.quantity}" class="update-quantity" />
+                  <button class="delete-from-cart" type="button" name="${id}">Remove</button>
+                </div>
               </div>
-            </div>
-          `;
-          container.appendChild(cartDiv);
-          total += item.price * item.quantity;
+
+              <div class="stock">
+                <p>
+                  <svg class="${item.in_stock ? 'check-icon' : 'clock-icon'}"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                  >
+                    <path fill-rule="evenodd"
+                      d="${
+                        item.in_stock
+                          ? 'M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z'
+                          : 'M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z'
+                      }" clip-rule="evenodd" />
+                  </svg>
+                  <span>${
+                    item.in_stock
+                      ? 'In Stock'
+                      : 'Estimated Shipping: ' + new Date(item.expected_shipping).toLocaleDateString()
+                  }</span>
+                </p>
+                <p>NOK ${(item.price * item.quantity).toLocaleString()},-</p>
+              </div>
+            </div>`;
+
+          container.appendChild(cartItem);
+          subtotal += item.price * item.quantity;
         }
 
         const deleteButtons = document.querySelectorAll('.delete-from-cart');
@@ -82,6 +163,7 @@
             displayCartItems();
           });
         });
+
         const updateQuantites = document.querySelectorAll('.update-quantity');
         updateQuantites.forEach((input) => {
           input.addEventListener('change', (e) => {
@@ -97,7 +179,12 @@
           });
         });
 
-        totalPrice.innerText = total;
+        subtotalPrice.innerText = 'NOK ' + subtotal.toLocaleString() + ',-';
+        shippingFees.innerText = shipping_fees > 0 ? 'NOK ' + shipping_fees.toLocaleString() + ',-' : 'Free shipping';
+        totalPrice.innerText = 'NOK ' + (subtotal + shipping_fees).toLocaleString() + ',-';
+
+        spinner.hidden = true;
+        main.hidden = false;
       }
 
       displayCartItems();

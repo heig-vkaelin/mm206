@@ -1,0 +1,202 @@
+#cart-container {
+  @apply mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8;
+}
+
+#cart-container > h1 {
+  @apply text-3xl font-bold tracking-tight;
+  color: var(--orange-400);
+}
+
+#cart {
+  @apply mt-12 px-3 pb-2 sm:px-8 sm:pb-8 rounded-lg;
+  background-color: var(--gray-100);
+}
+
+#cart-items {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-color: var(--gray-200);
+}
+
+#cart-items > :not([hidden]) ~ :not([hidden]) {
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  border-color: var(--gray-200);
+}
+
+.cart-item {
+  @apply flex py-6 sm:py-10;
+}
+
+.cart-item > div {
+  @apply flex-shrink-0;
+}
+
+.cart-item img {
+  @apply h-24 w-24 rounded-lg object-cover object-center sm:h-32 sm:w-32;
+}
+
+.cart-item .description {
+  @apply relative ml-1 sm:ml-4 flex flex-1 flex-col justify-between sm:ml-6;
+}
+
+.cart-item .description .name {
+  @apply flex justify-between sm:grid sm:grid-cols-2;
+}
+
+.cart-item .description .name > div {
+  @apply pr-6;
+}
+
+.cart-item .description .name h3 {
+  @apply text-base;
+}
+
+.cart-item .description .name a {
+  @apply font-medium;
+  color: var(--gray-700);
+}
+
+.cart-item .description .name a:hover {
+  color: var(--gray-800);
+}
+
+.cart-item .description .name > div p {
+  @apply mt-1 text-sm italic;
+  color: var(--gray-500);
+}
+
+.cart-item .description .price {
+  @apply text-right text-sm font-medium;
+  color: var(--gray-900);
+}
+
+.cart-item .description .quantity-container {
+  @apply mt-4 flex items-center sm:absolute sm:top-0 sm:left-1/2 sm:mt-0 sm:block;
+}
+
+.cart-item .description .quantity-container input {
+  @apply block rounded-md border py-1.5 text-left text-base font-medium leading-5 sm:text-sm;
+  color: var(--gray-700);
+  border-color: var(--gray-300);
+  max-width: 6rem;
+  width: fit-content;
+  appearance: none;
+  background-color: #fff;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  font-family: inherit;
+}
+
+.cart-item .description .quantity-container button {
+  @apply ml-4 text-sm font-medium sm:ml-0 sm:mt-3;
+  color: var(--purple-600);
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  text-transform: none;
+  font-family: inherit;
+}
+
+.cart-item .description .quantity-container button:hover {
+  color: var(--purple-500);
+}
+
+.cart-item .description .stock {
+  @apply mt-4 flex space-x-2 text-sm flex justify-between;
+  color: var(--gray-700);
+}
+
+.cart-item .description .stock > p {
+  @apply flex flex-row gap-x-2;
+}
+
+.cart-item .description .stock > p + p {
+  @apply font-bold;
+}
+
+.cart-item .description .stock .check-icon {
+  @apply h-5 w-5 flex-shrink-0;
+  color: var(--green-500);
+}
+
+.cart-item .description .stock .clock-icon {
+  @apply h-5 w-5 flex-shrink-0;
+  color: var(--gray-300);
+}
+
+#cart-summary {
+  @apply mt-10 sm:px-8;
+}
+
+#cart-summary > div {
+  @apply rounded-lg px-2 py-4 sm:p-3 lg:p-4 flow-root;
+  background-color: var(--gray-50);
+}
+
+#cart-summary > div dl {
+  @apply -my-4 divide-y divide-gray-200 text-sm;
+}
+
+#cart-summary .cart-subtotal {
+  @apply flex items-center justify-between py-4;
+}
+
+#cart-summary .cart-subtotal dt {
+  color: var(--gray-600);
+}
+
+#cart-summary .cart-subtotal dd {
+  @apply font-medium;
+  color: var(--gray-900);
+}
+
+#total * {
+  @apply text-base font-medium;
+  color: var(--gray-900);
+}
+
+#cart-summary > div + div {
+  @apply mt-2 sm:mt-10;
+}
+
+#checkout-button {
+  @apply w-full rounded-md border border-transparent py-3 px-4 text-base font-medium;
+  background-color: var(--purple-600);
+  color: white;
+}
+
+#checkout-button:hover {
+  background-color: var(--purple-700);
+}
+
+.additional-info {
+  @apply mt-6 text-center text-sm;
+  color: var(--gray-500);
+}
+
+.additional-info a, .additional-info button{
+  @apply font-medium;
+  color: var(--purple-700);
+}
+
+.additional-info a, .additional-info button:hover {
+  @apply font-medium;
+  color: var(--purple-500);
+}
+
+.additional-info button {
+  background-color: var(--purple-300);
+  @apply px-2 py-1 w-40 rounded-lg;
+}
+
+#checkout-button:disabled {
+  @apply cursor-not-allowed;
+  background-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+button {
+  cursor: pointer;
+}
+

@@ -55,15 +55,15 @@
 
 ### Shoppingcart page (cart.html)
 
-- [ ] List all plants in cart (id number, name, number of items, price per plant, total price for that plant)
-- [ ] If plant not in stock: show expected shipping date
-- [ ] Total price for all plants
-- [ ] Change number of items of a plant (default: 1)
-- [ ] Delete button to remove a plant from the cart
-- [ ] Empty shopping cart button to remove all plants from the cart
-- [ ] Back to startup page (home button)
-- [ ] Proceed to checkout button -> checkout page (task 7)
-- [ ] Store the shopping cart in localStage
+- [x] List all plants in cart (id number, name, number of items, price per plant, total price for that plant)
+- [x] If plant not in stock: show expected shipping date
+- [x] Total price for all plants
+- [x] Change number of items of a plant (default: 1)
+- [x] Delete button to remove a plant from the cart
+- [x] Empty shopping cart button to remove all plants from the cart
+- [x] Back to startup page (home button)
+- [~] Proceed to checkout button -> checkout page (task 7)
+- [x] Store the shopping cart in localStage
 
 ## Task 7
 

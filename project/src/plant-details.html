@@ -200,7 +200,6 @@
     }
 
     function addToCartHandler(plant) {
-      console.log('Add to cart: ', plant);
       const cart = JSON.parse(localStorage.getItem('cart')) ?? {};
 
       if (cart[plant.id]) {
@@ -211,6 +210,9 @@
           name: plant.name,
           price: plant.price,
           quantity: 1,
+          thumb: plant.thumb,
+          in_stock: plant.stock > 0,
+          expected_shipping: plant.expected_shipped,
         };
       }
 
