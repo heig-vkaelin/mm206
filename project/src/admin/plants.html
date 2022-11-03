@@ -59,6 +59,28 @@
 
       const tableBody = document.querySelector('tbody');
 
+      async function deletePlant(plantId) {
+        const { data } = await fetchAPIAdmin(
+          ENDPOINTS.PLANTS,
+          {
+            method: 'DELETE',
+            headers: {
+              Authorization: JSON.parse(localStorage.getItem('user')).token,
+            },
+          },
+          {
+            plant_id: plantId,
+          },
+        );
+
+        // TODO: handle error or refresh page if no error
+        console.log(data);
+
+        // if (data) {
+        //   window.location.reload();
+        // }
+      }
+
       async function main() {
         adminMiddleware();
 
@@ -100,12 +122,21 @@
             <td>${plant.reserved_members}</td>
             <td class="actions">
               <a href="#">Edit</a>
-              <a href="#">Delete</a>
+              <button class="delete-plant" data-plant="${plant.id}">Delete</button>
             </td>
           </tr>
         `;
           })
           .join('');
+
+        const deleteButtons = document.querySelectorAll('.delete-plant');
+        deleteButtons.forEach((button) => {
+          button.addEventListener('click', async (e) => {
+            const plantId = e.target.dataset.plant;
+            console.log('delete plant', plantId);
+            await deletePlant(plantId);
+          });
+        });
       }
 
       main();

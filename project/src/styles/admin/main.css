@@ -17,6 +17,10 @@ header {
   padding: 32px 16px;
 }
 
+header a {
+  display: inline-block;
+}
+
 main {
   display: flex;
   flex: 1 1 0%;

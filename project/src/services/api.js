@@ -8,7 +8,7 @@ export const ENDPOINTS = {
   ADMIN_LOGIN: 'users/adminLogin',
 };
 
-export async function fetchAPI(endpoint, options = {}) {
+export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {
   if (Object.values(ENDPOINTS).indexOf(endpoint) === -1) {
     return {
       error: 'Invalid endpoint',
@@ -20,6 +20,9 @@ export async function fetchAPI(endpoint, options = {}) {
   const params = new URLSearchParams(window.location.search);
 
   for (const [key, value] of params) {
+    url.searchParams.append(key, value);
+  }
+  for (const [key, value] of Object.entries(additionnalParams)) {
     url.searchParams.append(key, value);
   }
   url.searchParams.append('key', KEY);

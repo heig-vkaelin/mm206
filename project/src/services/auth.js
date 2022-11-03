@@ -32,8 +32,8 @@ export async function adminLogin(username, password) {
   };
 }
 
-export async function fetchAPIAdmin(endpoint, options = {}) {
-  const { data, status } = await fetchAPI(endpoint, options);
+export async function fetchAPIAdmin(endpoint, options = {}, params = {}) {
+  const { data, status } = await fetchAPI(endpoint, options, params);
 
   // Check if token is expired : redirect to login
   if (data && data.http_code === 401) {
