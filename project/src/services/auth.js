@@ -33,6 +33,10 @@ export async function adminLogin(username, password) {
 }
 
 export async function fetchAPIAdmin(endpoint, options = {}, params = {}) {
+  options.headers = {
+    Authorization: JSON.parse(localStorage.getItem('user')).token,
+  };
+
   const { data, status } = await fetchAPI(endpoint, options, params);
 
   // Check if token is expired : redirect to login

@@ -27,7 +27,7 @@
             <p class="table-subtitle">A list of all the plants your created and can modify.</p>
           </div>
           <div class="add-item-container">
-            <button type="button" class="btn btn-primary btn-sm">Add plant</button>
+            <a href="add-plant.html" class="btn btn-primary btn-sm">Add plant</a>
           </div>
         </div>
         <div class="table-main-container">
@@ -64,9 +64,6 @@
           ENDPOINTS.PLANTS,
           {
             method: 'DELETE',
-            headers: {
-              Authorization: JSON.parse(localStorage.getItem('user')).token,
-            },
           },
           {
             plant_id: plantId,

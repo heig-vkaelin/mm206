@@ -32,7 +32,7 @@ export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {
     const data = await response.json();
     return {
       data,
-      status: 200,
+      status: data.http_code ?? 200,
     };
   } catch (error) {
     console.log(error);
