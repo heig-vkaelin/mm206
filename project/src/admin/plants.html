@@ -66,16 +66,13 @@
             method: 'DELETE',
           },
           {
-            plant_id: plantId,
+            id: plantId,
           },
         );
 
-        // TODO: handle error or refresh page if no error
-        console.log(data);
-
-        // if (data) {
-        //   window.location.reload();
-        // }
+        if (data.msg === 'Delete plant ok') {
+          window.location.reload();
+        }
       }
 
       async function main() {
