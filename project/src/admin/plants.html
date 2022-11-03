@@ -91,7 +91,7 @@
           .map((plant) => {
             const inStock = plant.stock > 0;
             return `
-          <tr>
+          <tr class="plant-row" onclick="location.href='edit-plant.html?id=${plant.id}'">
             <td class="name">
               <div class="container">
                 <div class="img-container">
@@ -126,6 +126,7 @@
         const deleteButtons = document.querySelectorAll('.delete-plant');
         deleteButtons.forEach((button) => {
           button.addEventListener('click', async (e) => {
+            e.stopPropagation();
             const plantId = e.target.dataset.plant;
             console.log('delete plant', plantId);
             await deletePlant(plantId);

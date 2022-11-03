@@ -4,6 +4,12 @@ main {
 .table-component {
   margin: 24px 0 0
 }
+tbody .plant-row {
+  cursor: pointer
+}
+tbody .plant-row:hover {
+  background: var(--gray-100)
+}
 tbody .name .container {
   display: flex;
   align-items: center
