@@ -54,15 +54,15 @@
     </main>
 
     <script type="module">
-      import { fetchAPI, ENDPOINTS } from '../services/api.js';
-      import { adminMiddleware } from '../services/auth.js';
+      import { ENDPOINTS } from '../services/api.js';
+      import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
 
       const tableBody = document.querySelector('tbody');
 
       async function main() {
         adminMiddleware();
 
-        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS, {
+        const { data: plants } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
           headers: {
             Authorization: JSON.parse(localStorage.getItem('user')).token,
           },

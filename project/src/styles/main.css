@@ -121,6 +121,10 @@ li {
   opacity: 1;
 }
 
+.hidden {
+  display: none;
+}
+
 .wrapper {
   padding: 0 5px;
 }

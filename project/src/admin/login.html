@@ -19,7 +19,7 @@
     </header>
     <main>
       <div class="card-container">
-        <div class="card">
+        <div class="card hidden">
           <h1>Login</h1>
           <form class="login">
             <div class="spacer">
@@ -58,6 +58,7 @@
 
       const loginForm = document.querySelector('.login');
       const formError = document.querySelector('.form-error');
+      const card = document.querySelector('.card');
 
       loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -77,10 +78,10 @@
         if (isAdminLogged()) {
           displayLoggedContent();
         }
+        card.classList.remove('hidden');
       }
 
       function displayLoggedContent() {
-        const card = document.querySelector('.card');
         card.innerHTML = `
           <h1>Select a page to visit</h1>
           <div class="actions">
