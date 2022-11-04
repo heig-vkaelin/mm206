@@ -21,7 +21,7 @@
     </header>
     <main>
       <div class="card-container">
-        <div class="card mt-10">
+        <div class="card card-xl">
           <h1 class="path-header">
             <a href="plants.html">Plants</a>
             <span>/</span>
@@ -29,16 +29,16 @@
           </h1>
           <form class="add-plant">
             <div class="spacer">
-              <label for="name">Name</label>
+              <label for="name">Name*</label>
               <input type="text" name="name" placeholder="Plant name" required />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="category_id">Category</label>
               <select name="category_id" id="category" required></select>
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="zone_id">Zone</label>
               <select name="zone_id" id="zone" required></select>
             </div>
@@ -53,77 +53,79 @@
               <input type="file" name="img_file" accept=".jpg, .jpeg, .png" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="price">Price</label>
               <input type="number" name="price" placeholder="Plant price (default: 0)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="discount">Discount</label>
               <input type="number" name="discount" placeholder="Discount in % default: 0)" />
             </div>
 
-            <div class="spacer">
-              <label for="height">Height</label>
-              <input type="number" name="height" placeholder="Height in cm (default: 0)" />
-            </div>
-
-            <div class="spacer">
+            <div class="spacer half">
               <label for="min_temp_day">Minimum day-temperature</label>
               <input type="number" name="min_temp_day" placeholder="Temperature in °C (default: 10)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="min_temp_night">Minimum night-temperature</label>
               <input type="number" name="min_temp_night" placeholder="Temperature in °C (default: 2)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="nitrogen">Nitrogen</label>
-              <input type="number" name="nitrogen" placeholder="Recommended percentage in fertilizer (default: 50)" />
+              <input type="number" name="nitrogen" placeholder="Recommended % in fertilizer (default: 50)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="potassium">Potassium</label>
-              <input type="number" name="potassium" placeholder="Recommended percentage in fertilizer (default: 40)" />
+              <input type="number" name="potassium" placeholder="Recommended % in fertilizer (default: 40)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="phosphor">Phosphor</label>
-              <input type="number" name="phosphor" placeholder="Recommended percentage in fertilizer (default: 10)" />
+              <input type="number" name="phosphor" placeholder="Recommended % in fertilizer (default: 10)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half"></div>
+
+            <div class="spacer half">
+              <label for="height">Height</label>
+              <input type="number" name="height" placeholder="Height in cm (default: 0)" />
+            </div>
+
+            <div class="spacer half">
               <label for="stock">Stock</label>
               <input type="number" name="stock" placeholder="Number of plants in stock (default: 0)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="expected_shipped">Expected shipped</label>
               <input type="date" name="expected_shipped" placeholder="Date for shipping (default: today)" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="reserved_members">Available for members only</label>
               <input type="checkbox" name="reserved_members" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="extra_1">Extra 1</label>
               <input type="number" name="extra_1" placeholder="Custom information about the plant" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="extra_2">Extra 2</label>
               <input type="number" name="extra_2" placeholder="Custom information about the plant" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="extra_3">Extra 3</label>
               <input type="number" name="extra_3" placeholder="Custom information about the plant" />
             </div>
 
-            <div class="spacer">
+            <div class="spacer half">
               <label for="extra_4">Extra 4</label>
               <input type="number" name="extra_4" placeholder="Custom information about the plant" />
             </div>

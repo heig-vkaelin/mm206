@@ -45,9 +45,9 @@
 ### Plants page (admin/plants.html)
 
 - [x] List all plants
-- [~] Add plant button -> add plant page
+- [x] Add plant button -> add plant page
 - [ ] Edit plant button -> edit plant page
-- [~] Delete plant button -> delete plant
+- [x] Delete plant button -> delete plant
 
 # Part 3 – Shopping and ordering
 
