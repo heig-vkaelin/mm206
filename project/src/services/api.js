@@ -5,6 +5,7 @@ export const BASE_URL = 'https://helseflora.herokuapp.com';
 export const ENDPOINTS = {
   CATEGORIES: 'categories',
   PLANTS: 'plants',
+  ZONES: 'plantzones',
   ADMIN_LOGIN: 'users/adminLogin',
 };
 

@@ -40,12 +40,15 @@ tbody .name .text-container .category {
 }
 
 tbody .actions * {
-  @apply ml-3;
   background: transparent;
   color: var(--indigo-600);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
+}
+
+tbody .actions *:not(:first-child) {
+  @apply ml-3;
 }
 
 tbody .actions *:hover {
