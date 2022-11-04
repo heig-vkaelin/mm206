@@ -1,34 +1,110 @@
 'use strict';
 
-export default class CartCheckout {
-  constructor(shipping_fees = 0) {
-    this.cartEl = document.createElement('form');
-    this.shipping_fees = shipping_fees;
+export default class CartView {
+  /**
+   * Construct a new cart, the cart is not rendered until the render method is called
+   */
+  constructor() {
+    this.cartEl = document.createElement('div');
   }
 
-  hydrate(cartData) {
+  /**
+   *
+   * @param {Element} container The container to render the cart in
+   * @param {Object} cartData The cart data to be rendered
+   * @param {number} shipping_fees The shipping fees if any
+   */
+  render(container, cartData, shipping_fees = 0) {
+    this.cartEl.id = 'cart';
+    this.cartEl.innerHTML = `
+      <div>
+        <ul id="cart-items" role="list"></ul>
+        <div class="additional-info">
+          <p>
+            <button id="empty-cart-button">Empty cart</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div id="cart-summary">
+        <div>
+          <dl>
+            <div id="subtotal" class="cart-subtotal">
+              <dt>Subtotal</dt>
+              <dd></dd>
+            </div>
+            <div id="shipping-fees" class="cart-subtotal">
+              <dt>Shipping</dt>
+              <dd></dd>
+            </div>
+            <div id="total" class="cart-subtotal">
+              <dt>Order total</dt>
+              <dd></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div>
+          <button type="submit" id="checkout-button">Checkout</button>
+        </div>
+
+        <div class="additional-info">
+          <p>
+            or
+            <a href="index.html">
+              Continue Shopping
+              <span aria-hidden="true"> &rarr;</span>
+            </a>
+          </p>
+        </div>
+      </div>`;
+
+    this.#hydrate(cartData, shipping_fees);
+    container.appendChild(this.cartEl);
+  }
+
+  /**
+   * Update the quantity for a given item in the cart
+   * @param {Object} cartData The cart data
+   * @param {number} id The id of the item to be updated
+   * @param {number} shipping_fees The shipping fees if any
+   */
+  updateQuantity(cartData, id, shipping_fees = 0) {
+    const cartItem = this.cartEl.querySelector('#cart-item-' + id);
+    if (cartItem) {
+      if (cartData[id].quantity < 0) {
+        cartData[id].quantity = 1;
+      }
+      cartItem.querySelector('.update-quantity').value = cartData[id].quantity;
+      cartItem.querySelector('.stock p:last-child').textContent =
+        'NOK ' + (cartData[id].price * cartData[id].quantity).toLocaleString() + ',-';
+      subtotal = Object.entries(cartData).reduce((acc, [id, item]) => acc + item.price * item.quantity, 0);
+      this.#renderTotal(subtotal, shipping_fees);
+    }
+  }
+
+  #hydrate(cartData, shipping_fees) {
     const container = this.cartEl.querySelector('#cart-items');
-    const emptyCart = this.cartEl.querySelector('#empty-cart');
+    const emptyCartButton = this.cartEl.querySelector('#empty-cart-button');
     const checkoutButton = this.cartEl.querySelector('#checkout-button');
 
-    const subtotalPrice = this.cartEl.querySelector('#subtotal dd');
-    const shippingFees = this.cartEl.querySelector('#shipping-fees dd');
-    const totalPrice = this.cartEl.querySelector('#total dd');
     let subtotal = 0;
     container.innerHTML = '';
 
     if (Object.keys(cartData).length === 0) {
       container.innerHTML = '<p class="no-results">Your cart is empty</p>';
-      emptyCart.style.display = 'none';
+      emptyCartButton.style.display = 'none';
       checkoutButton.disabled = true;
     } else {
-      emptyCart.style.display = 'block';
+      emptyCartButton.style.display = 'block';
       checkoutButton.disabled = false;
     }
 
     for (const [id, item] of Object.entries(cartData)) {
       const cartItem = document.createElement('li');
       cartItem.classList.add('cart-item');
+      cartItem.id = 'cart-item-' + id;
       cartItem.innerHTML = `
             <div><img src="${item.thumb}" /></div>
             <div class="description">
@@ -72,83 +148,16 @@ export default class CartCheckout {
       container.appendChild(cartItem);
       subtotal += item.price * item.quantity;
     }
-
-    // const deleteButtons = this.cartEl.querySelectorAll('.delete-from-cart');
-    // deleteButtons.forEach((button) => {
-    //   button.addEventListener('click', (e) => {
-    //     delete this.cartData[e.target.name];
-    //     localStorage.setItem('cart', JSON.stringify(this.cartData));
-    //     displayCartItems();
-    //   });
-    // });
-
-    // const updateQuantites = this.cartEl.querySelectorAll('.update-quantity');
-    // updateQuantites.forEach((input) => {
-    //   input.addEventListener('change', (e) => {
-    //     const newValue = e.target.value;
-
-    //     if (newValue <= 0) {
-    //       e.target.value = this.cartData[e.target.name].quantity;
-    //       return;
-    //     }
-    //     this.cartData[e.target.name].quantity = newValue;
-    //     localStorage.setItem('cart', JSON.stringify(this.cartData));
-    //     displayCartItems();
-    //   });
-    // });
-
-    subtotalPrice.innerText = 'NOK ' + subtotal.toLocaleString() + ',-';
-    shippingFees.innerText =
-      this.shipping_fees > 0 ? 'NOK ' + this.shipping_fees.toLocaleString() + ',-' : 'Free shipping';
-    totalPrice.innerText = 'NOK ' + (subtotal + this.shipping_fees).toLocaleString() + ',-';
+    this.#renderTotal(subtotal, shipping_fees);
   }
 
-  render(container, cartData) {
-    this.cartEl.id = 'cart';
-    this.cartEl.innerHTML = `
-      <div>
-        <ul id="cart-items" role="list"></ul>
-        <div class="additional-info">
-          <p>
-            <button id="empty-cart">Empty cart</button>
-          </p>
-        </div>
-      </div>
+  #renderTotal(subtotal, shipping_fees) {
+    const subtotalPrice = this.cartEl.querySelector('#subtotal dd');
+    const shippingFees = this.cartEl.querySelector('#shipping-fees dd');
+    const totalPrice = this.cartEl.querySelector('#total dd');
 
-      <!-- Order summary -->
-      <div id="cart-summary">
-        <div>
-          <dl>
-            <div id="subtotal" class="cart-subtotal">
-              <dt>Subtotal</dt>
-              <dd></dd>
-            </div>
-            <div id="shipping-fees" class="cart-subtotal">
-              <dt>Shipping</dt>
-              <dd></dd>
-            </div>
-            <div id="total" class="cart-subtotal">
-              <dt>Order total</dt>
-              <dd></dd>
-            </div>
-          </dl>
-        </div>
-
-        <div>
-          <button type="submit" id="checkout-button">Checkout</button>
-        </div>
-
-        <div class="additional-info">
-          <p>
-            or
-            <a href="index.html">
-              Continue Shopping
-              <span aria-hidden="true"> &rarr;</span>
-            </a>
-          </p>
-        </div>
-      </div>`;
-    this.hydrate(cartData);
-    container.appendChild(this.cartEl);
+    subtotalPrice.innerText = 'NOK ' + subtotal.toLocaleString() + ',-';
+    shippingFees.innerText = shipping_fees > 0 ? 'NOK ' + shipping_fees.toLocaleString() + ',-' : 'Free shipping';
+    totalPrice.innerText = 'NOK ' + (subtotal + shipping_fees).toLocaleString() + ',-';
   }
 }

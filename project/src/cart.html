@@ -25,7 +25,7 @@
       <div id="cart-container">
         <h1>Shopping Cart</h1>
 
-        <!-- Cart (form) -->
+        <!-- Cart -->
       </div>
     </main>
 
@@ -33,125 +33,51 @@
       import CartView from './views/CartView.js';
 
       const main = document.querySelector('main');
+      const container = document.querySelector('#cart-container');
       const spinner = document.querySelector('.spin');
       const cartData = JSON.parse(localStorage.getItem('cart')) || {};
 
       const cartView = new CartView();
-      cartView.render(main.children[0], cartData);
+      cartView.render(container, cartData);
 
-      spinner.hidden = true;
-      main.hidden = false;
+      const checkoutButton = document.querySelector('#checkout-button');
 
-      // const container = document.querySelector('#cart-items');
-      const emptyCart = document.querySelector('#empty-cart');
-      // const checkoutButton = document.querySelector('#checkout-button');
-
-      // const subtotalPrice = document.querySelector('#subtotal dd');
-      // const shippingFees = document.querySelector('#shipping-fees dd');
-      // const totalPrice = document.querySelector('#total dd');
-
-      // const shipping_fees = 0;
-
-      // document.querySelector('#cart').addEventListener('submit', (e) => e.preventDefault());
-
-      emptyCart.addEventListener('click', () => {
+      document.querySelector('#empty-cart-button').addEventListener('click', () => {
         localStorage.removeItem('cart');
-        cartView.hydrateCart({});
-        emptyCart.style.display = 'none';
+        cartView.render(container, {});
         checkoutButton.disabled = true;
       });
 
-      // function displayCartItems() {
-      //   const cart = JSON.parse(localStorage.getItem('cart')) || {};
-      //   let subtotal = 0;
-      //   container.innerHTML = '';
+      checkoutButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/checkout.html';
+      });
 
-      //   if (Object.keys(cart).length === 0) {
-      //     container.innerHTML = '<p class="no-results">Your cart is empty</p>';
-      //     emptyCart.style.display = 'none';
-      //     checkoutButton.disabled = true;
-      //   } else {
-      //     emptyCart.style.display = 'block';
-      //     checkoutButton.disabled = false;
-      //   }
+      document.querySelectorAll('.delete-from-cart').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          console.log(e);
+          delete cartData[e.target.name];
+          localStorage.setItem('cart', JSON.stringify(cartData));
+          cartView.render(container, cartData);
+        });
+      });
 
-      //   for (const [id, item] of Object.entries(cart)) {
-      //     const cartItem = document.createElement('li');
-      //     cartItem.classList.add('cart-item');
-      //     cartItem.innerHTML = `
-      //       <div><img src="${item.thumb}" /></div>
-      //       <div class="description">
-      //         <div>
-      //           <div class="name">
-      //             <div>
-      //               <h3><a href="plants.html?id=${id}">${item.name}</a></h3>
-      //               <p>ID: ${id}</p>
-      //             </div>
-      //             <p class="price">NOK ${item.price.toLocaleString()},-/piece</p>
-      //           </div>
+      document.querySelectorAll('.update-quantity').forEach((input) => {
+        input.addEventListener('change', (e) => {
+          const newValue = e.target.value;
 
-      //           <div class="quantity-container">
-      //             <input type="number" name="${id}" min="1" value="${item.quantity}" class="update-quantity" />
-      //             <button class="delete-from-cart" type="button" name="${id}">Remove</button>
-      //           </div>
-      //         </div>
+          if (newValue <= 0) {
+            e.target.value = cartData[e.target.name].quantity;
+            return;
+          }
+          cartData[e.target.name].quantity = newValue;
+          localStorage.setItem('cart', JSON.stringify(cartData));
+          cartView.updateQuantity(cartData, e.target.name);
+        });
+      });
 
-      //         <div class="stock">
-      //           <p>
-      //             <svg class="${item.in_stock ? 'check-icon' : 'clock-icon'}"
-      //               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-      //             >
-      //               <path fill-rule="evenodd"
-      //                 d="${
-      //                   item.in_stock
-      //                     ? 'M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z'
-      //                     : 'M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z'
-      //                 }" clip-rule="evenodd" />
-      //             </svg>
-      //             <span>${
-      //               item.in_stock
-      //                 ? 'In Stock'
-      //                 : 'Estimated Shipping: ' + new Date(item.expected_shipping).toLocaleDateString()
-      //             }</span>
-      //           </p>
-      //           <p>NOK ${(item.price * item.quantity).toLocaleString()},-</p>
-      //         </div>
-      //       </div>`;
-
-      //     container.appendChild(cartItem);
-      //     subtotal += item.price * item.quantity;
-      //   }
-
-      //   const deleteButtons = document.querySelectorAll('.delete-from-cart');
-      //   deleteButtons.forEach((button) => {
-      //     button.addEventListener('click', (e) => {
-      //       delete cart[e.target.name];
-      //       localStorage.setItem('cart', JSON.stringify(cart));
-      //       displayCartItems();
-      //     });
-      //   });
-
-      //   const updateQuantites = document.querySelectorAll('.update-quantity');
-      //   updateQuantites.forEach((input) => {
-      //     input.addEventListener('change', (e) => {
-      //       const newValue = e.target.value;
-
-      //       if (newValue <= 0) {
-      //         e.target.value = cart[e.target.name].quantity;
-      //         return;
-      //       }
-      //       cart[e.target.name].quantity = newValue;
-      //       localStorage.setItem('cart', JSON.stringify(cart));
-      //       displayCartItems();
-      //     });
-      //   });
-
-      //   subtotalPrice.innerText = 'NOK ' + subtotal.toLocaleString() + ',-';
-      //   shippingFees.innerText = shipping_fees > 0 ? 'NOK ' + shipping_fees.toLocaleString() + ',-' : 'Free shipping';
-      //   totalPrice.innerText = 'NOK ' + (subtotal + shipping_fees).toLocaleString() + ',-';
-      // }
-
-      // displayCartItems();
+      spinner.hidden = true;
+      main.hidden = false;
     </script>
   </body>
 </html>
