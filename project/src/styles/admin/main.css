@@ -314,38 +314,3 @@ tbody td:last-child {
   position: relative;
   text-align: right;
 }
-
-/*-------------------------
-  Divider
--------------------------*/
-.divider {
-  position: relative;
-  margin: 16px 0;
-}
-
-.divider .line-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-}
-
-.divider .line {
-  width: 100%;
-  border-top: 1px solid var(--gray-300);
-}
-
-.divider .text-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-
-.divider .text {
-  background: white;
-  padding: 0 8px;
-  color: var(--gray-500);
-}

@@ -234,6 +234,7 @@ export default function PlantDetailsView() {
       const data = new FormData(e.target);
       const event = new CustomEvent('plantSubmit');
 
+      data.set('reserved_members', !!data.get('reserved_members'));
       if (isEditing) {
         data.append('id', plant.id);
       }
