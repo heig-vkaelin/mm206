@@ -10,7 +10,7 @@
     <title>Admin add plant - Helseflora</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/admin/main.css" />
-    <link rel="stylesheet" href="../styles/admin/pages/add-plant.css" />
+    <link rel="stylesheet" href="../styles/admin/pages/plant-details.css" />
   </head>
 
   <body>
@@ -20,161 +20,37 @@
       </a>
     </header>
     <main>
-      <div class="card-container">
-        <div class="card card-xl">
-          <h1 class="path-header">
-            <a href="plants.html">Plants</a>
-            <span>/</span>
-            Add a plant
-          </h1>
-          <form class="add-plant">
-            <div class="spacer">
-              <label for="name">Name*</label>
-              <input type="text" name="name" placeholder="Plant name" required />
-            </div>
-
-            <div class="spacer half">
-              <label for="category_id">Category</label>
-              <select name="category_id" id="category" required></select>
-            </div>
-
-            <div class="spacer half">
-              <label for="zone_id">Zone</label>
-              <select name="zone_id" id="zone" required></select>
-            </div>
-
-            <div class="spacer">
-              <label for="description">Description</label>
-              <input type="text" name="description" placeholder="Plant description" />
-            </div>
-
-            <div class="spacer">
-              <label for="img_file">Image (max 1MB)</label>
-              <input type="file" name="img_file" accept=".jpg, .jpeg, .png" />
-            </div>
-
-            <div class="spacer half">
-              <label for="price">Price</label>
-              <input type="number" name="price" placeholder="Plant price (default: 0)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="discount">Discount</label>
-              <input type="number" name="discount" placeholder="Discount in % default: 0)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="min_temp_day">Minimum day-temperature</label>
-              <input type="number" name="min_temp_day" placeholder="Temperature in °C (default: 10)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="min_temp_night">Minimum night-temperature</label>
-              <input type="number" name="min_temp_night" placeholder="Temperature in °C (default: 2)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="nitrogen">Nitrogen</label>
-              <input type="number" name="nitrogen" placeholder="Recommended % in fertilizer (default: 50)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="potassium">Potassium</label>
-              <input type="number" name="potassium" placeholder="Recommended % in fertilizer (default: 40)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="phosphor">Phosphor</label>
-              <input type="number" name="phosphor" placeholder="Recommended % in fertilizer (default: 10)" />
-            </div>
-
-            <div class="spacer half"></div>
-
-            <div class="spacer half">
-              <label for="height">Height</label>
-              <input type="number" name="height" placeholder="Height in cm (default: 0)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="stock">Stock</label>
-              <input type="number" name="stock" placeholder="Number of plants in stock (default: 0)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="expected_shipped">Expected shipped</label>
-              <input type="date" name="expected_shipped" placeholder="Date for shipping (default: today)" />
-            </div>
-
-            <div class="spacer half">
-              <label for="reserved_members">Available for members only</label>
-              <input type="checkbox" name="reserved_members" />
-            </div>
-
-            <div class="spacer half">
-              <label for="extra_1">Extra 1</label>
-              <input type="number" name="extra_1" placeholder="Custom information about the plant" />
-            </div>
-
-            <div class="spacer half">
-              <label for="extra_2">Extra 2</label>
-              <input type="number" name="extra_2" placeholder="Custom information about the plant" />
-            </div>
-
-            <div class="spacer half">
-              <label for="extra_3">Extra 3</label>
-              <input type="number" name="extra_3" placeholder="Custom information about the plant" />
-            </div>
-
-            <div class="spacer half">
-              <label for="extra_4">Extra 4</label>
-              <input type="number" name="extra_4" placeholder="Custom information about the plant" />
-            </div>
-
-            <p class="form-error"></p>
-            <div class="spacer">
-              <button class="btn btn-primary">Add</button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <div class="card-container"></div>
     </main>
 
     <script type="module">
       import { ENDPOINTS, fetchAPI } from '../services/api.js';
       import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
+      import PlantDetailsView from '../views/plantDetails.js';
 
-      const addPlantForm = document.querySelector('.add-plant');
-      const formError = document.querySelector('.form-error');
-      const categorySelect = document.querySelector('#category');
-      const zoneSelect = document.querySelector('#zone');
-
-      addPlantForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        formError.textContent = '';
-
-        const data = new FormData(e.target);
-        const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
-          method: 'POST',
-          body: data,
-        });
-
-        if (status == 200) {
-          window.location.href = '/src/admin/plants.html';
-        } else {
-          formError.textContent = response.msg ?? 'Invalid data';
-        }
-      });
+      const container = document.querySelector('.card-container');
 
       async function main() {
         adminMiddleware();
 
+        const view = new PlantDetailsView();
+        view.addEventListener('plantSubmit', async (e) => {
+          const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
+            method: 'POST',
+            body: e.plantData,
+          });
+
+          if (status == 200) {
+            window.location.href = '/src/admin/plants.html';
+          } else {
+            view.displayError(response.msg ?? 'Invalid data');
+          }
+        });
+
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
         const { data: zones } = await fetchAPI(ENDPOINTS.ZONES);
 
-        console.log(zones);
-
-        categorySelect.innerHTML = categories.map((cat) => `<option value=${cat.id}>${cat.name}</option>`).join('');
-        zoneSelect.innerHTML = zones.map((zone) => `<option value=${zone.id}>${zone.name}</option>`).join('');
+        view.render(container, categories, zones);
       }
 
       main();

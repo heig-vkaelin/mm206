@@ -84,8 +84,6 @@
           },
         });
 
-        console.log(plants);
-
         tableBody.innerHTML = plants
           .sort((a, b) => a.category_name.localeCompare(b.category_name))
           .map((plant) => {
@@ -127,7 +125,6 @@
           button.addEventListener('click', async (e) => {
             e.stopPropagation();
             const plantId = e.target.dataset.plant;
-            console.log('delete plant', plantId);
             await deletePlant(plantId);
           });
         });

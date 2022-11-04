@@ -46,7 +46,7 @@
 
 - [x] List all plants
 - [x] Add plant button -> add plant page
-- [ ] Edit plant button -> edit plant page
+- [x] Edit plant button -> edit plant page
 - [x] Delete plant button -> delete plant
 
 # Part 3 – Shopping and ordering

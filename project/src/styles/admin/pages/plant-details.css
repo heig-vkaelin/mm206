@@ -2,26 +2,26 @@
   margin: 2.5rem 0;
 }
 
-.add-plant {
+form {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
 }
 
-.add-plant .spacer {
+form .spacer {
   width: 100%;
 }
 
-.add-plant .half {
+form .half {
   width: 50%;
   padding: 0 16px 0 0;
 }
 
-.add-plant .half + .half:nth-child(2n + 1) {
+form .half + .half:nth-child(2n + 1) {
   padding: 0;
 }
 
-.add-plant input[type='checkbox'] {
+form input[type='checkbox'] {
   height: 1.5rem;
   width: 1.5rem;
   margin: 0.5rem 0 0 0;

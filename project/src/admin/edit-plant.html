@@ -10,6 +10,7 @@
     <title>Admin edit plant - Helseflora</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/admin/main.css" />
+    <link rel="stylesheet" href="../styles/admin/pages/plant-details.css" />
   </head>
 
   <body>
@@ -19,62 +20,41 @@
       </a>
     </header>
     <main>
-      <div class="card-container">
-        <div class="card">
-          <h1>Edit a plant</h1>
-          <form class="add-plant">
-            <div class="spacer">
-              <label for="name">Name</label>
-              <input type="text" name="name" id="name" placeholder="Plant name" required />
-            </div>
-            <!-- <div class="spacer">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-                value="busybee_taxonomy"
-              />
-            </div> -->
-            <p class="form-error"></p>
-            <div class="spacer">
-              <button class="btn btn-primary">Add</button>
-            </div>
-          </form>
-        </div>
-      </div>
+      <div class="card-container"></div>
     </main>
 
     <script type="module">
-      import { ENDPOINTS } from '../services/api.js';
+      import { ENDPOINTS, fetchAPI } from '../services/api.js';
       import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
+      import PlantDetailsView from '../views/plantDetails.js';
 
-      const addPlantForm = document.querySelector('.add-plant');
-      const formError = document.querySelector('.form-error');
-
-      addPlantForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        formError.textContent = '';
-
-        // TODO
-
-        const data = new FormData(e.target);
-        const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
-          method: 'POST',
-          body: data,
-        });
-
-        if (status == 200) {
-          window.location.href = '/src/admin/plants.html';
-        } else {
-          formError.textContent = response.msg ?? 'Invalid data';
-        }
-      });
-
+      const container = document.querySelector('.card-container');
       async function main() {
         adminMiddleware();
+
+        const view = new PlantDetailsView();
+        view.addEventListener('plantSubmit', async (e) => {
+          const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
+            method: 'PUT',
+            body: e.plantData,
+          });
+
+          if (status == 200) {
+            window.location.href = '/src/admin/plants.html';
+          } else {
+            view.displayError(response.msg ?? 'Invalid data');
+          }
+        });
+
+        const { data: plants } = await fetchAPIAdmin(ENDPOINTS.PLANTS);
+        const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
+        const { data: zones } = await fetchAPI(ENDPOINTS.ZONES);
+
+        if (plants.length !== 1) {
+          window.location.href = '/src/admin/plants.html';
+        }
+
+        view.render(container, categories, zones, plants[0]);
       }
 
       main();
