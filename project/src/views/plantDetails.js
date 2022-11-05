@@ -220,12 +220,13 @@ export default function PlantDetailsView() {
 
     const form = div.querySelector('form');
     const formError = div.querySelector('.form-error');
-
     const categorySelect = div.querySelector('#category');
     const zoneSelect = div.querySelector('#zone');
 
     categorySelect.innerHTML = categories.map((cat) => `<option value=${cat.id}>${cat.name}</option>`).join('');
     zoneSelect.innerHTML = zones.map((zone) => `<option value=${zone.id}>${zone.name}</option>`).join('');
+    categorySelect.value = plant.category_id;
+    zoneSelect.value = plant.zone_id;
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
