@@ -102,12 +102,12 @@ Divided in 3 parts/steps:
 
 ## Task 10
 
-- [ ] Create user button on homepage -> add-user page
+- [x] Create user button on homepage -> register page
 - [ ] Form to enter info (name, username, password, picture, email, address (street, city, zip, country), phone)
 
 ## Task 11
 
-- [ ] Login button on homepage -> login page
+- [x] Login button on homepage -> login page
 - [ ] Form to login with username and password
 - [ ] When user logged in: display his thumb picture on all pages (header) but not in the admin pages
 
