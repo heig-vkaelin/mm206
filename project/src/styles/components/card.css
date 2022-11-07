@@ -24,3 +24,8 @@
 .card-xl {
   max-width: 48rem;
 }
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -7,6 +7,7 @@ export const ENDPOINTS = {
   PLANTS: 'plants',
   ZONES: 'plantzones',
   ADMIN_LOGIN: 'users/adminLogin',
+  USERS: 'users',
 };
 
 export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {

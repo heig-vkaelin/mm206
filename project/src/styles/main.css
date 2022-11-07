@@ -6,6 +6,7 @@
 @import url(components/table.css);
 @import url(components/tag.css);
 @import url(components/tag.css);
+@import url(components/utility.css);
 
 /*-------------------------
   Global
@@ -101,8 +102,11 @@ button {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
+hr {
+  display: block;
+  width: 100%;
+  margin: 2rem 0;
+  border: 1px solid var(--gray-100);
 }
 
 .wrapper {

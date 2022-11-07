@@ -39,17 +39,6 @@ h1 {
   font-weight: 600;
 }
 
-hr {
-  display: block;
-  width: 100%;
-  margin: 2rem 0;
-  border: 1px solid var(--gray-100);
-}
-
-.spacer {
-  margin: 1rem 0 0 0;
-}
-
 .path-header a {
   color: var(--indigo-600);
 }
