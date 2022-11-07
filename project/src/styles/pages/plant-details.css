@@ -105,7 +105,7 @@
   color: var(--gray-300)
 }
 #plant-info .full-star {
-  color: var(--purple-500)
+  color: var(--indigo-500)
 }
 #plant-info #plant-description {
   font-size: 1rem;
@@ -143,10 +143,10 @@
   min-width: 100%;
   padding: .75rem 2rem;
   color: #fff;
-  background-color: var(--purple-600)
+  background-color: var(--indigo-600)
 }
 #plant-info > form button:hover {
-  background-color: var(--purple-700)
+  background-color: var(--indigo-700)
 }
 #plant-info > form button:disabled {
   cursor: not-allowed;
@@ -200,7 +200,7 @@
   color: var(--gray-900)
 }
 #plant-info .details-title.title-open {
-  color: var(--purple-600)
+  color: var(--indigo-600)
 }
 #plant-info .details-buttons {
   display: flex;
@@ -219,7 +219,7 @@
 }
 #plant-info .details button .visible {
   display: block;
-  color: var(--purple-400)
+  color: var(--indigo-400)
 }
 .group:hover #plant-info .details button .visible {
   --tw-text-opacity: 1;

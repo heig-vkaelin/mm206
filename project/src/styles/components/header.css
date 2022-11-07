@@ -5,14 +5,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--green-800);
-  padding: 10px 5px;
-  background-color: var(--green-900);
+  padding: 1rem 2rem;
+  background-color: var(--gray-900);
 }
 
 .website-title {
-  font-size: 3em;
-  color: var(--orange-400);
+  font-size: 2em;
+  color: var(--green-500);
+}
+
+.website-title:hover {
+  color: var(--green-400);
+}
+
+@media (min-width: 640px) {
+  .website-title {
+    font-size: 3em;
+  }
 }
 
 .website-title.with-back {
@@ -30,16 +39,17 @@
 .website-logo {
   width: 50px;
   height: 50px;
-  margin-left: 25px;
   margin-right: 15px;
 }
+
 .website-header .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: var(--orange-400);
+  padding: 0.75rem;
+  background: var(--gray-700);
   border-radius: 999px;
   border: none;
   color: #fff;
@@ -48,11 +58,7 @@
 }
 
 .website-header .btn:hover {
-  background: var(--purple-500);
-}
-
-.website-header .btn:hover svg {
-  fill: var(--orange-400);
+  background: var(--gray-500);
 }
 
 .website-header .btn svg {

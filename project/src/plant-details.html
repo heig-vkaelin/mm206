@@ -61,7 +61,6 @@
                 <h3>
                   <!-- Expand/collapse question button -->
                   <button id="additional-details-button" type="button">
-                    <!-- Open: "text-indigo-600", Closed: "text-gray-900" -->
                     <span class="details-title">Additional Details</span>
                     <span class="details-buttons">
                       <svg
@@ -172,7 +171,9 @@
         plantStock.textContent = `${plant.stock} remaining`;
       } else {
         plantStock.classList.add('out-of-stock');
-        plantStock.innerHTML = `Out of stock<br/>Estimate delivery time: ${new Date(plant.expected_shipped).toLocaleDateString()}`;
+        plantStock.innerHTML = `Out of stock<br/>Estimate delivery time: ${new Date(
+          plant.expected_shipped,
+        ).toLocaleDateString()}`;
       }
 
       plantDescription.textContent = plant.description;

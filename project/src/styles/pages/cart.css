@@ -2,28 +2,14 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 56rem;
-  padding: 4rem 1rem
+  padding-left: 1rem;
+  padding-right: 1rem
 }
 @media (min-width:640px) {
   #cart-container {
-    padding: 6rem 1.5rem
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
   }
-}
-#cart-container > h1 {
-  font-weight: 700;
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-  letter-spacing: -.025em;
-  color: var(--orange-400)
-}
-#cart {
-  border-radius: .5rem;
-  margin-top: 3rem;
-  padding-left: .75rem;
-  padding-right: .75rem;
-  padding-bottom: .5rem;
-  background-color: #fff;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%),0 2px 4px -2px rgb(0 0 0 / 10%)
 }
 #cart-items:not(:first-child) {
   border-top-width: 1px;
@@ -63,11 +49,6 @@
   justify-content: space-between
 }
 @media (min-width:640px) {
-  #cart {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-bottom: 2rem
-  }
   .cart-item {
     padding-top: 2.5rem;
     padding-bottom: 2.5rem
@@ -125,7 +106,7 @@
   font-size: .875rem;
   line-height: 1.25rem;
   margin-left: 1rem;
-  color: var(--purple-600);
+  color: var(--indigo-600);
   background-color: transparent;
   background-image: none
 }
@@ -147,7 +128,7 @@
   }
 }
 .cart-item .description .quantity-container button:hover {
-  color: var(--purple-500)
+  color: var(--indigo-500)
 }
 .cart-item .description .stock > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -255,12 +236,12 @@
   font-size: 1rem;
   line-height: 1.5rem;
   width: 100%;
-  background-color: var(--purple-600);
+  background-color: var(--indigo-600);
   color: #fff;
   padding: .75rem 1rem
 }
 #checkout-button:hover {
-  background-color: var(--purple-700)
+  background-color: var(--indigo-700)
 }
 .additional-info {
   font-size: .875rem;
@@ -272,15 +253,14 @@
 .additional-info a,
 .additional-info button {
   font-weight: 500;
-  color: var(--purple-700)
+  color: var(--indigo-800)
 }
 .additional-info a,
 .additional-info button:hover {
-  font-weight: 500;
-  color: var(--purple-500)
+  color: var(--indigo-500)
 }
 .additional-info button {
-  background-color: var(--purple-300);
+  background-color: var(--indigo-200);
   border-radius: .5rem;
   width: 10rem;
   padding: .25rem .5rem

@@ -16,6 +16,8 @@ export default class CartView {
    */
   render(container, cartData, shipping_fees = 0) {
     this.cartEl.id = 'cart';
+    this.cartEl.classList.add('card');
+
     this.cartEl.innerHTML = `
       <div>
         <ul id="cart-items" role="list"></ul>
