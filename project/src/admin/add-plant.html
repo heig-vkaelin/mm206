@@ -26,14 +26,14 @@
     <script type="module">
       import { ENDPOINTS, fetchAPI } from '../services/api.js';
       import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
-      import PlantDetailsView from '../views/plantDetails.js';
+      import PlantFormView from '../views/plantForm.js';
 
       const container = document.querySelector('.card-container');
 
       async function main() {
         adminMiddleware();
 
-        const view = new PlantDetailsView();
+        const view = new PlantFormView();
         view.addEventListener('plantSubmit', async (e) => {
           const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
             method: 'POST',

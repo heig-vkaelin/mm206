@@ -1,6 +1,6 @@
 'use strict';
 
-export default function PlantDetailsView() {
+export default function PlantFormView() {
   const div = document.createElement('div');
   div.classList.add('card', 'card-xl');
 
