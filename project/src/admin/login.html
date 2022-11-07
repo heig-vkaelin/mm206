@@ -54,7 +54,7 @@
     </main>
 
     <script type="module">
-      import { adminLogin, isAdminLogged, logout } from '../services/auth.js';
+      import { login, isAdminLogged, logout } from '../services/auth.js';
 
       const loginForm = document.querySelector('.login');
       const formError = document.querySelector('.form-error');
@@ -65,7 +65,7 @@
         formError.textContent = '';
 
         const data = new FormData(e.target);
-        const { success, data: response } = await adminLogin(data.get('email'), data.get('password'));
+        const { success, data: response } = await login(data.get('email'), data.get('password'), true);
 
         if (success) {
           displayLoggedContent();

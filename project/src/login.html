@@ -7,7 +7,7 @@
     <meta name="author" content="Valentin Kaelin" />
     <meta name="author" content="Francesco Monti" />
     <meta name="description" content="MM206 - Project" />
-    <title>Register - Helseflora</title>
+    <title>Login - Helseflora</title>
     <link rel="stylesheet" href="styles/main.css" />
   </head>
 
@@ -28,7 +28,7 @@
     <main>
       <div class="card-container">
         <div class="card card-sm my-10">
-          <h1 class="card-title">Register</h1>
+          <h1 class="card-title">Login</h1>
           <form>
             <div class="spacer">
               <label for="username">Username*</label>
@@ -37,42 +37,12 @@
 
             <div class="spacer">
               <label for="password">Password*</label>
-              <input type="password" name="password" placeholder="Choose a strong password" required />
-            </div>
-
-            <div class="spacer">
-              <label for="fullname">Full name*</label>
-              <input type="text" name="fullname" placeholder="Enter your firstname and lastname" required />
-            </div>
-
-            <div class="spacer">
-              <label for="street">Street*</label>
-              <input type="text" name="street" placeholder="Enter your address street" required />
-            </div>
-
-            <div class="spacer">
-              <label for="city">City*</label>
-              <input type="text" name="city" placeholder="Enter your address city" required />
-            </div>
-
-            <div class="spacer">
-              <label for="zipcode">Zipcode*</label>
-              <input type="number" name="zipcode" placeholder="Enter your address zipcode" required />
-            </div>
-
-            <div class="spacer">
-              <label for="country">Country*</label>
-              <input type="text" name="country" placeholder="Enter your address country" required />
-            </div>
-
-            <div class="spacer">
-              <label for="img_file">Profile picture (max 1MB)</label>
-              <input type="file" name="img_file" accept=".jpg, .jpeg, .png" />
+              <input type="password" name="password" placeholder="Choose a strong password" />
             </div>
 
             <p class="form-error"></p>
             <div class="spacer">
-              <button class="btn btn-primary">Register</button>
+              <button class="btn btn-primary">Login</button>
             </div>
           </form>
         </div>
@@ -81,6 +51,7 @@
 
     <script type="module">
       import { fetchAPI, ENDPOINTS } from './services/api.js';
+      import { login } from './services/auth.js';
 
       const form = document.querySelector('form');
       const formError = document.querySelector('.form-error');
@@ -89,16 +60,16 @@
         e.preventDefault();
         formError.textContent = '';
 
-        const body = new FormData(e.target);
-        const { data } = await fetchAPI(ENDPOINTS.USERS, {
-          method: 'POST',
-          body,
-        });
+        const data = new FormData(e.target);
+        const { success, data: response } = await login(data.get('email'), data.get('password'));
 
-        if (data.record) {
-          window.location.href = 'login.html';
+        // TODO
+        console.log(response, success);
+
+        if (success) {
+          // redirect to homepage
         } else {
-          formError.textContent = data.msg;
+          formError.textContent = response;
         }
       });
     </script>

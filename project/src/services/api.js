@@ -7,6 +7,7 @@ export const ENDPOINTS = {
   PLANTS: 'plants',
   ZONES: 'plantzones',
   ADMIN_LOGIN: 'users/adminLogin',
+  USER_LOGIN: 'users/login',
   USERS: 'users',
 };
 
