@@ -1,0 +1,124 @@
+/*-------------------------
+  Table
+-------------------------*/
+.table-component {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.table-heading {
+  display: flex;
+  align-items: center;
+}
+
+.heading-container {
+  flex: 1 1 auto;
+}
+
+.table-header {
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: var(--gray-900);
+}
+
+.table-subtitle {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-top: 0.5rem;
+  color: var(--gray-700);
+}
+
+.add-item-container {
+  flex: none;
+  margin-left: 4rem;
+}
+
+.table-main-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.table-sub-container {
+  overflow-x: auto;
+  margin: -0.5rem -2rem;
+}
+
+.table-max-width {
+  display: inline-block;
+  min-width: 100%;
+  vertical-align: middle;
+  padding: 0.5rem 2rem;
+}
+
+.table-hide-overflow {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+table > * + * {
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  color: var(--gray-300);
+}
+
+thead {
+  background: var(--gray-50);
+}
+
+thead th {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: left;
+  color: var(--gray-900);
+  padding: 0.875rem 0.75rem;
+}
+
+thead tr th:first-child {
+  padding-right: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+thead tr th:last-child {
+  position: relative;
+  padding: 0.875rem 1.5rem 0.875rem 0.75rem;
+}
+
+tbody {
+  background: #fff;
+}
+
+tbody > * + * {
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  color: var(--gray-200);
+}
+
+tbody td {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  color: var(--gray-500);
+  padding: 1rem 0.75rem;
+}
+
+tbody td:first-child {
+  padding-right: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+tbody td:last-child {
+  font-weight: 500;
+  padding-left: 0.75rem;
+  padding-right: 1.5rem;
+  position: relative;
+  text-align: right;
+}

@@ -1,45 +1,33 @@
-/*-------------------------
-  Category view
--------------------------*/
-.category {
-  display: block;
-  padding: 5px;
-  font-size: 18px;
-  font-weight: 300;
-  color: var(--purple-500);
-  border-bottom: 1px solid var(--green-800);
-}
-
-.category:hover {
-  background: var(--green-700);
-  color: var(--purple-100)
-}
-
 .search-plant {
-  padding: 25px 5px;
-  font-size: 18px;
-  color: var(--green-700);
-}
-
-.search-plant input {
-  padding: 10px;
-  font-size: 18px;
-  color: var(--orange-50);
-  background: var(--green-700);
-  border: 1px solid var(--green-800);
-  border-radius: 5px;
+  display: flex;
 }
 
 .search-plant button {
-  padding: 10px;
-  font-size: 18px;
-  color: var(--orange-50);
-  background: var(--green-800);
-  border: 1px solid var(--green-900);
-  border-radius: 5px;
-  cursor: pointer;
+  margin: 0 0 0 1rem;
 }
 
-.search-plant button:hover {
-  background: var(--green-700);
+.category {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--gray-8700);
+  border-radius: 0.375rem;
+}
+
+.category::after {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' aria-hidden='true' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.category:hover {
+  background: var(--gray-100);
+  color: var(--gray-800);
 }

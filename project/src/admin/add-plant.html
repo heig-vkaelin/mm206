@@ -47,8 +47,10 @@
           }
         });
 
-        const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
-        const { data: zones } = await fetchAPI(ENDPOINTS.ZONES);
+        const [{ data: categories }, { data: zones }] = await Promise.all([
+          fetchAPI(ENDPOINTS.CATEGORIES),
+          fetchAPI(ENDPOINTS.ZONES),
+        ]);
 
         view.render(container, categories, zones);
       }

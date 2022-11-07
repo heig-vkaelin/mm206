@@ -26,15 +26,18 @@
         </svg>
       </a>
     </header>
-    <h1 class="page-title">Categories</h1>
-    <div>
-      <form action="" class="search-plant">
-        <label for="search">Search a plant</label>
-        <input type="text" name="search" id="search" placeholder="Search for a plant" />
-        <button>Search</button>
-      </form>
-    </div>
-    <div id="categories"></div>
+    <main class="container">
+      <div class="title-container">
+        <h1 class="page-title">Categories</h1>
+        <div>
+          <form class="search-plant">
+            <input type="text" name="search" id="search" class="input-inline" placeholder="Search for a plant" />
+            <button class="btn btn-primary btn-sm">Search</button>
+          </form>
+        </div>
+      </div>
+      <div id="categories" class="card"></div>
+    </main>
 
     <script type="module">
       import { fetchAPI, ENDPOINTS } from './services/api.js';
@@ -44,6 +47,7 @@
 
       async function main() {
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
+        console.log(categories);
         displayCategories(categories);
 
         searchForm.addEventListener('submit', (e) => {

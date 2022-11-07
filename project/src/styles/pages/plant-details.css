@@ -12,7 +12,8 @@
 #plant-details {
   border-radius: .5rem;
   padding: .5rem;
-  background-color: var(--gray-50)
+  background-color: #fff;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%),0 2px 4px -2px rgb(0 0 0 / 10%)
 }
 #plant-image {
   position: relative;

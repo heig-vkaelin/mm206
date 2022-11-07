@@ -4,7 +4,8 @@
 
 #plant-details {
   @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 sm:p-10 p-2 rounded-lg;
-  background-color: var(--gray-50);
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
 }
 
 #plant-image {

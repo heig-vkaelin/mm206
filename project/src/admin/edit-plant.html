@@ -46,9 +46,11 @@
           }
         });
 
-        const { data: plants } = await fetchAPIAdmin(ENDPOINTS.PLANTS);
-        const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
-        const { data: zones } = await fetchAPI(ENDPOINTS.ZONES);
+        const [{ data: plants }, { data: categories }, { data: zones }] = await Promise.all([
+          fetchAPIAdmin(ENDPOINTS.PLANTS),
+          fetchAPI(ENDPOINTS.CATEGORIES),
+          fetchAPI(ENDPOINTS.ZONES),
+        ]);
 
         if (plants.length !== 1) {
           window.location.href = '/src/admin/plants.html';

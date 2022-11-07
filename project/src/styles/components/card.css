@@ -1,0 +1,26 @@
+/*-------------------------
+  Card
+-------------------------*/
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+.card {
+  width: 100%;
+  padding: 16px 24px;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.card-sm {
+  max-width: 28rem;
+}
+
+.card-xl {
+  max-width: 48rem;
+}

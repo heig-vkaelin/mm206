@@ -14,7 +14,7 @@ tbody .plant-row:hover {
   background: var(--gray-100);
 }
 
-tbody .name .container {
+tbody .name .name-container {
   @apply flex items-center;
 }
 
