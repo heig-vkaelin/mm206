@@ -143,3 +143,14 @@ button {
   font-size: 18px;
   font-weight: 600;
 }
+
+.error {
+  text-align: center;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.error .back {
+  max-width: 16rem;
+  margin: 2rem auto 0 auto;
+}
