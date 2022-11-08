@@ -17,6 +17,7 @@
         <img class="website-logo" src="images/logo.png" alt="Helseflora logo" />
         <h2 class="website-title">Helseflora</h2>
       </a>
+      <div class="right"></div>
     </header>
 
     <div class="spin"></div>
@@ -33,6 +34,7 @@
 
     <script type="module">
       import CartView from './views/CartView.js';
+      import { authMiddleware } from './services/auth.js';
 
       const main = document.querySelector('main');
       const container = document.querySelector('#cart-container');
@@ -80,6 +82,7 @@
 
       spinner.hidden = true;
       main.hidden = false;
+      authMiddleware();
     </script>
   </body>
 </html>

@@ -124,3 +124,7 @@
 .auth-card .item:hover .arrow-icon {
   color: var(--gray-400);
 }
+
+.logged {
+  margin: 1rem 0;
+}

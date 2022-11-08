@@ -69,7 +69,25 @@ export function isAdminLogged() {
 
 export function authMiddleware() {
   if (!isLogged()) {
-    redirectToLogin();
+    return;
+  }
+
+  const container = document.querySelector('header .right');
+  if (!container) return;
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const iconContainer = document.createElement('a');
+  iconContainer.href = 'settings.html';
+  iconContainer.classList.add('icon-container');
+  iconContainer.innerHTML = `<img src="${user.thumb}"/>`;
+
+  container.appendChild(iconContainer);
+}
+
+export function guestMiddleware() {
+  if (isLogged()) {
+    history.back();
   }
 }
 

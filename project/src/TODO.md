@@ -108,8 +108,8 @@ Divided in 3 parts/steps:
 ## Task 11
 
 - [x] Login button on homepage -> login page
-- [~] Form to login with username and password
-- [ ] When user logged in: display his thumb picture on all pages (header) but not in the admin pages
+- [x] Form to login with username and password
+- [x] When user logged in: display his thumb picture on all pages (header) but not in the admin pages
 
 ## Task 12
 
