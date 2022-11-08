@@ -65,35 +65,35 @@
   color: var(--gray-700);
 }
 
-#plant-info > form {
+#plant-info > .add-cart {
   @apply mt-6;
 }
 
-#plant-info > form > div {
+#plant-info > .add-cart > div {
   @apply sm:flex-row mt-10 flex flex-col items-center justify-between;
 }
 
-#plant-info > form button {
+#plant-info > .add-cart button {
   @apply flex min-w-full sm:min-w-0 sm:max-w-xs flex-1 items-center justify-center rounded-md border border-transparent py-3 px-8 text-base font-medium sm:w-full;
   color: white;
   background-color: var(--indigo-600);
 }
 
-#plant-info > form button:hover {
+#plant-info > .add-cart button:hover {
   background-color: var(--indigo-700);
 }
 
-#plant-info > form button:disabled {
+#plant-info > .add-cart button:disabled {
   @apply cursor-not-allowed;
   background-color: var(--gray-300);
   color: var(--gray-700);
 }
 
-#plant-info > form p {
+#plant-info > .add-cart p {
   @apply italic px-2 mt-4 sm:mt-0 sm:px-6;
 }
 
-#plant-info > form p.out-of-stock {
+#plant-info > .add-cart .out-of-stock {
   @apply font-bold text-sm;
   color: var(--red-500);
 }
@@ -117,7 +117,7 @@
   color: var(--indigo-600);
 }
 
-#plant-info .details-buttons {
+#plant-info .details-icons {
   @apply ml-6 flex items-center;
 }
 

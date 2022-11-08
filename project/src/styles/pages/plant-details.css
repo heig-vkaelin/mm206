@@ -114,10 +114,10 @@
   margin-bottom: 0;
   color: var(--gray-700)
 }
-#plant-info > form {
+#plant-info > .add-cart {
   margin-top: 1.5rem
 }
-#plant-info > form > div {
+#plant-info > .add-cart > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,11 +125,11 @@
   margin-top: 2.5rem
 }
 @media (min-width:640px) {
-  #plant-info > form > div {
+  #plant-info > .add-cart > div {
     flex-direction: row
   }
 }
-#plant-info > form button {
+#plant-info > .add-cart button {
   border-color: transparent;
   border-radius: .375rem;
   border-width: 1px;
@@ -145,33 +145,33 @@
   color: #fff;
   background-color: var(--indigo-600)
 }
-#plant-info > form button:hover {
+#plant-info > .add-cart button:hover {
   background-color: var(--indigo-700)
 }
-#plant-info > form button:disabled {
+#plant-info > .add-cart button:disabled {
   cursor: not-allowed;
   background-color: var(--gray-300);
   color: var(--gray-700)
 }
-#plant-info > form p {
+#plant-info > .add-cart p {
   margin-top: 1rem;
   padding-left: .5rem;
   padding-right: .5rem;
   font-style: italic
 }
 @media (min-width:640px) {
-  #plant-info > form button {
+  #plant-info > .add-cart button {
     max-width: 20rem;
     min-width: 0;
     width: 100%
   }
-  #plant-info > form p {
+  #plant-info > .add-cart p {
     margin-top: 0;
     padding-left: 1.5rem;
     padding-right: 1.5rem
   }
 }
-#plant-info > form p.out-of-stock {
+#plant-info > .add-cart .out-of-stock {
   font-weight: 700;
   font-size: .875rem;
   line-height: 1.25rem;
@@ -202,7 +202,7 @@
 #plant-info .details-title.title-open {
   color: var(--indigo-600)
 }
-#plant-info .details-buttons {
+#plant-info .details-icons {
   display: flex;
   align-items: center;
   margin-left: 1.5rem
