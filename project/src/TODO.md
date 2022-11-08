@@ -113,7 +113,7 @@ Divided in 3 parts/steps:
 
 ## Task 12
 
-- [ ] Update plants page + details pages to display plants only available if you are logged in
+- [x] Update plants page + details pages to display plants only available if you are logged in
 
 ## Task 13
 

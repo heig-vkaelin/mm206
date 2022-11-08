@@ -41,8 +41,8 @@
     </main>
 
     <script type="module">
-      import { fetchAPI, ENDPOINTS } from './services/api.js';
-      import { authMiddleware } from './services/auth.js';
+      import { ENDPOINTS } from './services/api.js';
+      import { authMiddleware, fetchAPIAuth } from './services/auth.js';
 
       const container = document.querySelector('#category-container');
       const plantsContainer = document.querySelector('#category-plants');
@@ -53,7 +53,7 @@
 
       async function main() {
         try {
-          const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
+          const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
           displayPlants(plants);
           displayTitle(plants);
         } catch (error) {

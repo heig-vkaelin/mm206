@@ -55,12 +55,12 @@
 
     <script type="module">
       import { ENDPOINTS } from '../services/api.js';
-      import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
+      import { adminMiddleware, fetchAPIAuth } from '../services/auth.js';
 
       const tableBody = document.querySelector('tbody');
 
       async function deletePlant(plantId) {
-        const { data } = await fetchAPIAdmin(
+        const { data } = await fetchAPIAuth(
           ENDPOINTS.PLANTS,
           {
             method: 'DELETE',
@@ -76,13 +76,7 @@
       }
 
       async function main() {
-        adminMiddleware();
-
-        const { data: plants } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
-          headers: {
-            Authorization: JSON.parse(localStorage.getItem('user')).token,
-          },
-        });
+        const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
 
         tableBody.innerHTML = plants
           .sort((a, b) => a.category_name.localeCompare(b.category_name))
@@ -130,6 +124,7 @@
         });
       }
 
+      adminMiddleware();
       main();
     </script>
   </body>

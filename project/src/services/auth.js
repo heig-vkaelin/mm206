@@ -38,17 +38,23 @@ export async function login(username, password, admin = false) {
   };
 }
 
-export async function fetchAPIAdmin(endpoint, options = {}, params = {}) {
-  options.headers = {
-    Authorization: JSON.parse(localStorage.getItem('user')).token,
-  };
+export async function fetchAPIAuth(endpoint, options = {}, params = {}) {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user) {
+    options.headers = {
+      Authorization: user.token,
+    };
+  }
 
   const { data, status } = await fetchAPI(endpoint, options, params);
 
-  // Check if token is expired : redirect to login
+  // Check if auth token is expired : logout
   if (data && data.http_code === 401) {
     logout(false);
-    redirectToAdminLogin();
+
+    if (user.superuser) {
+      redirectToAdminLogin();
+    }
   }
 
   return {

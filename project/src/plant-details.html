@@ -101,8 +101,8 @@
   </body>
 
   <script type="module">
-    import { fetchAPI, ENDPOINTS } from './services/api.js';
-    import { authMiddleware } from './services/auth.js';
+    import { ENDPOINTS } from './services/api.js';
+    import { authMiddleware, fetchAPIAuth } from './services/auth.js';
 
     const container = document.querySelector('#plant-container');
     const spinner = document.querySelector('.spin');
@@ -121,7 +121,7 @@
 
     async function fetchPlantDetails() {
       try {
-        const { data: plants } = await fetchAPI(ENDPOINTS.PLANTS);
+        const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
         if (plants.length === 1) {
           displayPlant(plants[0]);
         } else {

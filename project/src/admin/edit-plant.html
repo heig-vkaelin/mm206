@@ -25,16 +25,14 @@
 
     <script type="module">
       import { ENDPOINTS, fetchAPI } from '../services/api.js';
-      import { adminMiddleware, fetchAPIAdmin } from '../services/auth.js';
+      import { adminMiddleware, fetchAPIAuth } from '../services/auth.js';
       import PlantFormView from '../views/plantForm.js';
 
       const container = document.querySelector('.card-container');
       async function main() {
-        adminMiddleware();
-
         const view = new PlantFormView();
         view.addEventListener('plantSubmit', async (e) => {
-          const { data: response, status } = await fetchAPIAdmin(ENDPOINTS.PLANTS, {
+          const { data: response, status } = await fetchAPIAuth(ENDPOINTS.PLANTS, {
             method: 'PUT',
             body: e.plantData,
           });
@@ -47,7 +45,7 @@
         });
 
         const [{ data: plants }, { data: categories }, { data: zones }] = await Promise.all([
-          fetchAPIAdmin(ENDPOINTS.PLANTS),
+          fetchAPIAuth(ENDPOINTS.PLANTS),
           fetchAPI(ENDPOINTS.CATEGORIES),
           fetchAPI(ENDPOINTS.ZONES),
         ]);
@@ -59,6 +57,7 @@
         view.render(container, categories, zones, plants[0]);
       }
 
+      adminMiddleware();
       main();
     </script>
   </body>
