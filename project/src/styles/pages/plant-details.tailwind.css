@@ -2,10 +2,14 @@
   @apply mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8;
 }
 
-#plant-details {
-  @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8 sm:p-10 p-2 rounded-lg;
+.plant-card {
+  @apply sm:p-10 p-2 rounded-lg;
   background-color: white;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -2px rgb(0 0 0 / 10%);
+}
+
+#plant-details {
+  @apply lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8;
 }
 
 #plant-image {
@@ -49,12 +53,12 @@
   @apply flex items-center;
 }
 
-#plant-info .star {
+#plant-container .star {
   @apply h-5 w-5 flex-shrink-0;
   color: var(--gray-300);
 }
 
-#plant-info .full-star {
+#plant-container .full-star {
   color: var(--indigo-500);
 }
 
@@ -140,4 +144,32 @@
   font-size: 0.875rem;
   line-height: 1.7142857;
   color: #374151;
+}
+
+.add-comment {
+  margin: 1rem 0 0 0;
+}
+
+.add-comment h3 {
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.025em;
+  color: var(--gray-900);
+}
+
+.add-comment .stars {
+  margin: 0.5rem 0 0 0;
+}
+
+.add-comment .star {
+  cursor: pointer;
+}
+
+.add-comment .star:hover {
+  color: var(--indigo-500);
+}
+
+.add-comment textarea {
+  max-width: 32rem;
 }

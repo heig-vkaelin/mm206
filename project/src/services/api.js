@@ -9,6 +9,7 @@ export const ENDPOINTS = {
   ADMIN_LOGIN: 'users/adminLogin',
   USER_LOGIN: 'users/login',
   USERS: 'users',
+  COMMENTS: 'comments',
 };
 
 export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {

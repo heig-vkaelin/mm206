@@ -2,7 +2,7 @@
 
 export default function PlantDetailsView() {
   const div = document.createElement('div');
-  div.id = 'plant-details';
+  div.classList.add('plant-card');
 
   function getReviews(plant) {
     if (plant.rating !== null && plant.rating > 0 && plant.rating <= 5) {
@@ -41,15 +41,52 @@ export default function PlantDetailsView() {
     return '';
   }
 
-  div.render = (container, plant) => {
+  function getCommentForm(isLogged) {
+    if (!isLogged) return '';
+
+    const container = document.createElement('div');
+    container.innerHTML = `
+    <div class="add-comment">
+      <form class="add-comment-form">
+        <h3>Add a review</h3>
+        <div class="stars">
+            ${getCommentStars()}
+        </div>
+        <input type="hidden" name="rating" id="rating" value="1" />
+        <div class="spacer">
+          <textarea name="comment_text" rows="10" placeholder="Write your comment here"></textarea>
+        </div>
+        <p class="form-error"></p>
+        <div class="spacer">
+          <button class="btn btn-primary btn-sm w-auto">Send</button>
+        </div>
+      </form>
+    </div>
+    `;
+    return container.innerHTML;
+  }
+
+  function getCommentStars(rating = 1) {
+    const star = (i) => `
+      <svg class="star index-${i} ${
+      rating >= i ? 'full-star' : ''
+    }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+      </svg>`;
+
+    return Array.from({ length: 5 })
+      .map((_, i) => star(i + 1))
+      .join('');
+  }
+
+  div.render = (container, plant, isLogged) => {
     div.innerHTML = `
-      <!-- Image -->
+    <div id="plant-details">
       <div id="plant-image">
         <img src="${plant.image}" />
         ${getDiscount(plant)}
       </div>
 
-      <!-- Product info -->
       <div id="plant-info">
         <h1>${plant.name}</h1>
         <h3>${plant.category_name}</h3>
@@ -74,7 +111,6 @@ export default function PlantDetailsView() {
           <div>
             <div>
               <h3>
-                <!-- Expand/collapse question button -->
                 <button id="additional-details-button" type="button">
                   <span class="details-title">Additional Details</span>
                   <span class="details-icons">
@@ -119,6 +155,8 @@ export default function PlantDetailsView() {
           </div>
         </section>
       </div>
+    </div>
+    ${getCommentForm(isLogged)}
     `;
 
     const additionalDetailsButton = div.querySelector('#additional-details-button');
@@ -126,6 +164,9 @@ export default function PlantDetailsView() {
     const detailsIcons = div.querySelectorAll('.details-icons svg');
     const detailsTitle = div.querySelector('.details-title');
     const addToCart = div.querySelector('#add-to-cart');
+    const addCommentForm = div.querySelector('.add-comment-form');
+    const rating = div.querySelector('.add-comment #rating');
+    const starsContainer = div.querySelector('.add-comment .stars');
 
     additionalDetailsButton.addEventListener('click', () => {
       detailsIcons[0].classList.toggle('visible');
@@ -140,7 +181,41 @@ export default function PlantDetailsView() {
       div.dispatchEvent(event);
     });
 
+    addCommentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+      data.plant_id = plant.id;
+      data.rating = parseInt(data.rating);
+
+      const event = new CustomEvent('addComment');
+      event.commentData = data;
+      div.dispatchEvent(event);
+    });
+
+    function onStarClick(star) {
+      const index = star.classList[1].split('-')[1];
+      rating.value = index;
+      starsContainer.innerHTML = getCommentStars(index);
+      addHandlersToStars();
+    }
+
+    function addHandlersToStars() {
+      const stars = div.querySelectorAll('.add-comment .star');
+      stars.forEach((star) => {
+        star.addEventListener('click', () => onStarClick(star));
+      });
+    }
+
+    addHandlersToStars();
+
     container.appendChild(div);
+  };
+
+  div.displayError = (error) => {
+    const formError = div.querySelector('.form-error');
+    formError.textContent = error;
   };
 
   return div;

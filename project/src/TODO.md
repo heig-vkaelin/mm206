@@ -121,7 +121,7 @@ Divided in 3 parts/steps:
 
 ## Task 14
 
-- [ ] Change the plant details page to be able to add a comment when you are logged in
+- [x] Change the plant details page to be able to add a comment + rating (1-5 stars) when you are logged in
 
 ## Task 15
 

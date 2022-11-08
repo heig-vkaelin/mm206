@@ -41,9 +41,10 @@ export async function login(username, password, admin = false) {
 export async function fetchAPIAuth(endpoint, options = {}, params = {}) {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user) {
-    options.headers = {
-      Authorization: user.token,
-    };
+    if (!options.headers) {
+      options.headers = {};
+    }
+    options.headers.Authorization = user.token;
   }
 
   const { data, status } = await fetchAPI(endpoint, options, params);

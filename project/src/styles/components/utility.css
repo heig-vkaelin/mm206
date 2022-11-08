@@ -2,6 +2,14 @@
   display: none;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
+.w-auto {
+  width: auto;
+}
+
 .spacer {
   margin: 1rem 0 0 0;
 }
