@@ -36,7 +36,7 @@
 
   <script type="module">
     import { ENDPOINTS } from './services/api.js';
-    import { isLogged, authMiddleware, fetchAPIAuth } from './services/auth.js';
+    import { isLogged, authMiddleware, fetchAPIAuth, getUser } from './services/auth.js';
     import PlantDetailsView from './views/plantDetailsView.js';
 
     const container = document.querySelector('#plant-container');
@@ -45,10 +45,16 @@
     async function main() {
       try {
         const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
-        plants.length === 1
-          ? view.render(container, plants[0], isLogged())
-          : (container.innerHTML = '<h1 class="no-results">Plant not found</h1>');
+        if (plants.length !== 1) {
+          container.innerHTML = '<h1 class="no-results">Plant not found</h1>';
+          return;
+        }
+        const { data: reviews } = await fetchAPIAuth(ENDPOINTS.COMMENTS, {}, { plant_id: plants[0].id });
+        const user = getUser();
+
+        view.render(container, reviews, plants[0], isLogged(), user);
       } catch (error) {
+        console.error(error);
         container.innerHTML = '<h1 class="no-results">Plant id not valid</h1>';
       }
 

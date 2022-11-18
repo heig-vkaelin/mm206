@@ -159,18 +159,6 @@
   padding-right: .5rem;
   font-style: italic
 }
-@media (min-width:640px) {
-  #plant-info > .add-cart button {
-    max-width: 20rem;
-    min-width: 0;
-    width: 100%
-  }
-  #plant-info > .add-cart p {
-    margin-top: 0;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem
-  }
-}
 #plant-info > .add-cart .out-of-stock {
   font-weight: 700;
   font-size: .875rem;
@@ -235,7 +223,24 @@
   color: #374151
 }
 .add-comment {
+  padding: 1rem;
   margin: 1rem 0 0
+}
+@media (min-width:640px) {
+  #plant-info > .add-cart button {
+    max-width: 20rem;
+    min-width: 0;
+    width: 100%
+  }
+  #plant-info > .add-cart p {
+    margin-top: 0;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+  }
+  .add-comment {
+    padding-left: 0;
+    padding-right: 0
+  }
 }
 .add-comment h3 {
   font-weight: 500;
@@ -255,4 +260,29 @@
 }
 .add-comment textarea {
   max-width: 32rem
+}
+.reviews-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  background: rgba(0,0,0,.8);
+  backdrop-filter: blur(4px);
+  cursor: pointer
+}
+.reviews-modal .card {
+  cursor: default
+}
+.reviews-modal .reviews-container > :not([hidden]) ~ :not([hidden]) {
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  border-color: var(--gray-200)
+}
+.reviews-modal .reviews-container > div {
+  padding: 1rem 0
 }

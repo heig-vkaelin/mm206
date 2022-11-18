@@ -125,9 +125,9 @@ Divided in 3 parts/steps:
 
 ## Task 15
 
-- [ ] Add a show comments button on plant details page -> plant comments page
-- [ ] On this page you can see all comments and ratings for the selected plant
-- [ ] This comments page should also be available for non-logged in users
+- [x] Add a show comments button on plant details page -> plant comments page
+- [x] On this page you can see all comments and ratings for the selected plant
+- [x] This comments page should also be available for non-logged in users
 
 ## Task 16
 
