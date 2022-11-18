@@ -181,18 +181,20 @@ export default function PlantDetailsView() {
       div.dispatchEvent(event);
     });
 
-    addCommentForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (isLogged) {
+      addCommentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-      const formData = new FormData(e.target);
-      const data = Object.fromEntries(formData);
-      data.plant_id = plant.id;
-      data.rating = parseInt(data.rating);
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        data.plant_id = plant.id;
+        data.rating = parseInt(data.rating);
 
-      const event = new CustomEvent('addComment');
-      event.commentData = data;
-      div.dispatchEvent(event);
-    });
+        const event = new CustomEvent('addComment');
+        event.commentData = data;
+        div.dispatchEvent(event);
+      });
+    }
 
     function onStarClick(star) {
       const index = star.classList[1].split('-')[1];
