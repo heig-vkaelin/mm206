@@ -32,3 +32,13 @@
 .btn-primary:hover {
   background: var(--indigo-700);
 }
+
+.btn-error {
+  background: var(--red-500);
+  color: white;
+  border-color: var(--red-600);
+}
+
+.btn-error:hover {
+  background: var(--red-600);
+}

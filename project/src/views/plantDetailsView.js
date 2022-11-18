@@ -98,7 +98,7 @@ export default function PlantDetailsView() {
           <div>${getReviews(plant)}</div>
         </div>
 
-        <div id="plant-description"><p>${plant.description}</p></div>
+        <div id="plant-description"><p>${plant.description ?? ''}</p></div>
 
         <div class="add-cart">
           <div>
