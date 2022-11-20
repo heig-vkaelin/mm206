@@ -24,3 +24,13 @@
   transform: translate3d(-50%, -50%, 0);
   will-change: transform;
 }
+
+.spin.quarter.left::before {
+  top: 50%;
+  left: 25%;
+}
+
+.spin.quarter.right::before {
+  top: 50%;
+  left: 75%;
+}

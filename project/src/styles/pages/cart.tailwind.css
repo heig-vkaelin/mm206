@@ -62,7 +62,7 @@
 }
 
 .cart-item .description .quantity-container {
-  @apply mt-4 flex items-center sm:absolute sm:top-0 sm:left-1/2 sm:mt-0 sm:block;
+  @apply mt-4 flex items-center sm:absolute sm:top-0 sm:right-1/3 sm:mt-0 sm:block;
 }
 
 .cart-item .description .quantity-container input {

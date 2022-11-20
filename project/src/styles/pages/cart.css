@@ -116,7 +116,7 @@
     margin-top: 0;
     position: absolute;
     top: 0;
-    left: 50%
+    right: 33.333333%
   }
   .cart-item .description .quantity-container button {
     margin-left: 0;
@@ -269,4 +269,7 @@
   cursor: not-allowed;
   background-color: var(--gray-300);
   color: var(--gray-700)
+}
+button {
+  cursor: pointer
 }
