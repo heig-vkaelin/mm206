@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="author" content="Francesco Monti" />
+    <meta name="description" content="MM206 - Project" />
+    <link rel="icon" href="../images/favicon.ico" />
+    <title>Reviews - Helseflora</title>
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/admin/main.css" />
+    <link rel="stylesheet" href="../styles/admin/pages/plants.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="login.html">
+        <h2>Admin Dashboard - Helseflora</h2>
+      </a>
+    </header>
+    <main>
+      <div class="table-component">
+        <div class="table-heading">
+          <div class="heading-container">
+            <h1 class="table-header">Reviews</h1>
+            <p class="table-subtitle">Reviews made on all plants by users.</p>
+          </div>
+        </div>
+        <div class="table-main-container">
+          <div class="table-sub-container">
+            <div class="table-max-width">
+              <div class="table-hide-overflow">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Rating</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Comment</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Plant</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User</th>
+                      <th scope="col" class="relative py-3.5 pl-3 pr-6"></th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import { ENDPOINTS } from '../services/api.js';
+      import { adminMiddleware, fetchAPIAuth } from '../services/auth.js';
+
+      const tableBody = document.querySelector('tbody');
+
+      async function deleteReview(reviewId) {
+        console.log('id', reviewId);
+        const { data } = await fetchAPIAuth(
+          ENDPOINTS.COMMENTS,
+          {
+            method: 'DELETE',
+          },
+          {
+            comment_id: reviewId,
+          },
+        );
+
+        if (data.msg === 'delete comment ok') {
+          window.location.reload();
+        }
+      }
+
+      async function main() {
+        const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
+        const { data: reviews } = await fetchAPIAuth(ENDPOINTS.COMMENTS);
+        console.log(reviews);
+
+        tableBody.innerHTML = reviews
+          .map((review) => {
+            return `
+          <tr>
+            <td>
+              <span>${review.rating}/5</span>
+            </td>
+            <td class="text-ellipsis">
+              <div>${review.comment_text}</div>
+            </td>
+            <td>
+              <a href="/src/plant-details.html?id=${review.plant_id}" class="btn btn-primary btn-sm">Show plant</a>
+            </td>
+            <td>
+              <a href="/src/admin/users.html" class="btn btn-primary btn-sm">Show user</a>
+            </td>
+            <td class="actions">
+              <button class="delete-review" data-review="${review.id}">Delete</button>
+            </td>
+          </tr>
+        `;
+          })
+          .join('');
+
+        const deleteButtons = document.querySelectorAll('.delete-review');
+        deleteButtons.forEach((button) => {
+          button.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const reviewId = e.target.dataset.review;
+            await deleteReview(reviewId);
+          });
+        });
+      }
+
+      adminMiddleware();
+      main();
+    </script>
+  </body>
+</html>

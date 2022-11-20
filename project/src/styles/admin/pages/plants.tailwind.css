@@ -54,3 +54,13 @@ tbody .actions *:not(:first-child) {
 tbody .actions *:hover {
   color: var(--indigo-900);
 }
+
+tbody .text-ellipsis {
+  max-width: 5rem;
+}
+
+tbody .text-ellipsis div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
