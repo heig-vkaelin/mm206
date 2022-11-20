@@ -8,7 +8,7 @@
     <meta name="author" content="Francesco Monti" />
     <meta name="description" content="MM206 - Project" />
     <link rel="icon" href="../images/favicon.ico" />
-    <title>Reviews - Helseflora</title>
+    <title>Users - Helseflora</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/admin/main.css" />
     <link rel="stylesheet" href="../styles/admin/pages/plants.css" />
@@ -24,8 +24,8 @@
       <div class="table-component">
         <div class="table-heading">
           <div class="heading-container">
-            <h1 class="table-header">Reviews</h1>
-            <p class="table-subtitle">Reviews made on all plants by users.</p>
+            <h1 class="table-header">Users</h1>
+            <p class="table-subtitle">A list of all the registered users of the application.</p>
           </div>
         </div>
         <div class="table-main-container">
@@ -35,10 +35,9 @@
                 <table>
                   <thead>
                     <tr>
-                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Rating</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Comment</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Plant</th>
+                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Id</th>
                       <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Admin</th>
                       <th scope="col" class="relative py-3.5 pl-3 pr-6"></th>
                     </tr>
                   </thead>
@@ -57,55 +56,62 @@
 
       const tableBody = document.querySelector('tbody');
 
-      async function deleteReview(reviewId) {
+      async function deleteUser(userId) {
         const { data } = await fetchAPIAuth(
-          ENDPOINTS.COMMENTS,
+          ENDPOINTS.USERS,
           {
             method: 'DELETE',
           },
           {
-            comment_id: reviewId,
+            id: userId,
           },
         );
 
-        if (data.msg === 'delete comment ok') {
+        if (data.msg === 'delete user ok') {
           window.location.reload();
         }
       }
 
       async function main() {
-        const { data: reviews } = await fetchAPIAuth(ENDPOINTS.COMMENTS);
+        const { data: users } = await fetchAPIAuth(ENDPOINTS.USERS);
 
-        tableBody.innerHTML = reviews
-          .map((review) => {
+        tableBody.innerHTML = users
+          .sort((a, b) => a.id - b.id)
+          .map((user) => {
             return `
           <tr>
-            <td>
-              <span>${review.rating}/5</span>
+            <td>${user.id}</td>
+            <td class="name">
+              <div class="name-container">
+                <div class="img-container">
+                  <img
+                    class="img"
+                    src="${user.thumb}"
+                    alt=""
+                  />
+                </div>
+                <div class="text-container">
+                  <div class="name">${user.username}</div>
+                </div>
+              </div>
             </td>
-            <td class="text-ellipsis">
-              <div>${review.comment_text}</div>
-            </td>
             <td>
-              <a href="/src/plant-details.html?id=${review.plant_id}" class="btn btn-primary btn-sm">Show plant</a>
-            </td>
-            <td>
-              <a href="/src/admin/users.html" class="btn btn-primary btn-sm">Show user ${review.user_id}</a>
+              <span class="tag ${user.superuser ? 'success' : 'error'}">${user.superuser ? 'Admin' : 'User'}</span>
             </td>
             <td class="actions">
-              <button class="delete-review" data-review="${review.id}">Delete</button>
+              <button class="delete-user" data-user="${user.id}">Delete</button>
             </td>
           </tr>
         `;
           })
           .join('');
 
-        const deleteButtons = document.querySelectorAll('.delete-review');
+        const deleteButtons = document.querySelectorAll('.delete-user');
         deleteButtons.forEach((button) => {
           button.addEventListener('click', async (e) => {
             e.stopPropagation();
-            const reviewId = e.target.dataset.review;
-            await deleteReview(reviewId);
+            const userId = e.target.dataset.user;
+            await deleteUser(userId);
           });
         });
       }
