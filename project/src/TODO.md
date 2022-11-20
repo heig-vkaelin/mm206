@@ -125,13 +125,13 @@ Divided in 3 parts/steps:
 
 ## Task 15
 
-- [ ] Add a show comments button on plant details page -> plant comments page
-- [ ] On this page you can see all comments and ratings for the selected plant
-- [ ] This comments page should also be available for non-logged in users
+- [x] Add a show comments button on plant details page -> plant comments page
+- [x] On this page you can see all comments and ratings for the selected plant
+- [x] This comments page should also be available for non-logged in users
 
 ## Task 16
 
-- [ ] When you click on the user pictures (in header) -> settings page
-- [ ] Form to change user information
-- [ ] Button to delete the logged in user
-- [ ] Logout button (delete authorization token in localStorage/sessionStorage), redirect to homepage
+- [x] When you click on the user pictures (in header) -> settings page
+- [x] Form to change user information
+- [x] Button to delete the logged in user
+- [x] Logout button (delete authorization token in localStorage/sessionStorage), redirect to homepage

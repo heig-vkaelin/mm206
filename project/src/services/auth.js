@@ -12,6 +12,10 @@ function redirectToLogin() {
   window.location.href = '/src/login.html';
 }
 
+export function getUser() {
+  return JSON.parse(localStorage.getItem('user'));
+}
+
 export async function login(username, password, admin = false) {
   const endpoint = admin ? ENDPOINTS.ADMIN_LOGIN : ENDPOINTS.USER_LOGIN;
 
@@ -39,7 +43,7 @@ export async function login(username, password, admin = false) {
 }
 
 export async function fetchAPIAuth(endpoint, options = {}, params = {}) {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = getUser();
   if (user) {
     if (!options.headers) {
       options.headers = {};
@@ -65,24 +69,27 @@ export async function fetchAPIAuth(endpoint, options = {}, params = {}) {
 }
 
 export function isLogged() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = getUser();
   return !!user;
 }
 
 export function isAdminLogged() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = getUser();
   return !!user && user.superuser;
 }
 
-export function authMiddleware() {
+export function authMiddleware(redirect = false) {
   if (!isLogged()) {
+    if (redirect) {
+      redirectToLogin();
+    }
     return;
   }
 
   const container = document.querySelector('header .right');
   if (!container) return;
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = getUser();
 
   const iconContainer = document.createElement('a');
   iconContainer.href = 'settings.html';
@@ -109,4 +116,12 @@ export function logout(reload = true) {
   if (reload) {
     location.reload();
   }
+}
+
+export function updateStoredUser(newUser) {
+  const updated = {
+    ...getUser(),
+    ...newUser,
+  };
+  localStorage.setItem('user', JSON.stringify(updated));
 }

@@ -4,7 +4,7 @@ export default function PlantDetailsView() {
   const div = document.createElement('div');
   div.classList.add('plant-card');
 
-  function getReviews(plant) {
+  function getReviews(plant, reviews) {
     if (plant.rating !== null && plant.rating > 0 && plant.rating <= 5) {
       let result = '';
       for (let i = 0; i < 5; i++) {
@@ -15,6 +15,7 @@ export default function PlantDetailsView() {
             <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
           </svg>`;
       }
+      result += `<div class="ml-2">${reviews.length} review${reviews.length > 1 ? 's' : ''}</div>`;
       return result;
     }
 
@@ -41,8 +42,14 @@ export default function PlantDetailsView() {
     return '';
   }
 
-  function getCommentForm(isLogged) {
-    if (!isLogged) return '';
+  function canComment(reviews, isLogged, user) {
+    if (!isLogged) return false;
+
+    return !reviews.some((review) => review.user_id === user.userid);
+  }
+
+  function getCommentForm(reviews, isLogged, user) {
+    if (!canComment(reviews, isLogged, user)) return '';
 
     const container = document.createElement('div');
     container.innerHTML = `
@@ -79,8 +86,26 @@ export default function PlantDetailsView() {
       .join('');
   }
 
-  div.render = (container, plant, isLogged) => {
+  div.render = (container, reviews, plant, isLogged, user) => {
     div.innerHTML = `
+    <div class="reviews-modal hidden">
+      <div class="card card-xl">
+        <h3 class="card-title">Reviews</h3>
+        <div class="reviews-container">
+          ${reviews
+            .map(
+              (review) => `
+          <div>
+            <div>${getCommentStars(review.rating)}</div>
+            <div>${review.comment_text || 'No comment from this review.'}</div>
+          </div>
+          `,
+            )
+            .join('')}
+            ${reviews.length === 0 ? 'No reviews yet' : ''}
+        </div>
+      </div>
+    </div>
     <div id="plant-details">
       <div id="plant-image">
         <img src="${plant.image}" />
@@ -95,10 +120,10 @@ export default function PlantDetailsView() {
         </div>
 
         <div id="plant-reviews">
-          <div>${getReviews(plant)}</div>
+          <div>${getReviews(plant, reviews)}</div>
         </div>
 
-        <div id="plant-description"><p>${plant.description}</p></div>
+        <div id="plant-description"><p>${plant.description ?? ''}</p></div>
 
         <div class="add-cart">
           <div>
@@ -127,7 +152,6 @@ export default function PlantDetailsView() {
                     </svg>
 
                     <svg
-                      class=""
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -154,9 +178,12 @@ export default function PlantDetailsView() {
             </div>
           </div>
         </section>
+        <div>
+          <button class="btn" id="show-reviews">Show reviews</button>
+        </div>
       </div>
     </div>
-    ${getCommentForm(isLogged)}
+    ${getCommentForm(reviews, isLogged, user)}
     `;
 
     const additionalDetailsButton = div.querySelector('#additional-details-button');
@@ -167,6 +194,8 @@ export default function PlantDetailsView() {
     const addCommentForm = div.querySelector('.add-comment-form');
     const rating = div.querySelector('.add-comment #rating');
     const starsContainer = div.querySelector('.add-comment .stars');
+    const showReviewsButton = div.querySelector('#show-reviews');
+    const reviewsModal = div.querySelector('.reviews-modal');
 
     additionalDetailsButton.addEventListener('click', () => {
       detailsIcons[0].classList.toggle('visible');
@@ -181,7 +210,15 @@ export default function PlantDetailsView() {
       div.dispatchEvent(event);
     });
 
-    if (isLogged) {
+    showReviewsButton.addEventListener('click', () => {
+      reviewsModal.classList.toggle('hidden');
+    });
+
+    reviewsModal.addEventListener('click', () => {
+      reviewsModal.classList.toggle('hidden');
+    });
+
+    if (canComment(reviews, isLogged, user)) {
       addCommentForm.addEventListener('submit', (e) => {
         e.preventDefault();
 

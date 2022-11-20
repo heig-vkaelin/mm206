@@ -111,7 +111,6 @@
           </span>
         </div>
       </div>
-      <div class="logged hidden">You are logged in</div>
     </main>
 
     <script type="module">
@@ -121,7 +120,6 @@
       const container = document.querySelector('#categories');
       const searchForm = document.querySelector('.search-plant');
       const authCard = document.querySelector('.auth-card');
-      const logged = document.querySelector('.logged');
 
       async function main() {
         const { data: categories } = await fetchAPI(ENDPOINTS.CATEGORIES);
@@ -129,7 +127,6 @@
 
         if (isLogged()) {
           authCard.style.display = 'none';
-          logged.style.display = 'block';
         }
 
         searchForm.addEventListener('submit', (e) => {

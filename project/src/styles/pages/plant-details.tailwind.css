@@ -147,6 +147,7 @@
 }
 
 .add-comment {
+  @apply p-4 sm:px-0;
   margin: 1rem 0 0 0;
 }
 
@@ -172,4 +173,25 @@
 
 .add-comment textarea {
   max-width: 32rem;
+}
+
+.reviews-modal {
+  @apply inset-0 absolute z-20 flex items-center justify-center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.reviews-modal .card {
+  cursor: default;
+}
+
+.reviews-modal .reviews-container > :not([hidden]) ~ :not([hidden]) {
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  border-color: var(--gray-200);
+}
+
+.reviews-modal .reviews-container > div {
+  padding: 1rem 0;
 }
