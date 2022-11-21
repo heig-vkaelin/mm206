@@ -95,8 +95,8 @@ Divided in 3 parts/steps:
 
 ### Orders admin page (admin/orders.html)
 
-- [ ] List all orders
-- [ ] Delete orders
+- [x] List all orders
+- [x] Delete orders
 
 # Part 4 – Users and comments/plant reviews
 

@@ -8,7 +8,7 @@
     <meta name="author" content="Francesco Monti" />
     <meta name="description" content="MM206 - Project" />
     <link rel="icon" href="../images/favicon.ico" />
-    <title>Admin plants - Helseflora</title>
+    <title>Orders - Helseflora</title>
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/admin/main.css" />
     <link rel="stylesheet" href="../styles/admin/pages/listing.css" />
@@ -24,11 +24,8 @@
       <div class="table-component">
         <div class="table-heading">
           <div class="heading-container">
-            <h1 class="table-header">Plants</h1>
-            <p class="table-subtitle">A list of all the plants your created and can modify.</p>
-          </div>
-          <div class="add-item-container">
-            <a href="add-plant.html" class="btn btn-primary btn-sm">Add plant</a>
+            <h1 class="table-header">Orders</h1>
+            <p class="table-subtitle">Orders made on all plants by users.</p>
           </div>
         </div>
         <div class="table-main-container">
@@ -38,10 +35,10 @@
                 <table>
                   <thead>
                     <tr>
-                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Reserved</th>
+                      <th scope="col" class="py-3.5 pl-6 pr-3 text-left text-sm font-semibold text-gray-900">Number</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Customer</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Shipping</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date</th>
                       <th scope="col" class="relative py-3.5 pl-3 pr-6"></th>
                     </tr>
                   </thead>
@@ -60,67 +57,57 @@
 
       const tableBody = document.querySelector('tbody');
 
-      async function deletePlant(plantId) {
+      async function deleteOrder(orderId) {
         const { data } = await fetchAPIAuth(
-          ENDPOINTS.PLANTS,
+          ENDPOINTS.ORDERS,
           {
             method: 'DELETE',
           },
           {
-            id: plantId,
+            id: orderId,
           },
         );
 
-        if (data.msg === 'Delete plant ok') {
+        if (data.msg === 'delete order ok') {
           window.location.reload();
         }
       }
 
       async function main() {
-        const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
+        const { data: orders } = await fetchAPIAuth(ENDPOINTS.ORDERS);
+        const { data: shipping } = await fetchAPIAuth(ENDPOINTS.SHIPPING_METHODS);
 
-        tableBody.innerHTML = plants
-          .sort((a, b) => a.category_name.localeCompare(b.category_name))
-          .map((plant) => {
-            const inStock = plant.stock > 0;
+        tableBody.innerHTML = orders
+          .map((order) => {
+            const shippingMethod = shipping.find((s) => s.id === order.shipping_id);
             return `
-          <tr class="plant-row" onclick="location.href='edit-plant.html?id=${plant.id}'">
-            <td class="name">
-              <div class="name-container">
-                <div class="img-container">
-                  <img
-                    class="img"
-                    src="${plant.thumb}"
-                    alt=""
-                  />
-                </div>
-                <div class="text-container">
-                  <div class="name">${plant.name}</div>
-                  <div class="category">${plant.category_name}</div>
-                </div>
-              </div>
-            </td>
-            <td class="price">
-              <div>${plant.price} NOK</div>
+          <tr>
+            <td>
+              <div>${order.ordernumber}</div>
             </td>
             <td>
-              <span class="tag ${inStock ? 'success' : 'error'}">${inStock ? 'Available' : 'Unavailable'}</span>
+              <div>${order.customer_name}</div>
             </td>
-            <td>${plant.reserved_members}</td>
+            <td>
+              <div>${shippingMethod.method}</div>
+            </td>
+            <td>
+              <div>${new Date(order.date).toLocaleDateString()}</div>
+            </td>
             <td class="actions">
-              <button class="delete-plant" data-plant="${plant.id}">Delete</button>
+              <button class="delete-order" data-order="${order.id}">Delete</button>
             </td>
           </tr>
         `;
           })
           .join('');
 
-        const deleteButtons = document.querySelectorAll('.delete-plant');
+        const deleteButtons = document.querySelectorAll('.delete-order');
         deleteButtons.forEach((button) => {
           button.addEventListener('click', async (e) => {
             e.stopPropagation();
-            const plantId = e.target.dataset.plant;
-            await deletePlant(plantId);
+            const orderId = e.target.dataset.order;
+            await deleteOrder(orderId);
           });
         });
       }
