@@ -233,8 +233,7 @@
 }
 
 .group:hover #plant-info .details button svg {
-  --tw-text-opacity: 1;
-  color: rgba(107, 114, 128, var(--tw-text-opacity));
+  color: rgb(107, 114, 128);
 }
 
 #plant-info .details button .visible {
@@ -243,8 +242,7 @@
 }
 
 .group:hover #plant-info .details button .visible {
-  --tw-text-opacity: 1;
-  color: rgba(99, 102, 241, var(--tw-text-opacity));
+  color: rgb(99, 102, 241);
 }
 
 #plant-info .details > div {
