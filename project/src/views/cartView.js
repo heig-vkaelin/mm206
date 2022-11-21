@@ -14,7 +14,7 @@ export default class CartView {
    * @param {Object} cartData The cart data to be rendered
    * @param {number} shipping_fees The shipping fees if any
    */
-  render(container, cartData, shipping_fees = 0) {
+  render(container, cartData, show_image = true, shipping_fees = 0) {
     this.cartEl.id = 'cart';
     this.cartEl.classList.add('card');
 
@@ -28,7 +28,6 @@ export default class CartView {
         </div>
       </div>
 
-      <!-- Order summary -->
       <div id="cart-summary">
         <div>
           <dl>
@@ -47,7 +46,7 @@ export default class CartView {
           </dl>
         </div>
 
-        <div>
+        <div id="submit-div">
           <button type="submit" id="checkout-button">Checkout</button>
         </div>
 
@@ -62,7 +61,7 @@ export default class CartView {
         </div>
       </div>`;
 
-    this.#hydrate(cartData, shipping_fees);
+    this.#hydrate(cartData, shipping_fees, show_image);
     container.appendChild(this.cartEl);
   }
 
@@ -86,7 +85,7 @@ export default class CartView {
     }
   }
 
-  #hydrate(cartData, shipping_fees) {
+  #hydrate(cartData, shipping_fees, show_image) {
     const container = this.cartEl.querySelector('#cart-items');
     const emptyCartButton = this.cartEl.querySelector('#empty-cart-button');
     const checkoutButton = this.cartEl.querySelector('#checkout-button');
@@ -106,17 +105,21 @@ export default class CartView {
     for (const [id, item] of Object.entries(cartData)) {
       const cartItem = document.createElement('li');
       cartItem.classList.add('cart-item');
+      if (!show_image) cartItem.classList.add('no-image');
       cartItem.id = 'cart-item-' + id;
       cartItem.innerHTML = `
-            <div><img src="${item.thumb}" /></div>
+            ${show_image ? `<div><img src="${item.thumb}" /></div>` : ''}
             <div class="description">
               <div>
                 <div class="name">
                   <div>
                     <h3><a href="plants.html?id=${id}">${item.name}</a></h3>
-                    <p>ID: ${id}</p>
+                    <p class="cart-id">ID: ${id}</p>
                   </div>
-                  <p class="price">NOK ${item.price.toLocaleString()},-/piece</p>
+                  <div class="price">
+                  <p>NOK ${item.price.toLocaleString()},-/piece</p>
+                  ${!show_image ? `<p>NOK ${(item.price * item.quantity).toLocaleString()},-</p>` : ''}
+                  </div>
                 </div>
 
                 <div class="quantity-container">
@@ -125,26 +128,24 @@ export default class CartView {
                 </div>
               </div>
 
-              <div class="stock">
+              ${show_image ? `<div class="stock">
                 <p>
                   <svg class="${item.in_stock ? 'check-icon' : 'clock-icon'}"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                   >
                     <path fill-rule="evenodd"
-                      d="${
-                        item.in_stock
-                          ? 'M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z'
-                          : 'M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z'
-                      }" clip-rule="evenodd" />
+                      d="${item.in_stock
+          ? 'M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z'
+          : 'M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z'
+          }" clip-rule="evenodd" />
                   </svg>
-                  <span>${
-                    item.in_stock
-                      ? 'In Stock'
-                      : 'Estimated Shipping: ' + new Date(item.expected_shipping).toLocaleDateString()
-                  }</span>
+                  <span>${item.in_stock
+          ? 'In Stock'
+          : 'Estimated Shipping: ' + new Date(item.expected_shipping).toLocaleDateString()
+          }</span>
                 </p>
                 <p>NOK ${(item.price * item.quantity).toLocaleString()},-</p>
-              </div>
+              </div>` : ''}
             </div>`;
 
       container.appendChild(cartItem);

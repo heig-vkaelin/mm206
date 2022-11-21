@@ -65,7 +65,7 @@
     grid-template-columns: repeat(2,minmax(0,1fr))
   }
 }
-.cart-item .description .name > div {
+.cart-item .description .name > div:nth-child(1) {
   padding-right: 1.5rem
 }
 .cart-item .description .name h3 {
@@ -79,19 +79,22 @@
 .cart-item .description .name a:hover {
   color: var(--gray-800)
 }
-.cart-item .description .name > div p {
+.cart-item .description .cart-id {
   font-size: .875rem;
   line-height: 1.25rem;
   margin-top: .25rem;
   font-style: italic;
   color: var(--gray-500)
 }
-.cart-item .description .price {
+.cart-item .description .price > p {
   font-weight: 500;
   font-size: .875rem;
   line-height: 1.25rem;
   text-align: right;
   color: var(--gray-900)
+}
+.cart-item .description .price > p + p {
+  font-weight: 700
 }
 .cart-item .description .quantity-container {
   display: flex;
@@ -131,9 +134,8 @@
   color: var(--indigo-500)
 }
 .cart-item .description .stock > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(.5rem * calc(1 - var(--tw-space-x-reverse)))
+  margin-right: 0;
+  margin-left: 0.5rem;
 }
 .cart-item .description .stock {
   display: flex;

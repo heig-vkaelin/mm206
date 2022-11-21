@@ -62,7 +62,7 @@
 - [x] Delete button to remove a plant from the cart
 - [x] Empty shopping cart button to remove all plants from the cart
 - [x] Back to startup page (home button)
-- [~] Proceed to checkout button -> checkout page (task 7)
+- [x] Proceed to checkout button -> checkout page (task 7)
 - [x] Store the shopping cart in localStage
 
 ## Task 7
@@ -71,11 +71,11 @@
 
 Divided in 3 parts/steps:
 
-- [ ] 1 - Type in customer info (name, email, address (street, city, zip, country), phone)
-- [ ] 2 - Select shipping method (retrieve from API)
-- [ ] 3 - Show total price including shipping
-- [ ] 3 - Place order button -> order confirmation page (task 8)
-- [ ] Back to startup page (home button)
+- [x] 1 - Type in customer info (name, email, address (street, city, zip, country), phone)
+- [x] 2 - Select shipping method (retrieve from API)
+- [x] 3 - Show total price including shipping
+- [~] 3 - Place order button -> order confirmation page (task 8)
+- [x] Back to startup page (home button)
 
 ## Task 8
 
