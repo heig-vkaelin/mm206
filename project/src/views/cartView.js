@@ -165,7 +165,7 @@ export default class CartView {
     const shippingFees = this.cartEl.querySelector('#shipping-fees dd');
     const totalPrice = this.cartEl.querySelector('#total dd');
 
-    subtotalPrice.innerText = 'NOK ' + subtotal.toLocaleString() + ',-';
+    subtotalPrice.innerText = 'NOK ' + subtotal + ',-';
     shippingFees.innerText = shipping_fees > 0 ? 'NOK ' + shipping_fees.toLocaleString() + ',-' : 'Free shipping';
     totalPrice.innerText = 'NOK ' + (subtotal + shipping_fees).toLocaleString() + ',-';
   }

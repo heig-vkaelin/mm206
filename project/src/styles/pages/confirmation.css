@@ -5,6 +5,13 @@
   padding-right: 50px;
 }
 
+#order-confirmation .thank-you {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  padding: 2rem 1rem;
+}
+
 #order-confirmation h3 {
   font-weight: bold;
   margin-top: 25px;
@@ -19,6 +26,7 @@
 .confirmation-details > div + div {
   margin-left: 50px;
   font-style: italic;
+  color: var(--gray-600);
 }
 
 .shipping-details > div > span {

@@ -5,8 +5,10 @@ export default class CheckoutView {
     container.innerHTML = `
     <div class="confirmation modal">
       <div id="order-confirmation" class="card">
-        <p>Thank you for your order!</p>
-        <p>Your order number is: ${orderData.record.id}</p>
+        <div class="thank-you">
+          <p>Thank you for your order!</p>
+          <p>Your order number is: ${orderData.record.id}</p>
+        </div>
         <h3>Customer details</h3>
         <p>${orderData.record.customer_name}</p>
         <p>${orderData.record.street}, ${orderData.record.zipcode} ${orderData.record.city}, ${
@@ -25,7 +27,9 @@ export default class CheckoutView {
           .join('\n')}
         <h3>Shipping details</h3>
         <div class="shipping-details">
-          <div>${shippingData[orderData.record.shipping_id - 1].method}</div>
+          <div>${shippingData[orderData.record.shipping_id - 1].method} (NOK ${
+      shippingData[orderData.record.shipping_id - 1].price
+    })</div>
           <div>Estimated time delivery: <span>${shippingData[orderData.record.shipping_id - 1].description}</span></div>
         </div>
         <h3>Order total</h3>

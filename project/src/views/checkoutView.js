@@ -76,7 +76,7 @@ export default class CheckoutView {
     const fees = container.querySelector('#shipping-fees dd');
     const total = container.querySelector('#total dd');
     fees.innerHTML = `NOK ${fee_price},-`;
-    total.innerHTML = `NOK ${parseInt(fee_price) + parseInt(subtotal.innerHTML.split(' ')[1])},-`;
+    total.innerHTML = `NOK ${(parseInt(fee_price) + parseInt(subtotal.innerHTML.split(' ')[1])).toLocaleString()},-`;
   }
 
   #getDeliveryOption(deliveryObject, checked = false) {

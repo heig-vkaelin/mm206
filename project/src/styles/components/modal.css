@@ -15,4 +15,6 @@
 
 .modal .card {
   cursor: default;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
