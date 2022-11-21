@@ -88,7 +88,7 @@ export default function PlantDetailsView() {
 
   div.render = (container, reviews, plant, isLogged, user) => {
     div.innerHTML = `
-    <div class="reviews-modal hidden">
+    <div class="modal reviews-modal hidden">
       <div class="card card-xl">
         <h3 class="card-title">Reviews</h3>
         <div class="reviews-container">
