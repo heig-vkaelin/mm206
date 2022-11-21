@@ -57,7 +57,7 @@
           const { data: plants } = await fetchAPIAuth(ENDPOINTS.PLANTS);
           displayPlants(plants);
           displayTitle(plants);
-        } catch (error) {
+        } catch (ignored) {
           container.innerHTML = `<p class="no-results">The category id is invalid</p>`;
         }
 

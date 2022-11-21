@@ -60,7 +60,6 @@
 
       document.querySelectorAll('.delete-from-cart').forEach((button) => {
         button.addEventListener('click', (e) => {
-          console.log(e);
           delete cartData[e.target.name];
           localStorage.setItem('cart', JSON.stringify(cartData));
           cartView.render(container, cartData);

@@ -42,7 +42,6 @@
       if (isLogged()) {
         const users = await fetchAPIAuth(ENDPOINTS.USERS);
         user = users.data[getUser().userid];
-        console.log(user);
       }
 
       main.addEventListener('nextPage', async function nextPage(e) {
@@ -56,9 +55,6 @@
         spin.hidden = false;
 
         contactData = new FormData(form);
-        for (const [key, value] of contactData) {
-          console.log(`${key}: ${value}`);
-        }
         main.removeEventListener('nextPage', nextPage);
         const shippingMethods = await fetchAPIAuth(ENDPOINTS.SHIPPING_METHODS);
         checkoutView.renderShippingForm(main, shippingMethods);

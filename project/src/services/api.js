@@ -41,6 +41,7 @@ export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {
       status: data.http_code ?? 200,
     };
   } catch (error) {
+    console.error(error);
     // Redirect to global error page, example: rate limited by the API (429)
     window.location.href = '/src/error.html';
     return {
