@@ -1,0 +1,30 @@
+#order-confirmation {
+  text-align: center;
+  width: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#order-confirmation h3 {
+  font-weight: bold;
+  margin-top: 25px;
+}
+
+.confirmation-details{
+  width: 2/3;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.confirmation-details > div + div {
+  margin-left: 50px;
+  font-style: italic;
+}
+
+.shipping-details > div > span {
+  font-style: italic;
+}
+
+#back-to-shop {
+  margin-top: 25px;
+}

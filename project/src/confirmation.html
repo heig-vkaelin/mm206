@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Valentin Kaelin" />
+    <meta name="author" content="Francesco Monti" />
+    <meta name="description" content="MM206 - Project" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/pages/confirmation.css" />
+    <title>Order Confirmation - Helseflora</title>
+  </head>
+  <body>
+    <header class="website-header">
+      <a class="website-nav" href="index.html">
+        <img class="website-logo" src="images/logo.png" alt="Helseflora logo" />
+        <h2 class="website-title">Helseflora</h2>
+      </a>
+      <div class="right"></div>
+    </header>
+
+    <div class="spin"></div>
+
+    <main></main>
+    <script type="module">
+      import { ENDPOINTS } from './services/api.js';
+      import { authMiddleware, fetchAPIAuth } from './services/auth.js';
+      import ConfirmationView from './views/confirmationView.js';
+
+      const main = document.querySelector('main');
+      const spin = document.querySelector('.spin');
+
+      const orderData = window.localStorage.getItem('order');
+      const shippingData = await fetchAPIAuth(ENDPOINTS.SHIPPING_METHODS);
+      const confirmationView = new ConfirmationView();
+
+      const order = await fetchAPIAuth(ENDPOINTS.ORDERS, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: orderData,
+      });
+      // const order = {
+      //   msg: 'insert order ok',
+      //   record: {
+      //     id: 731,
+      //     customer_name: 'Francesco Monti',
+      //     user_id: 1,
+      //     street: 'Ch. du Verger 2',
+      //     city: 'Cossonay',
+      //     zipcode: '1304',
+      //     country: 'Switzerland',
+      //     shipping_id: 3,
+      //     content:
+      //       '[{"id":8,"name":"Stakebjørk","price":299,"quantity":1},{"id":18,"name":"Øgleregn","price":127,"quantity":1},{"id":23,"name":"Blålys","price":177,"quantity":4},{"id":25,"name":"Myrost","price":234,"quantity":1},{"id":34,"name":"Sviskeknoll","price":178,"quantity":2},{"id":40,"name":"Snørotte","price":367,"quantity":3}]',
+      //     date: '2022-11-21T11:18:39.115Z',
+      //     ordernumber: 'ORD-TBHET-Y2022',
+      //   },
+      // };
+      confirmationView.renderConfirmation(main, order.data, shippingData.data);
+
+      main.addEventListener('backToShop', () => {
+        localStorage.removeItem('order');
+        localStorage.removeItem('cart');
+        window.location.href = 'index.html';
+      });
+
+      spin.hidden = true;
+      main.hidden = false;
+      authMiddleware();
+    </script>
+  </body>
+</html>

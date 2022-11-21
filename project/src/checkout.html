@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/pages/checkout.css" />
     <link rel="stylesheet" href="styles/pages/cart.css" />
-    <!-- <script src="https://cdn.tailwindcss.com?plugins=forms"></script> -->
     <title>Cart - Helseflora</title>
   </head>
   <body>
@@ -29,15 +28,22 @@
     <script type="module">
       import CheckoutView from './views/CheckoutView.js';
       import { ENDPOINTS } from './services/api.js';
-      import { authMiddleware, fetchAPIAuth } from './services/auth.js';
+      import { authMiddleware, fetchAPIAuth, isLogged, getUser } from './services/auth.js';
 
       const main = document.querySelector('main');
       const spin = document.querySelector('.spin');
 
       const checkoutView = new CheckoutView();
       const cartData = JSON.parse(localStorage.getItem('cart')) || {};
+      let user;
       let contactData = new FormData();
       let selectedDeliveryMethod = -1;
+      
+      if(isLogged()){
+        const users = await fetchAPIAuth(ENDPOINTS.USERS);
+        user = users.data[getUser().userid];
+        console.log(user);
+      }
 
       main.addEventListener('nextPage', async function nextPage(e) {
         const checkoutFormContainer = document.querySelector('.checkout-form-container');
@@ -83,26 +89,17 @@
         const orderData = JSON.stringify({
           customer_name: `${contactData.get('first-name')} ${contactData.get('last-name')}`,
           street: contactData.get('address'),
-          email: contactData.get('email-address'),
           city: contactData.get('city'),
           zipcode: contactData.get('postal-code'),
           country: contactData.get('country'),
           shipping_id: selectedDeliveryMethod,
-          content: cartOrder,
+          content: JSON.stringify(cartOrder),
         });
-        const order = await fetchAPIAuth(ENDPOINTS.ORDERS, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: orderData,
-        });
-
         window.localStorage.setItem('order', orderData);
         window.location.href = 'confirmation.html';
       });
 
-      checkoutView.renderContactForm(main, cartData);
+      checkoutView.renderContactForm(main, cartData, user);
 
       spin.hidden = true;
       main.hidden = false;
