@@ -42,7 +42,7 @@ export async function fetchAPI(endpoint, options = {}, additionnalParams = {}) {
     };
   } catch (error) {
     // Redirect to global error page, example: rate limited by the API (429)
-    window.location.href = '/error.html';
+    window.location.href = '/src/error.html';
     return {
       data: null,
       status: 500,
