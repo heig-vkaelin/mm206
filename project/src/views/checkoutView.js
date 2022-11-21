@@ -52,12 +52,26 @@ export default class CheckoutView {
     const deliveryCards = checkoutContainer.querySelectorAll('.delivery-card');
     deliveryCards.forEach((card) => {
       card.addEventListener('click', () => {
-        container.dispatchEvent(new CustomEvent('selectShipping', { detail: { id: card.id.split('-')[1] } }));
+        container.dispatchEvent(new CustomEvent('selectShipping', {
+          detail: {
+            id: card.id.split('-')[1],
+            price: card.querySelector('.delivery-method-price').innerHTML.split(' ')[1].slice(0, -2)
+          }
+        }));
       });
     });
     deliveryCards[0].click();
     submitButton.textContent = 'Place Order';
     submitButton.addEventListener('click', () => { container.dispatchEvent(new CustomEvent('placeOrder', { detail: { button: submitButton } })); });
+  }
+
+  updateShippingFees(container, fee_price) {
+    const subtotal = container.querySelector('#subtotal dd');
+    const fees = container.querySelector('#shipping-fees dd');
+    const total = container.querySelector('#total dd');
+    fees.innerHTML = `NOK ${fee_price},-`;
+    total.innerHTML = `NOK ${parseInt(fee_price) + parseInt(subtotal.innerHTML.split(' ')[1])},-`;
+
   }
 
   #getDeliveryOption(deliveryObject, checked = false) {

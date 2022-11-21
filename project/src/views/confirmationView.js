@@ -23,7 +23,7 @@ export default class CheckoutView {
           <div>Estimated time delivery: <span>${shippingData[orderData.record.shipping_id - 1].description}</span></div>
         </div>
         <h3>Order total</h3>
-        <p>NOK ${JSON.parse(orderData.record.content).reduce((acc, item) => (acc + item.price * item.quantity), 0)},-</p>
+        <p>NOK ${JSON.parse(orderData.record.content).reduce((acc, item) => (acc + item.price * item.quantity), 0) + parseInt(shippingData[orderData.record.shipping_id - 1].price)},-</p>
         <button id="back-to-shop" class="btn btn-primary">Back to shop</button>
       </div>
     </div>
