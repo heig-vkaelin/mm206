@@ -74,22 +74,22 @@ Divided in 3 parts/steps:
 - [x] 1 - Type in customer info (name, email, address (street, city, zip, country), phone)
 - [x] 2 - Select shipping method (retrieve from API)
 - [x] 3 - Show total price including shipping
-- [~] 3 - Place order button -> order confirmation page (task 8)
+- [x] 3 - Place order button -> order confirmation page (task 8)
 - [x] Back to startup page (home button)
 
 ## Task 8
 
 ### Order confirmation page (order-confirmation.html)
 
-- [ ] Send order to API
-- [ ] Display the confirmation info from API
-  - [ ] Order number
-  - [ ] Customer info (name, email, phone, delivery address)
-  - [ ] List of the ordered plants (id number, name, number of items, price per plant, total price for that plant)
-  - [ ] Shipping method
-  - [ ] Estimated shipping date
-  - [ ] Total price for the order, including shipping
-- [ ] Back to startup page (home button)
+- [x] Send order to API
+- [x] Display the confirmation info from API
+  - [x] Order number
+  - [x] Customer info (name, email, phone, delivery address)
+  - [x] List of the ordered plants (id number, name, number of items, price per plant, total price for that plant)
+  - [x] Shipping method
+  - [x] Estimated shipping date
+  - [x] Total price for the order, including shipping
+- [x] Back to startup page (home button)
 
 ## Task 9
 

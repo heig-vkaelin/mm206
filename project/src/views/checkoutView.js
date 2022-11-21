@@ -39,7 +39,9 @@ export default class CheckoutView {
     cartDeleteButtons.forEach((button) => button.parentNode.removeChild(button));
     emptyCartButton.parentNode.removeChild(emptyCartButton);
     submitButton.textContent = 'Next';
-    submitButton.addEventListener('click', () => { container.dispatchEvent(new CustomEvent('nextPage', { detail: { button: submitButton } })); });
+    submitButton.addEventListener('click', () => {
+      container.dispatchEvent(new CustomEvent('nextPage', { detail: { button: submitButton } }));
+    });
 
     container.appendChild(this.checkoutEl);
   }
@@ -52,17 +54,21 @@ export default class CheckoutView {
     const deliveryCards = checkoutContainer.querySelectorAll('.delivery-card');
     deliveryCards.forEach((card) => {
       card.addEventListener('click', () => {
-        container.dispatchEvent(new CustomEvent('selectShipping', {
-          detail: {
-            id: card.id.split('-')[1],
-            price: card.querySelector('.delivery-method-price').innerHTML.split(' ')[1].slice(0, -2)
-          }
-        }));
+        container.dispatchEvent(
+          new CustomEvent('selectShipping', {
+            detail: {
+              id: card.id.split('-')[1],
+              price: card.querySelector('.delivery-method-price').innerHTML.split(' ')[1].slice(0, -2),
+            },
+          }),
+        );
       });
     });
     deliveryCards[0].click();
     submitButton.textContent = 'Place Order';
-    submitButton.addEventListener('click', () => { container.dispatchEvent(new CustomEvent('placeOrder', { detail: { button: submitButton } })); });
+    submitButton.addEventListener('click', () => {
+      container.dispatchEvent(new CustomEvent('placeOrder', { detail: { button: submitButton } }));
+    });
   }
 
   updateShippingFees(container, fee_price) {
@@ -71,7 +77,6 @@ export default class CheckoutView {
     const total = container.querySelector('#total dd');
     fees.innerHTML = `NOK ${fee_price},-`;
     total.innerHTML = `NOK ${parseInt(fee_price) + parseInt(subtotal.innerHTML.split(' ')[1])},-`;
-
   }
 
   #getDeliveryOption(deliveryObject, checked = false) {
@@ -115,21 +120,32 @@ export default class CheckoutView {
           <div class="checkout-input">
             <label for="first-name">First name</label>
             <div>
-              <input type="text" id="first-name" name="first-name" value="${this.#getUserData(userData, 'full_name', 0)}" required />
+              <input type="text" id="first-name" name="first-name" value="${this.#getUserData(
+                userData,
+                'full_name',
+                0,
+              )}" required />
             </div>
           </div>
 
           <div class="checkout-input">
             <label for="last-name">Last name</label>
             <div>
-              <input type="text" id="last-name" name="last-name" value="${this.#getUserData(userData, 'full_name', 1)}" required />
+              <input type="text" id="last-name" name="last-name" value="${this.#getUserData(
+                userData,
+                'full_name',
+                1,
+              )}" required />
             </div>
           </div>
 
           <div class="checkout-input half">
             <label for="address">Address</label>
             <div>
-              <input type="text" name="address" id="address" value="${this.#getUserData(userData, 'street')}" required />
+              <input type="text" name="address" id="address" value="${this.#getUserData(
+                userData,
+                'street',
+              )}" required />
             </div>
           </div>
 
@@ -143,14 +159,20 @@ export default class CheckoutView {
           <div class="checkout-input">
             <label for="postal-code">Postal code</label>
             <div>
-              <input type="text" name="postal-code" id="postal-code" value="${this.#getUserData(userData, 'zipcode')}" required />
+              <input type="text" name="postal-code" id="postal-code" value="${this.#getUserData(
+                userData,
+                'zipcode',
+              )}" required />
             </div>
           </div>
 
           <div class="checkout-input half">
             <label for="country">Country</label>
             <div>
-              <input type="text" id="country" name="country" value="${this.#getUserData(userData, 'country')}" required />
+              <input type="text" id="country" name="country" value="${this.#getUserData(
+                userData,
+                'country',
+              )}" required />
             </div>
           </div>
         </form>
