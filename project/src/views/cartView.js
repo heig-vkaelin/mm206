@@ -80,7 +80,7 @@ export default class CartView {
       cartItem.querySelector('.update-quantity').value = cartData[id].quantity;
       cartItem.querySelector('.stock p:last-child').textContent =
         'NOK ' + (cartData[id].price * cartData[id].quantity).toLocaleString() + ',-';
-      subtotal = Object.entries(cartData).reduce((acc, [id, item]) => acc + item.price * item.quantity, 0);
+      const subtotal = Object.entries(cartData).reduce((acc, [id, item]) => acc + item.price * item.quantity, 0);
       this.#renderTotal(subtotal, shipping_fees);
     }
   }

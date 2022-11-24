@@ -21,27 +21,27 @@ export default function SettingsView() {
 
           <div class="spacer">
             <label for="fullname">Full name*</label>
-            <input type="text" name="fullname" value="${user.full_name}" required />
+            <input type="text" name="fullname" value="${user.full_name || ''}" required />
           </div>
 
           <div class="spacer">
             <label for="street">Street*</label>
-            <input type="text" name="street" value="${user.street}" required />
+            <input type="text" name="street" value="${user.street || ''}" required />
           </div>
 
           <div class="spacer">
             <label for="city">City*</label>
-            <input type="text" name="city" value="${user.city}" required />
+            <input type="text" name="city" value="${user.city || ''}" required />
           </div>
 
           <div class="spacer">
             <label for="zipcode">Zipcode*</label>
-            <input type="number" name="zipcode" value="${user.zipcode}" required />
+            <input type="number" name="zipcode" value="${user.zipcode || 0}" required />
           </div>
 
           <div class="spacer">
             <label for="country">Country*</label>
-            <input type="text" name="country" value="${user.country}" required />
+            <input type="text" name="country" value="${user.country || ''}" required />
           </div>
 
           <div class="spacer">

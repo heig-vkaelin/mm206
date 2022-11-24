@@ -28,8 +28,6 @@
         <div class="title-container">
           <h1 class="page-title">Shopping Cart</h1>
         </div>
-
-        <!-- Cart -->
       </div>
     </main>
 
@@ -44,45 +42,49 @@
 
       const cartView = new CartView();
       cartView.render(container, cartData);
+      authMiddleware();
+      handleEventsListeners();
 
-      const checkoutButton = document.querySelector('#checkout-button');
+      function handleEventsListeners() {
+        const checkoutButton = document.querySelector('#checkout-button');
 
-      document.querySelector('#empty-cart-button').addEventListener('click', () => {
-        localStorage.removeItem('cart');
-        cartView.render(container, {});
-        checkoutButton.disabled = true;
-      });
-
-      checkoutButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = 'checkout.html';
-      });
-
-      document.querySelectorAll('.delete-from-cart').forEach((button) => {
-        button.addEventListener('click', (e) => {
-          delete cartData[e.target.name];
-          localStorage.setItem('cart', JSON.stringify(cartData));
-          cartView.render(container, cartData);
+        document.querySelector('#empty-cart-button').addEventListener('click', () => {
+          localStorage.removeItem('cart');
+          cartView.render(container, {});
+          checkoutButton.disabled = true;
         });
-      });
 
-      document.querySelectorAll('.update-quantity').forEach((input) => {
-        input.addEventListener('change', (e) => {
-          const newValue = e.target.value;
-
-          if (newValue <= 0) {
-            e.target.value = cartData[e.target.name].quantity;
-            return;
-          }
-          cartData[e.target.name].quantity = newValue;
-          localStorage.setItem('cart', JSON.stringify(cartData));
-          cartView.updateQuantity(cartData, e.target.name);
+        checkoutButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'checkout.html';
         });
-      });
+
+        document.querySelectorAll('.delete-from-cart').forEach((button) => {
+          button.addEventListener('click', (e) => {
+            delete cartData[e.target.name];
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            cartView.render(container, cartData);
+            handleEventsListeners();
+          });
+        });
+
+        document.querySelectorAll('.update-quantity').forEach((input) => {
+          input.addEventListener('change', (e) => {
+            const newValue = e.target.value;
+
+            if (newValue <= 0) {
+              e.target.value = cartData[e.target.name].quantity;
+              return;
+            }
+            cartData[e.target.name].quantity = newValue;
+            localStorage.setItem('cart', JSON.stringify(cartData));
+            cartView.updateQuantity(cartData, e.target.name);
+          });
+        });
+      }
 
       spinner.hidden = true;
       main.hidden = false;
-      authMiddleware();
     </script>
   </body>
 </html>

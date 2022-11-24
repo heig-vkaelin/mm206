@@ -22,7 +22,7 @@ export default class CheckoutView {
     // Render the order summary
     const cartView = new CartView();
     const orderSummary = this.checkoutEl.querySelector('#order-summary');
-    cartView.render(orderSummary, cartData, false);
+    cartView.render(orderSummary, cartData, false, shipping_fees);
 
     // Remove the cart inputs
     const cartUpdateQuantities = orderSummary.querySelectorAll('.update-quantity');
