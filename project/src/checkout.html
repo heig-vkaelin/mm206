@@ -41,7 +41,7 @@
 
       if (isLogged()) {
         const users = await fetchAPIAuth(ENDPOINTS.USERS);
-        user = users.data[getUser().userid];
+        user = users.data.find((u) => u.id === getUser().userid);
       }
 
       main.addEventListener('nextPage', async function nextPage(e) {

@@ -106,7 +106,7 @@ export default class CheckoutView {
 
   #getUserData(userData, field, split = -1, delimiter = ' ') {
     if (userData !== undefined) {
-      return split === -1 ? userData[field] : userData[field].split(delimiter)[split];
+      return split === -1 ? userData[field] : userData[field].split(delimiter)[split] || '';
     }
     return '';
   }
